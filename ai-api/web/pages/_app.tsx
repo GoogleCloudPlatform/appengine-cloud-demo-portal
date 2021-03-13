@@ -1,3 +1,4 @@
+import { CssBaseline } from "@material-ui/core";
 import { AppProps } from "next/app";
 import Head from "next/head";
 
@@ -12,6 +13,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
         />
       </Head>
+      <CssBaseline />
       <Component {...pageProps} />
     </>
   );

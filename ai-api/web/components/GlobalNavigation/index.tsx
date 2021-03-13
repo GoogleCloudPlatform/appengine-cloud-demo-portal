@@ -1,17 +1,41 @@
-import { AppBar, IconButton, Toolbar, Typography } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
+import {
+  AppBar,
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Toolbar,
+  Typography,
+} from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { HeadsetMic } from "@material-ui/icons";
+
+const drawerWidth = 300;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
     },
+    appBar: {
+      zIndex: theme.zIndex.drawer + 1,
+    },
     menuButton: {
       marginRight: theme.spacing(2),
     },
     title: {
       flexGrow: 1,
+    },
+    drawer: {
+      width: drawerWidth,
+      flexShrink: 0,
+    },
+    drawerPaper: {
+      width: drawerWidth,
+    },
+    drawerContainer: {
+      overflow: "auto",
     },
   })
 );
@@ -22,23 +46,37 @@ const GlobalNavigation: React.FC<Props> = ({ pageTitle }) => {
   const classes = useStyles();
 
   return (
-    <header>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            {pageTitle}
-          </Typography>
-        </Toolbar>
-      </AppBar>
-    </header>
+    <>
+      <header>
+        <AppBar position="fixed" className={classes.appBar}>
+          <Toolbar>
+            <Typography variant="h6" className={classes.title}>
+              {pageTitle}
+            </Typography>
+          </Toolbar>
+        </AppBar>
+      </header>
+      <nav>
+        <Drawer
+          anchor="left"
+          variant="permanent"
+          className={classes.drawer}
+          classes={{ paper: classes.drawerPaper }}
+        >
+          <Toolbar />
+          <div className={classes.drawerContainer}>
+            <List>
+              <ListItem button>
+                <ListItemIcon>
+                  <HeadsetMic />
+                </ListItemIcon>
+                <ListItemText primary={"Contact Center Analysis"} />
+              </ListItem>
+            </List>
+          </div>
+        </Drawer>
+      </nav>
+    </>
   );
 };
 
