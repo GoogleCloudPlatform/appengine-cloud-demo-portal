@@ -3,7 +3,6 @@ import {
   CssBaseline,
   makeStyles,
   Theme,
-  ThemeProvider,
   Toolbar,
 } from "@material-ui/core";
 import { AppProps } from "next/app";
