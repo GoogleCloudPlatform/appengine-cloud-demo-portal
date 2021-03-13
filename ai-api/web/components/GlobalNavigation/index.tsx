@@ -11,6 +11,8 @@ import {
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { HeadsetMic } from "@material-ui/icons";
 
+import { useTranslation } from "../../hooks/useTranslation";
+
 const drawerWidth = 300;
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -44,6 +46,7 @@ type Props = void;
 
 const GlobalNavigation: React.FC<Props> = () => {
   const classes = useStyles();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -51,7 +54,7 @@ const GlobalNavigation: React.FC<Props> = () => {
         <AppBar position="fixed" className={classes.appBar}>
           <Toolbar>
             <Typography variant="h6" className={classes.title}>
-              Google Cloud Demo
+              {t.title}
             </Typography>
           </Toolbar>
         </AppBar>
@@ -70,7 +73,7 @@ const GlobalNavigation: React.FC<Props> = () => {
                 <ListItemIcon>
                   <HeadsetMic />
                 </ListItemIcon>
-                <ListItemText primary={"Contact Center Analysis"} />
+                <ListItemText primary={t.contactCenterAnalysis.title} />
               </ListItem>
             </List>
           </div>
