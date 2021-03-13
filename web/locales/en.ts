@@ -1,7 +1,7 @@
 const en = {
   title: "Google Cloud Demo",
   demoMenu: "Choose Demo",
-  langMenu: "Language",
+  changeLanguage: "Change language",
   contactCenterAnalysis: {
     title: "Contact Center Analysis",
   },

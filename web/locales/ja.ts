@@ -3,7 +3,7 @@ import { localeType } from "./type";
 const ja: localeType = {
   title: "Google Cloud デモ",
   demoMenu: "デモを選択する",
-  langMenu: "言語",
+  changeLanguage: "言語を切り替える",
   contactCenterAnalysis: {
     title: "コールセンター分析",
   },
