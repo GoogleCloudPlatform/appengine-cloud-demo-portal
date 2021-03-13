@@ -18,7 +18,7 @@ const useStyles = makeStyles((_theme: Theme) =>
   })
 );
 
-const GlobalNavigation: React.FC = () => {
+const Header: React.FC = () => {
   const router = useRouter();
   const classes = useStyles();
   const { t, locale } = useTranslation();
@@ -53,4 +53,4 @@ const GlobalNavigation: React.FC = () => {
   );
 };
 
-export default GlobalNavigation;
+export default Header;
