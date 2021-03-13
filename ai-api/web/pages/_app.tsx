@@ -1,18 +1,19 @@
 import { CssBaseline } from "@material-ui/core";
 import { AppProps } from "next/app";
-import Head from "next/head";
+import { useEffect } from "react";
 
 import "../styles/globals.css";
 
-const App = ({ Component, pageProps }: AppProps) => {
+const App = ({ Component, pageProps }: AppProps): JSX.Element => {
+  useEffect(() => {
+    const jssStyles = document.querySelector("#jss-server-side");
+    if (jssStyles && jssStyles.parentElement) {
+      jssStyles.parentElement.removeChild(jssStyles);
+    }
+  }, []);
+
   return (
     <>
-      <Head>
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-        />
-      </Head>
       <CssBaseline />
       <Component {...pageProps} />
     </>
