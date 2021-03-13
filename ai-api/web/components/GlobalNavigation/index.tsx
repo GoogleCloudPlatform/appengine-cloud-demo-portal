@@ -40,9 +40,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-type Props = { pageTitle: string };
+type Props = void;
 
-const GlobalNavigation: React.FC<Props> = ({ pageTitle }) => {
+const GlobalNavigation: React.FC<Props> = () => {
   const classes = useStyles();
 
   return (
@@ -51,7 +51,7 @@ const GlobalNavigation: React.FC<Props> = ({ pageTitle }) => {
         <AppBar position="fixed" className={classes.appBar}>
           <Toolbar>
             <Typography variant="h6" className={classes.title}>
-              {pageTitle}
+              Google Cloud Demo
             </Typography>
           </Toolbar>
         </AppBar>

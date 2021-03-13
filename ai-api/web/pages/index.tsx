@@ -13,7 +13,7 @@ const Index: React.FC = () => {
       </Head>
 
       <header>
-        <GlobalNavigation pageTitle={title} />
+        <GlobalNavigation />
       </header>
 
       <div className={styles.container}>
