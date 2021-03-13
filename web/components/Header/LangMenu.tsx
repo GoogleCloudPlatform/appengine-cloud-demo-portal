@@ -61,8 +61,11 @@ const LangMenu: React.FC = () => {
           open={Boolean(anchor)}
           onClose={onClose}
         >
-          <MenuItem onClick={onLangChanged("en")}>English</MenuItem>
-          <MenuItem onClick={onLangChanged("ja")}>日本語</MenuItem>
+          {Object.keys(languageLabels).map((code: string) => (
+            <MenuItem onClick={onLangChanged(code)} key={code}>
+              {languageLabels[code]}
+            </MenuItem>
+          ))}
         </Menu>
       </NoSsr>
     </>

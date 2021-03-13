@@ -3,7 +3,7 @@ import ja from "./ja";
 
 export type locale = "en" | "ja";
 
-const languageLabels = {
+const languageLabels: { [key: string]: string } = {
   en: "English",
   ja: "日本語",
 };
