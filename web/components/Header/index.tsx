@@ -21,9 +21,9 @@ const useStyles = makeStyles((_theme: Theme) =>
 const Header: React.FC = () => {
   const router = useRouter();
   const classes = useStyles();
-  const { t, locale } = useTranslation();
+  const { t } = useTranslation();
 
-  const onClickTitle = () => router.push("/", "/", { locale });
+  const onClickTitle = () => router.push("/", "/");
 
   return (
     <header>
