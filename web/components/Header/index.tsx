@@ -1,12 +1,14 @@
 import {
   AppBar,
   Button,
+  IconButton,
   Menu,
   MenuItem,
   Toolbar,
   Typography,
 } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { GitHub } from "@material-ui/icons";
 import { useState } from "react";
 
 import { useTranslation } from "../../hooks/useTranslation";
@@ -63,6 +65,14 @@ const GlobalNavigation: React.FC = () => {
                 {t.contactCenterAnalysis.title}
               </MenuItem>
             </Menu>
+            <IconButton
+              aria-label="github"
+              color="inherit"
+              href="https://github.com/ShawnLabo/cloud-demos"
+              target="_blank"
+            >
+              <GitHub />
+            </IconButton>
           </nav>
         </Toolbar>
       </AppBar>

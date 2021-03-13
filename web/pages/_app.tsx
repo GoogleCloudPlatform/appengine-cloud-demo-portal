@@ -9,7 +9,6 @@ import { AppProps } from "next/app";
 import { useEffect } from "react";
 
 import Header from "../components/Header";
-import Footer from "../components/Footer";
 
 const useStyles = makeStyles((_theme: Theme) =>
   createStyles({
@@ -17,13 +16,6 @@ const useStyles = makeStyles((_theme: Theme) =>
       minHeight: "100vh",
       display: "flex",
       flexDirection: "column",
-    },
-    main: {
-      flex: 1,
-    },
-    footer: {
-      width: "100%",
-      height: "100px",
     },
   })
 );
@@ -42,15 +34,8 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
     <>
       <CssBaseline />
       <Header />
-      <div className={classes.container}>
-        <Toolbar />
-        <div className={classes.main}>
-          <Component {...pageProps} />
-        </div>
-        <div className={classes.footer}>
-          <Footer />
-        </div>
-      </div>
+      <Toolbar />
+      <Component {...pageProps} />
     </>
   );
 };
