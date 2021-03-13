@@ -4,4 +4,4 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-cd ai-api/web && npm run pre-commit
+cd web && npm run pre-commit
