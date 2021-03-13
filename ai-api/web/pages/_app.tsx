@@ -43,8 +43,8 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
       <CssBaseline />
       <Header />
       <div className={classes.container}>
+        <Toolbar />
         <div className={classes.main}>
-          <Toolbar />
           <Component {...pageProps} />
         </div>
         <div className={classes.footer}>
