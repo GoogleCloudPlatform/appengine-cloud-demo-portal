@@ -24,7 +24,6 @@ const useStyles = makeStyles((_theme: Theme) =>
     footer: {
       width: "100%",
       height: "100px",
-      borderTop: "1px solid #eaeaea",
     },
   })
 );

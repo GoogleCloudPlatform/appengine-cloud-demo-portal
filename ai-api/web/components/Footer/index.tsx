@@ -1,4 +1,11 @@
-import { createStyles, makeStyles, Theme } from "@material-ui/core";
+import {
+  createStyles,
+  makeStyles,
+  Theme,
+  Link,
+  Container,
+} from "@material-ui/core";
+import { GitHub } from "@material-ui/icons";
 
 const useStyles = makeStyles((_theme: Theme) =>
   createStyles({
@@ -8,13 +15,8 @@ const useStyles = makeStyles((_theme: Theme) =>
       justifyContent: "center",
       alignItems: "center",
     },
-    a: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-    },
-    logo: {
-      marginLeft: "0.5rem",
+    container: {
+      textAlign: "center",
     },
   })
 );
@@ -24,15 +26,11 @@ const Footer: React.FC = () => {
 
   return (
     <footer className={classes.root}>
-      <a
-        href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-        target="_blank"
-        rel="noopener noreferrer"
-        className={classes.a}
-      >
-        Powered by{" "}
-        <img src="/vercel.svg" alt="Vercel Logo" className={classes.logo} />
-      </a>
+      <Container maxWidth="sm" className={classes.container}>
+        <Link href="https://github.com/ShawnLabo/cloud-demos">
+          <GitHub style={{ color: "black" }} fontSize="large" />
+        </Link>
+      </Container>
     </footer>
   );
 };
