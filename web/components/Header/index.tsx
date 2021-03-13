@@ -12,6 +12,7 @@ import { GitHub } from "@material-ui/icons";
 import { useState } from "react";
 
 import { useTranslation } from "../../hooks/useTranslation";
+import LangMenu from "./LangMenu";
 
 const useStyles = makeStyles((_theme: Theme) =>
   createStyles({
@@ -65,6 +66,7 @@ const GlobalNavigation: React.FC = () => {
                 {t.contactCenterAnalysis.title}
               </MenuItem>
             </Menu>
+            <LangMenu />
             <IconButton
               aria-label="github"
               color="inherit"
