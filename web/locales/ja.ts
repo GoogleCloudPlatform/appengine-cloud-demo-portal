@@ -1,6 +1,6 @@
-import { localeType } from "./type";
+import { Locale } from "./type";
 
-const ja: localeType = {
+const ja: Locale = {
   title: "Google Cloud デモ",
   changeLanguage: "言語を切り替える",
   home: {},
