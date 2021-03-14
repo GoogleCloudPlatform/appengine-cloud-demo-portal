@@ -1,4 +1,10 @@
-import { Avatar, Chip } from "@material-ui/core";
+import {
+  Avatar,
+  Chip,
+  createStyles,
+  makeStyles,
+  Theme,
+} from "@material-ui/core";
 import { useTranslation } from "../../hooks/useTranslation";
 
 type Product = {
@@ -24,7 +30,16 @@ type Props = {
   productId: string;
 };
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    chip: {
+      backgroundColor: theme.palette.background.paper,
+    },
+  })
+);
+
 const ProductChip: React.FC<Props> = ({ productId }) => {
+  const classes = useStyles();
   const { locale } = useTranslation();
   const product = products[productId];
 
@@ -39,6 +54,7 @@ const ProductChip: React.FC<Props> = ({ productId }) => {
       variant="outlined"
       avatar={<Avatar alt={product.name} src={product.icon} />}
       onClick={onClick}
+      className={classes.chip}
     />
   );
 };
