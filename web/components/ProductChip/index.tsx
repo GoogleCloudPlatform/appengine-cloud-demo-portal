@@ -1,0 +1,46 @@
+import { Avatar, Chip, Link } from "@material-ui/core";
+import { useTranslation } from "../../hooks/useTranslation";
+
+type Product = {
+  name: string;
+  icon: string;
+  url: string;
+};
+
+const products: { [key: string]: Product } = {
+  "speech-to-text": {
+    name: "Cloud Speech-to-Text",
+    icon: "/images/speech-to-text-512-color.svg",
+    url: "https://cloud.google.com/speech-to-text",
+  },
+  "natural-language-api": {
+    name: "Cloud Natural Language API",
+    icon: "/images/cloud-natural-language-api-512-color.svg",
+    url: "https://cloud.google.com/natural-language",
+  },
+};
+
+type Props = {
+  productId: string;
+};
+
+const ProductChip: React.FC<Props> = ({ productId }) => {
+  const { locale } = useTranslation();
+  const product = products[productId];
+
+  const onClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation();
+    window.open(`${product.url}?hl=${locale}`, "_blank");
+  };
+
+  return (
+    <Chip
+      label={product.name}
+      variant="outlined"
+      avatar={<Avatar alt={product.name} src={product.icon} />}
+      onClick={onClick}
+    />
+  );
+};
+
+export default ProductChip;
