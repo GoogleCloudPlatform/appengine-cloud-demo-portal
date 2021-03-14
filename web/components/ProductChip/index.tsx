@@ -1,4 +1,4 @@
-import { Avatar, Chip, Link } from "@material-ui/core";
+import { Avatar, Chip } from "@material-ui/core";
 import { useTranslation } from "../../hooks/useTranslation";
 
 type Product = {
