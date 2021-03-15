@@ -1,9 +1,18 @@
-import { createStyles, makeStyles, Theme, Typography } from "@material-ui/core";
+import {
+  createStyles,
+  Grid,
+  makeStyles,
+  Theme,
+  Typography,
+} from "@material-ui/core";
+import { useState } from "react";
 
 import ProductChips from "../../components/ProductChips";
 import { useTranslation } from "../../hooks/useTranslation";
 import { demos } from "../../src/demos";
 import Recorder from "../../components/Recorder";
+import { analyze, Response } from "../../src/api/contactCenterAnalysis";
+import NaturalLanguageAnnotatedResult from "../../components/NaturalLanguageAnnotatedResult";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,6 +33,10 @@ const useStyles = makeStyles((theme: Theme) =>
       marginTop: theme.spacing(2),
       marginBottom: theme.spacing(4),
     },
+    responses: {
+      marginTop: theme.spacing(4),
+      width: 800,
+    },
   })
 );
 
@@ -33,11 +46,21 @@ const ContactCenterAnalysis: React.FC = () => {
   const classes = useStyles();
   const { t } = useTranslation();
 
+  const [responses, setResponses] = useState<Response[]>([]);
+
+  const addResult = (response: Response) =>
+    setResponses((responses) => [response, ...responses]);
+
   const languages = ["en-US", "ja-JP"];
 
   const onStop = async (lang: string, blob: Blob): Promise<void> => {
-    console.log("onStop", lang, blob.size);
-    await fetch("https://google.com");
+    try {
+      const res = await analyze(lang, blob);
+      addResult(res);
+    } catch (e) {
+      // alert(e);
+      console.error(e);
+    }
   };
 
   return (
@@ -54,6 +77,19 @@ const ContactCenterAnalysis: React.FC = () => {
         {t.contactCenterAnalysis.description}
       </Typography>
       <Recorder onStop={onStop} languages={languages} defaultLanguage="en-US" />
+      <Grid
+        container
+        direction="column"
+        spacing={2}
+        className={classes.responses}
+      >
+        {responses.map((res, i) => (
+          <Grid item xs={12} key={i}>
+            <NaturalLanguageAnnotatedResult result={res} />
+          </Grid>
+        ))}
+      </Grid>
+      <div className={classes.responses}></div>
     </main>
   );
 };
