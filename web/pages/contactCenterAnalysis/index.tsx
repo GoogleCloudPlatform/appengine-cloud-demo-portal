@@ -3,6 +3,7 @@ import { createStyles, makeStyles, Theme, Typography } from "@material-ui/core";
 import ProductChips from "../../components/ProductChips";
 import { useTranslation } from "../../hooks/useTranslation";
 import { demos } from "../../src/demos";
+import Recorder from "../../components/Recorder";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,6 +33,13 @@ const ContactCenterAnalysis: React.FC = () => {
   const classes = useStyles();
   const { t } = useTranslation();
 
+  const languages = ["en-US", "ja-JP"];
+
+  const onStop = async (lang: string, blob: Blob): Promise<void> => {
+    console.log("onStop", lang, blob.size);
+    await fetch("https://google.com");
+  };
+
   return (
     <main className={classes.root}>
       <Typography variant="h3" component="h2" className={classes.title}>
@@ -45,6 +53,7 @@ const ContactCenterAnalysis: React.FC = () => {
       >
         {t.contactCenterAnalysis.description}
       </Typography>
+      <Recorder onStop={onStop} languages={languages} defaultLanguage="en-US" />
     </main>
   );
 };
