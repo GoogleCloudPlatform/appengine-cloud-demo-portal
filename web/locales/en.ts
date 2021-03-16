@@ -1,5 +1,5 @@
 const en = {
-  title: "Google Cloud Demo",
+  title: "Google Cloud Demo Center",
   changeLanguage: "Change language",
   home: {},
   contactCenterAnalysis: {
