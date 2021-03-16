@@ -38,13 +38,6 @@ export type Entity = {
   sentiment?: Sentiment;
 };
 
-/*
-export type Sentence = {
-  text: TextSpan;
-  sentiment: Sentiment;
-};
-*/
-
 export type ClassificationCategory = {
   name: string;
   confidence: number;
