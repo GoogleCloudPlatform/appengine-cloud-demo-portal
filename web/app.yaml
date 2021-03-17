@@ -1,0 +1,11 @@
+runtime: nodejs14
+# instance_class: F4_1G
+instance_class: F1
+
+handlers:
+  - url: /.*
+    secure: always
+    script: auto
+
+automatic_scaling:
+  min_instances: 1

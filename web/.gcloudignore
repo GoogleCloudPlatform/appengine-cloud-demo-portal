@@ -1,0 +1,19 @@
+# Next.js production server needs next.config.js, public, .next, node_modules
+# but App Engine don't need node_modules
+# https://nextjs.org/docs/deployment#docker-image
+
+app.yaml
+#components
+deploy.sh
+.eslintrc.js
+.gitignore
+#hooks
+#locales
+#next-env.d.ts
+node_modules
+.node-version
+#pages
+README.md
+#src
+#styles
+tsconfig.json
