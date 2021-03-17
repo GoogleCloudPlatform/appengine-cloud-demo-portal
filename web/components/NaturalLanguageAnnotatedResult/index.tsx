@@ -61,16 +61,16 @@ const sortFn = (a: Mention, b: Mention): number => {
 };
 
 const entityColors: { [key: string]: string } = {
-  ORGANIZATION: "#4285F5",
-  LOCATION: "#34A853",
-  CONSUMER_GOOD: "#A242F4",
-  PERSON: "#EA4235",
-  OTHER: "#9AA0A6",
-  EVENT: "#F29900",
-  ADDRESS: "#F538A0",
-  PRICE: "#B31411",
-  NUMBER: "#185ABC",
   UNKNOWN: "#9AA0A6",
+  PERSON: "#EA4235",
+  LOCATION: "#34A853",
+  ORGANIZATION: "#4285F5",
+  EVENT: "#F29900",
+  CONSUMER_GOOD: "#A242F4",
+  OTHER: "#9AA0A6",
+  ADDRESS: "#F538A0",
+  NUMBER: "#185ABC",
+  PRICE: "#B31411",
 };
 
 const NaturalLanguageAnnotatedResult: React.FC<Props> = ({
