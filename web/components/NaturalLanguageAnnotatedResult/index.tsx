@@ -66,9 +66,12 @@ const entityColors: { [key: string]: string } = {
   LOCATION: "#34A853",
   ORGANIZATION: "#4285F5",
   EVENT: "#F29900",
+  WORK_OF_ART: "#FA7B17",
   CONSUMER_GOOD: "#A242F4",
   OTHER: "#9AA0A6",
+  PHONE_NUMBER: "#23C1E0",
   ADDRESS: "#F538A0",
+  // DATE: "", I didn't find color of date
   NUMBER: "#185ABC",
   PRICE: "#B31411",
 };
