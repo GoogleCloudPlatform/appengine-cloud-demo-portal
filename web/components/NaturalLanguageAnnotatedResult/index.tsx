@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import { ThumbDown, ThumbsUpDown, ThumbUp } from "@material-ui/icons";
 
-import { EntityMention, Response } from "../../src/api/contactCenterAnalysis";
+import { Response } from "../../src/api/contactCenterAnalysis";
 
 type Props = {
   result: Response;
@@ -45,11 +45,18 @@ type Mention = {
   beginOffset: number;
 };
 
-const sortFn = (a: EntityMention, b: EntityMention): number => {
-  if (a.text.beginOffset === b.text.beginOffset) {
-    return b.text.content.length - a.text.content.length;
+type Sentence = {
+  text: string;
+  mention?: Mention;
+};
+
+const bytes = (s: string): number => new Blob([s]).size;
+
+const sortFn = (a: Mention, b: Mention): number => {
+  if (a.beginOffset === b.beginOffset) {
+    return b.content.length - a.content.length;
   } else {
-    return a.text.beginOffset - b.text.beginOffset;
+    return a.beginOffset - b.beginOffset;
   }
 };
 
@@ -85,7 +92,7 @@ const NaturalLanguageAnnotatedResult: React.FC<Props> = ({
 
   const mentions: Mention[] = [];
   result.entities.forEach((entity) => {
-    entity.mentions.sort(sortFn).forEach((mention) => {
+    entity.mentions.forEach((mention) => {
       mentions.push({
         name: entity.name,
         content: mention.text.content,
@@ -96,51 +103,89 @@ const NaturalLanguageAnnotatedResult: React.FC<Props> = ({
       });
     });
   });
+  mentions.sort(sortFn);
 
   const text = result.document.content;
-  const sentence: JSX.Element[] = [];
+
+  // TODO: Optimize
+  const sentence: Sentence[] = [];
+  let byte = 0;
   let i = 0;
-  mentions.forEach((mention) => {
-    if (mention.beginOffset < i) {
+  let buf = "";
+  let nextMention = 0;
+  while (byte < bytes(text)) {
+    if (nextMention >= mentions.length) {
+      buf += text[i];
+      i++;
+      byte += bytes(text[i]);
+      continue;
+    }
+    const mention = mentions[nextMention];
+    if (byte >= mention.beginOffset) {
+      sentence.push({ text: buf });
+      sentence.push({ text: mention.content, mention });
+      byte += bytes(text.substring(i, i + mention.content.length));
+      i += mention.content.length;
+      buf = "";
+      while (nextMention < mentions.length) {
+        if (mentions[nextMention].beginOffset >= byte) {
+          break;
+        }
+        nextMention++;
+      }
+    } else {
+      buf += text[i];
+      byte += bytes(text[i]);
+      i++;
+    }
+  }
+  sentence.push({ text: buf });
+
+  const sentenceElements: JSX.Element[] = [];
+  sentence.forEach((s, i) => {
+    if (s.text === "") {
       return;
     }
-    const pre = text.substring(i, mention.beginOffset);
-    sentence.push(<span>{pre}</span>);
 
-    const tooltip =
-      `entity=${mention.name}, ` +
-      `type=${mention.type}, ` +
-      `salience=${mention.salience}`;
-    const content = (
-      <span
-        style={{
-          color: entityColors[mention.type] || entityColors["UNKNOWN"],
-        }}
-      >
-        {mention.content}
-      </span>
-    );
-    sentence.push(
-      <Tooltip title={tooltip}>
-        <span>
-          ⟨
-          {mention.url ? (
-            <a
-              href={mention.url}
-              target="_blank"
-              rel="noreferrer"
-              className={classes.entityLink}
-            >
-              {content}
-            </a>
-          ) : (
-            content
-          )}
-          ⟩
+    if (s.mention) {
+      const tooltip =
+        `entity=${s.mention.name}, ` +
+        `type=${s.mention.type}, ` +
+        `salience=${s.mention.salience}`;
+
+      const content = (
+        <span
+          key={i}
+          style={{
+            color: entityColors[s.mention.type] || entityColors["UNKNOWN"],
+          }}
+        >
+          {s.mention.content}
         </span>
-      </Tooltip>
-    );
-    i = mention.beginOffset + mention.content.length;
+      );
+      sentenceElements.push(
+        <Tooltip title={tooltip} key={i}>
+          <span>
+            ⟨
+            {s.mention.url ? (
+              <a
+                href={s.mention.url}
+                target="_blank"
+                rel="noreferrer"
+                className={classes.entityLink}
+              >
+                {content}
+              </a>
+            ) : (
+              content
+            )}
+            ⟩
+          </span>
+        </Tooltip>
+      );
+    } else {
+      sentenceElements.push(<span key={i}>{s.text}</span>);
+    }
   });
 
   return (
@@ -163,7 +208,7 @@ const NaturalLanguageAnnotatedResult: React.FC<Props> = ({
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>{sentence.map((s) => s)}</Grid>
+          {<Grid item>{sentenceElements.map((s) => s)}</Grid>}
         </Grid>
       </Paper>
     </div>
