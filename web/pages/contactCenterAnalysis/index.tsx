@@ -5,13 +5,17 @@ import {
   Theme,
   Typography,
 } from "@material-ui/core";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import ProductChips from "../../components/ProductChips";
 import { useTranslation } from "../../hooks/useTranslation";
 import { demos } from "../../src/demos";
-import Recorder from "../../components/Recorder";
-import { analyze, Response } from "../../src/api/contactCenterAnalysis";
+import Recorder, { Language } from "../../components/Recorder";
+import {
+  analyze,
+  Response,
+  getLanguages,
+} from "../../src/api/contactCenterAnalysis";
 import NaturalLanguageAnnotatedResult from "../../components/NaturalLanguageAnnotatedResult";
 import ErrorMessage from "../../components/ErrorMessage";
 
@@ -49,13 +53,35 @@ const ContactCenterAnalysis: React.FC = () => {
 
   const [responses, setResponses] = useState<Response[]>([]);
   const [error, setError] = useState({ open: false, msg: "" });
+  const [languages, setLanguages] = useState<{
+    languages: Language[];
+    default: string;
+  }>({ languages: [], default: "" });
 
   const onCloseError = () => setError({ open: false, msg: "" });
 
   const addResult = (response: Response) =>
     setResponses((responses) => [response, ...responses]);
 
-  const languages = ["en-US", "ja-JP"];
+  useEffect(() => {
+    const f = async () => {
+      try {
+        const res = await getLanguages();
+        setLanguages({
+          languages: res.languages,
+          default: res.languages[0].code,
+        });
+      } catch (e) {
+        console.error(e);
+        if (e instanceof Error) {
+          setError({ open: true, msg: e.message });
+        } else {
+          setError({ open: true, msg: "something went wrong." });
+        }
+      }
+    };
+    void f();
+  }, []);
 
   const onStop = async (lang: string, blob: Blob): Promise<void> => {
     try {
@@ -84,7 +110,11 @@ const ContactCenterAnalysis: React.FC = () => {
       >
         {t.contactCenterAnalysis.description}
       </Typography>
-      <Recorder onStop={onStop} languages={languages} defaultLanguage="en-US" />
+      <Recorder
+        onStop={onStop}
+        languages={languages.languages}
+        defaultLanguage={languages.default}
+      />
       <Grid
         container
         direction="column"

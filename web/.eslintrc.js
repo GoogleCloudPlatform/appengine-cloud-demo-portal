@@ -35,6 +35,7 @@ module.exports = {
     },
   },
   rules: {
+    "@typescript-eslint/no-floating-promises": ["error", { ignoreVoid: true }],
     "import/order": ["error"],
     "prettier/prettier": [
       "error",

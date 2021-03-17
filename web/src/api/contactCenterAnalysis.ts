@@ -83,11 +83,26 @@ const analyze = async (lang: string, blob: Blob): Promise<Response> => {
     },
   };
 
-  return await request<typeof data, Response>(
+  return await request<Response>(
     "/contactCenterAnalysis/speech:analyze",
     "POST",
     data
   );
 };
 
-export { analyze };
+type LanguageSupport = {
+  name: string;
+  code: string;
+};
+
+type GetLanguagesResponse = {
+  languages: LanguageSupport[];
+};
+
+const getLanguages = async (): Promise<GetLanguagesResponse> =>
+  await request<GetLanguagesResponse>(
+    "/contactCenterAnalysis/languages",
+    "GET"
+  );
+
+export { analyze, getLanguages };

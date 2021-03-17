@@ -5,10 +5,10 @@ const protocol = process.env.apiUseSsl === "true" ? "https" : "http";
 
 type Method = "GET" | "POST";
 
-const request = async <Req, Res>(
+const request = async <Res>(
   path: string,
   method: Method,
-  data: Req
+  data?: Record<string, unknown>
 ): Promise<Res> => {
   const url = `${protocol}://${apiHost}/v1${path}`;
   const res = await axios.request<Res>({

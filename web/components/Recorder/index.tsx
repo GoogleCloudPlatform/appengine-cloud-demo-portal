@@ -16,7 +16,7 @@ import { DisplayRecorder, Canvas } from "./Recorder";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     formControl: {
-      minWidth: 200,
+      minWidth: 350,
     },
     canvas: {
       borderColor: theme.palette.action.disabled,
@@ -26,10 +26,15 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+export type Language = {
+  name: string;
+  code: string;
+};
+
 export type OnStopCallback = (lang: string, blob: Blob) => Promise<void>;
 
 type Props = {
-  languages: string[];
+  languages: Language[];
   defaultLanguage: string;
   onStop: OnStopCallback;
 };
@@ -100,8 +105,8 @@ const Recorder: React.FC<Props> = ({ languages, defaultLanguage, onStop }) => {
             label="I speak"
           >
             {languages.map((lang) => (
-              <MenuItem value={lang} key={lang}>
-                {lang}
+              <MenuItem value={lang.code} key={lang.code}>
+                {lang.name}
               </MenuItem>
             ))}
           </Select>
