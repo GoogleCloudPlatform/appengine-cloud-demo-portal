@@ -3,7 +3,7 @@ import { createStyles, Grid, makeStyles, Theme } from "@material-ui/core";
 
 import { useTranslation } from "../hooks/useTranslation";
 import { demoIds } from "../src/demos";
-import DemoCard from "./DemoCard";
+import DemoCard from "../components/DemoCard";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
