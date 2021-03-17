@@ -13,6 +13,7 @@ import { demos } from "../../src/demos";
 import Recorder from "../../components/Recorder";
 import { analyze, Response } from "../../src/api/contactCenterAnalysis";
 import NaturalLanguageAnnotatedResult from "../../components/NaturalLanguageAnnotatedResult";
+import ErrorMessage from "../../components/ErrorMessage";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -47,6 +48,9 @@ const ContactCenterAnalysis: React.FC = () => {
   const { t } = useTranslation();
 
   const [responses, setResponses] = useState<Response[]>([]);
+  const [error, setError] = useState({ open: false, msg: "" });
+
+  const onCloseError = () => setError({ open: false, msg: "" });
 
   const addResult = (response: Response) =>
     setResponses((responses) => [response, ...responses]);
@@ -58,8 +62,12 @@ const ContactCenterAnalysis: React.FC = () => {
       const res = await analyze(lang, blob);
       addResult(res);
     } catch (e) {
-      // alert(e);
       console.error(e);
+      if (e instanceof Error) {
+        setError({ open: true, msg: e.message });
+      } else {
+        setError({ open: true, msg: "something went wrong." });
+      }
     }
   };
 
@@ -90,6 +98,11 @@ const ContactCenterAnalysis: React.FC = () => {
         ))}
       </Grid>
       <div className={classes.responses}></div>
+      <ErrorMessage
+        open={error.open}
+        onClose={onCloseError}
+        message={error.msg}
+      />
     </main>
   );
 };
