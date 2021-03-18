@@ -7,6 +7,7 @@ import {
 } from "@material-ui/core";
 import { useState, useEffect } from "react";
 
+import Head from "next/head";
 import ProductChips from "../../components/ProductChips";
 import { useTranslation } from "../../hooks/useTranslation";
 import { demos } from "../../src/demos";
@@ -99,6 +100,11 @@ const ContactCenterAnalysis: React.FC = () => {
 
   return (
     <main className={classes.root}>
+      <Head>
+        <title>
+          {t.contactCenterAnalysis.title} | {t.title}
+        </title>
+      </Head>
       <Typography variant="h3" component="h2" className={classes.title}>
         {t.contactCenterAnalysis.title}
       </Typography>
