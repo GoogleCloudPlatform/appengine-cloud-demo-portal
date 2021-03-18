@@ -3,6 +3,8 @@ service: api
 
 instance_class: F4
 
+entrypoint: uvicorn main:app --port $PORT --host 0.0.0.0
+
 handlers:
   - url: /.*
     secure: always
