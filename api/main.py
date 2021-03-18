@@ -8,7 +8,6 @@ import tempfile
 
 from fastapi import FastAPI, HTTPException
 from fastapi.logger import logger
-from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 from google.cloud import speech
@@ -19,12 +18,6 @@ from natural_language.languages import LANGUAGES as nl_languages
 
 
 app = FastAPI()
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=['http://localhost:3000'],
-    allow_methods=['*'],
-    allow_headers=['*'],
-)
 
 
 speech_client = speech.SpeechClient()
@@ -40,7 +33,7 @@ class GetLanguagesResponse(BaseModel):
     languages: List[LanguageSupport] = Field(..., example=['en-US', 'ja-JP'])
 
 
-@app.get('/v1/contactCenterAnalysis/languages', response_model=GetLanguagesResponse)
+@app.get('/api/v1/contactCenterAnalysis/languages', response_model=GetLanguagesResponse)
 async def get_languages():
     codes = speech_languages.keys()
     languages = map(
@@ -138,7 +131,7 @@ class SpeechAnalyzeResponse(BaseModel):
     categories: List[ClassificationCategory]
 
 
-@app.post('/v1/contactCenterAnalysis/speech:analyze', response_model=SpeechAnalyzeResponse)
+@app.post('/api/v1/contactCenterAnalysis/speech:analyze', response_model=SpeechAnalyzeResponse)
 async def analyze_speech(data: SpeechAnalyzeRequest):
     language_code = data.config.language_code
     audio_bytes = base64.b64decode(data.audio.content)

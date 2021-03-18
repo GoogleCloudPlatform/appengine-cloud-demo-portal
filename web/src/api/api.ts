@@ -1,8 +1,5 @@
 import axios from "axios";
 
-const apiHost = process.env.apiHost || "localhost:8000";
-const protocol = process.env.apiUseSsl === "true" ? "https" : "http";
-
 type Method = "GET" | "POST";
 
 const request = async <Res>(
@@ -10,7 +7,7 @@ const request = async <Res>(
   method: Method,
   data?: Record<string, unknown>
 ): Promise<Res> => {
-  const url = `${protocol}://${apiHost}/v1${path}`;
+  const url = `/api/v1${path}`;
   const res = await axios.request<Res>({
     url,
     method,
