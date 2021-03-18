@@ -1,0 +1,11 @@
+runtime: python39
+
+instance_class: F4
+
+handlers:
+  - url: /.*
+    secure: always
+    script: auto
+
+automatic_scaling:
+  min_instances: 1
