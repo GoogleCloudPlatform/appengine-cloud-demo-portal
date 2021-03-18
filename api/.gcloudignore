@@ -1,0 +1,8 @@
+app.yaml
+credentials.json
+.envrc
+.gitignore
+Pipfile
+Pipfile.lock
+__pycache__
+.python-version
