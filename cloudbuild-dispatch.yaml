@@ -1,0 +1,11 @@
+steps:
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
+    args:
+      - gcloud
+      - app
+      - deploy
+      - dispatch.yaml
+      - --project
+      - $PROJECT_ID
+      - --quiet
+
