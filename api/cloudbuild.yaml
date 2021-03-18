@@ -1,0 +1,19 @@
+steps:
+  - name: "python:${_PYTHON_VERSION}-slim-buster"
+    dir: api
+    entrypoint: bash
+    args:
+      - "-c"
+      - "pip install pipenv && pipenv lock -r > requirements.txt"
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
+    dir: api
+    args:
+      - gcloud
+      - app
+      - deploy
+      - --project
+      - $PROJECT_ID
+      - --quiet
+
+substitutions:
+  _PYTHON_VERSION: 3.9.2
