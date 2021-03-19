@@ -15,4 +15,4 @@ Mapping between [LogSeverity for Cloud Logging](https://cloud.google.com/logging
 | ERROR (500) | Error events are likely to cause problems. | error (3) |
 | CRITICAL (600) | Critical events cause more severe problems or outages. | fatal (4) |
 | ALERT (700) | A person must take an action immediately. | none |
-| EMERGENCY (800) | One or more systems are unusable. | none |
+| EMERGENCY (800) | One or more systems are unusable. | panic (5) |
