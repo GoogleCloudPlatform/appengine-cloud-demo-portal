@@ -1,6 +1,19 @@
 api
 ===
 
+## Prerequisites
+
+* Go 1.15
+* [realize](https://github.com/oxequa/realize).
+
+## Development
+
+Start local server.
+
+```bash
+realize start
+```
+
 ## Log level
 
 Mapping between [LogSeverity for Cloud Logging](https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#logseverity) and [zerolog](https://github.com/rs/zerolog)
