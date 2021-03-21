@@ -2,10 +2,17 @@ package contactcenteranalysis
 
 import (
 	"net/http"
-	"time"
+
+	hd "github.com/ShawnLabo/cloud-demos/api/pkg/handler"
 )
 
+type getLanguagesHandlerResponse struct {
+	Languages []*supportedLanguage `json:"languages"`
+}
+
 func (h *handler) getLanguagesHandler(w http.ResponseWriter, r *http.Request) {
-	time.Sleep(30 * time.Second)
-	w.Write([]byte("welcome"))
+	langs := &getLanguagesHandlerResponse{
+		Languages: supportedLanguages,
+	}
+	hd.RespondJSON(w, r, http.StatusOK, langs)
 }
