@@ -50,7 +50,7 @@ func E(status int, msg string, format string, a ...interface{}) error {
 // RespondError responds and logs error.
 func RespondError(w http.ResponseWriter, r *http.Request, err error) {
 	ctx := r.Context()
-	logger := log.Ctx(ctx)
+	logger := log.Ctx(ctx).With().CallerWithSkipFrameCount(3).Logger()
 
 	e, ok := err.(*httpError)
 	if ok {
@@ -71,7 +71,7 @@ type errjson struct {
 // RespondErrorJSON responds error as JSON and logs error.
 func RespondErrorJSON(w http.ResponseWriter, r *http.Request, err error) {
 	ctx := r.Context()
-	logger := log.Ctx(ctx)
+	logger := log.Ctx(ctx).With().CallerWithSkipFrameCount(3).Logger()
 
 	ej := &errjson{}
 
