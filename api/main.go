@@ -10,12 +10,13 @@ import (
 	"time"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/go-chi/chi/v5/middleware"
+	chimiddleware "github.com/go-chi/chi/v5/middleware"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 
 	"github.com/ShawnLabo/cloud-demos/api/client"
 	"github.com/ShawnLabo/cloud-demos/api/contactcenteranalysis"
+	"github.com/ShawnLabo/cloud-demos/api/pkg/middleware"
 )
 
 const (
@@ -25,7 +26,9 @@ const (
 
 func router(clients *client.Clients) http.Handler {
 	r := chi.NewRouter()
-	r.Use(middleware.RealIP)
+	r.Use(chimiddleware.RealIP)
+	r.Use(middleware.RequestLogger())
+	r.Use(middleware.LogRequest())
 	r.Route("/api", func(r chi.Router) {
 		r.Route("/v1", func(r chi.Router) {
 			r.Route("/contactCenterAnalysis", contactcenteranalysis.Router(clients))
@@ -36,10 +39,17 @@ func router(clients *client.Clients) http.Handler {
 }
 
 func initLogger() {
+	var level zerolog.Level
 	if os.Getenv("LOG_LEVEL") != "" {
+		l, err := zerolog.ParseLevel(os.Getenv("LOG_LEVEL"))
+		if err != nil {
+			panic(err)
+		}
+		level = l
 	} else {
-		zerolog.SetGlobalLevel(zerolog.InfoLevel)
+		level = zerolog.InfoLevel
 	}
+	zerolog.SetGlobalLevel(level)
 
 	var w io.Writer
 	if os.Getenv("LOG_PRETTY") == "true" {
