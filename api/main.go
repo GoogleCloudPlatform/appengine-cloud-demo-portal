@@ -26,9 +26,12 @@ const (
 
 func router(clients *client.Clients) http.Handler {
 	r := chi.NewRouter()
+
 	r.Use(chimiddleware.RealIP)
 	r.Use(middleware.RequestLogger())
 	r.Use(middleware.LogRequest())
+	r.Use(middleware.Recover())
+
 	r.Route("/api", func(r chi.Router) {
 		r.Route("/v1", func(r chi.Router) {
 			r.Route("/contactCenterAnalysis", contactcenteranalysis.Router(clients))
