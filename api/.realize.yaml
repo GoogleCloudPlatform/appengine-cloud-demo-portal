@@ -1,0 +1,41 @@
+settings:
+  files:
+    outputs:
+      status: false
+      path: ""
+      name: .r.outputs.log
+    logs:
+      status: false
+      path: ""
+      name: .r.logs.log
+    errors:
+      status: false
+      path: ""
+      name: .r.errors.log
+  legacy:
+    force: false
+    interval: 0s
+server:
+  status: false
+  open: false
+  port: 5001
+  host: localhost
+schema:
+- name: api
+  path: .
+  commands:
+    install:
+      status: true
+      method: go build -o api
+    run:
+      status: true
+      method: ./api
+  watcher:
+    extensions:
+    - go
+    paths:
+    - /
+    ignored_paths:
+    - .git
+    - .realize
+    - vendor

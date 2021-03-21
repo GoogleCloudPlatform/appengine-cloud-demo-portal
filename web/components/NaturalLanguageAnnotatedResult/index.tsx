@@ -40,7 +40,7 @@ type Mention = {
   name: string;
   content: string;
   type: string;
-  url: string;
+  url: string | undefined;
   salience: number;
   beginOffset: number;
 };
@@ -94,19 +94,21 @@ const NaturalLanguageAnnotatedResult: React.FC<Props> = ({
   }
 
   const mentions: Mention[] = [];
-  result.entities.forEach((entity) => {
-    entity.mentions.forEach((mention) => {
-      mentions.push({
-        name: entity.name,
-        content: mention.text.content,
-        type: entity.type,
-        url: entity.metadata["wikipedia_url"],
-        salience: entity.salience,
-        beginOffset: mention.text.beginOffset,
+  if (result.entities) {
+    result.entities.forEach((entity) => {
+      entity.mentions.forEach((mention) => {
+        mentions.push({
+          name: entity.name,
+          content: mention.text.content,
+          type: entity.type,
+          url: entity.metadata && entity.metadata["wikipedia_url"],
+          salience: entity.salience,
+          beginOffset: mention.text.beginOffset,
+        });
       });
     });
-  });
-  mentions.sort(sortFn);
+    mentions.sort(sortFn);
+  }
 
   const text = result.document.content;
 
@@ -206,7 +208,9 @@ const NaturalLanguageAnnotatedResult: React.FC<Props> = ({
               </Grid>
               <Grid item>
                 <Typography variant="body1" component="p">
-                  {result.categories.map((c) => c.name).join(", ")}
+                  {result.categories
+                    ? result.categories.map((c) => c.name).join(", ")
+                    : ""}
                 </Typography>
               </Grid>
             </Grid>

@@ -34,7 +34,7 @@ export type EntityMention = {
 export type Entity = {
   name: string;
   type: EntityType;
-  metadata: { [key: string]: string };
+  metadata?: { [key: string]: string };
   salience: number;
   mentions: EntityMention[];
   sentiment?: Sentiment;
@@ -53,10 +53,10 @@ export type Document = {
 
 export type Response = {
   document: Document;
-  entities: Entity[];
+  entities?: Entity[];
   documentSentiment: Sentiment;
   language: string;
-  categories: ClassificationCategory[];
+  categories?: ClassificationCategory[];
 };
 
 const blobToBase64 = (blob: Blob): Promise<string> => {

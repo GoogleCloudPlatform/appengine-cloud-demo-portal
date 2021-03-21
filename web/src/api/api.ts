@@ -1,6 +1,9 @@
+import applyCaseMiddleware from "axios-case-converter";
 import axios from "axios";
 
 type Method = "GET" | "POST";
+
+const client = applyCaseMiddleware(axios.create());
 
 const request = async <Res>(
   path: string,
@@ -8,7 +11,7 @@ const request = async <Res>(
   data?: Record<string, unknown>
 ): Promise<Res> => {
   const url = `/api/v1${path}`;
-  const res = await axios.request<Res>({
+  const res = await client.request<Res>({
     url,
     method,
     responseType: "json",
