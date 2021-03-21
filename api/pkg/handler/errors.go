@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"errors"
+	"context"
 	"fmt"
 	"net/http"
 
@@ -19,45 +19,59 @@ func (e *httpError) Error() string {
 	return fmt.Sprintf("%s (%d): %s", e.msg, e.status, e.err)
 }
 
-// Error returns a new error.
-func Error(status int, msg string, errmsg string) error {
-	return &httpError{
-		err:    errors.New(errmsg),
+// Errorf constructs a new error for handler.
+func Errorf(ctx context.Context, status int, msg string, format string, a ...interface{}) error {
+	he := &httpError{
+		err:    fmt.Errorf(format, a...),
 		status: status,
 		msg:    msg,
 	}
-}
 
-// E constructs an error.
-func E(status int, msg string, format string, a ...interface{}) error {
-	err := fmt.Errorf(format, a...)
+	first := false
 
-	e := &httpError{err: err}
-
-	pe, ok := err.(*httpError)
-
-	if ok {
-		e.status = pe.status
-		e.msg = fmt.Sprintf("%s: %s", msg, pe.msg)
+	if len(a) > 0 {
+		pe, ok := a[len(a)-1].(*httpError)
+		if ok {
+			he.status = pe.status
+			he.msg = pe.msg
+		} else {
+			first = true
+		}
 	} else {
-		e.status = status
-		e.msg = msg
+		first = true
 	}
 
-	return e
+	if first {
+		logger := log.Ctx(ctx).With().CallerWithSkipFrameCount(3).Logger()
+		logger.Error().Err(he).Msg(he.Error())
+	}
+
+	return he
 }
 
-// RespondError responds and logs error.
-func RespondError(w http.ResponseWriter, r *http.Request, err error) {
-	ctx := r.Context()
-	logger := log.Ctx(ctx).With().CallerWithSkipFrameCount(3).Logger()
+// Wrapf wraps an error.
+func Wrapf(format string, a ...interface{}) error {
+	he := &httpError{
+		err:    fmt.Errorf(format, a...),
+		status: http.StatusInternalServerError,
+		msg:    http.StatusText(http.StatusInternalServerError),
+	}
 
+	pe, ok := a[len(a)-1].(*httpError)
+	if ok {
+		he.status = pe.status
+		he.msg = pe.msg
+	}
+
+	return he
+}
+
+// RespondError responds an error.
+func RespondError(w http.ResponseWriter, r *http.Request, err error) {
 	e, ok := err.(*httpError)
 	if ok {
-		logger.Error().Err(e).Msg(e.Error())
 		http.Error(w, e.msg, e.status)
 	} else {
-		logger.Error().Err(err).Msg("unexpected error")
 		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 	}
 }
@@ -70,20 +84,15 @@ type errjson struct {
 
 // RespondErrorJSON responds error as JSON and logs error.
 func RespondErrorJSON(w http.ResponseWriter, r *http.Request, err error) {
-	ctx := r.Context()
-	logger := log.Ctx(ctx).With().CallerWithSkipFrameCount(3).Logger()
-
 	ej := &errjson{}
 
 	e, ok := err.(*httpError)
 	if ok {
 		ej.Status = e.status
 		ej.Message = e.msg
-		logger.Error().Err(e).Msg(e.msg)
 	} else {
 		ej.Status = http.StatusInternalServerError
 		ej.Message = http.StatusText(ej.Status)
-		logger.Error().Err(err).Msg(ej.Message)
 	}
 	ej.Kind = http.StatusText(ej.Status)
 

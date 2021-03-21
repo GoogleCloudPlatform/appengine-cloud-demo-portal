@@ -45,7 +45,6 @@ func (h *handler) analyzeSpeechHandler(w http.ResponseWriter, r *http.Request) {
 
 	req := &analyzeSpeechRequest{}
 	if err := hd.DecodeJSONBody(r, req); err != nil {
-		logger.Error().Err(err).Msg("failed to decode request json as json")
 		hd.RespondErrorJSON(w, r, err)
 		return
 	}
@@ -69,24 +68,27 @@ func (h *handler) analyzeSpeechHandler(w http.ResponseWriter, r *http.Request) {
 
 	speechRes, err := h.Speech.Recognize(ctx, speechReq)
 	if err != nil {
-		err = hd.E(http.StatusInternalServerError,
+		err := hd.Errorf(ctx,
+			http.StatusInternalServerError,
 			http.StatusText(http.StatusInternalServerError),
 			"failed to requeest to Speech.Recognize: %w", err)
-		logger.Error().Err(err).Msg(err.Error())
 		hd.RespondErrorJSON(w, r, err)
 		return
 	}
 
 	if len(speechRes.Results) == 0 {
-		err := hd.Error(http.StatusBadRequest, "no text was recognized",
+		err := hd.Errorf(ctx,
+			http.StatusBadRequest,
+			"no text was recognized",
 			"no text was recognized")
 		hd.RespondErrorJSON(w, r, err)
 		return
 	}
 
 	text := speechRes.Results[0].Alternatives[0].Transcript
+	logger.Debug().Msgf("recognized text = '%s'", text)
 
-	doc, err := buildDocument(req.Config.LanguageCode, text)
+	doc, err := buildDocument(ctx, req.Config.LanguageCode, text)
 	if err != nil {
 		hd.RespondErrorJSON(w, r, err)
 		return
@@ -101,7 +103,8 @@ func (h *handler) analyzeSpeechHandler(w http.ResponseWriter, r *http.Request) {
 
 	languageRes, err := h.Language.AnnotateText(ctx, languageReq)
 	if err != nil {
-		err = hd.E(http.StatusInternalServerError,
+		err := hd.Errorf(ctx,
+			http.StatusInternalServerError,
 			http.StatusText(http.StatusInternalServerError),
 			"failed to requeest to Language.AnnotateText: %w", err)
 		hd.RespondErrorJSON(w, r, err)
@@ -124,43 +127,46 @@ func (h *handler) analyzeSpeechHandler(w http.ResponseWriter, r *http.Request) {
 	hd.RespondJSON(w, r, http.StatusOK, res)
 }
 
-func buildDocument(languageCode string, content string) (*languagepb.Document, error) {
-	var lang *supportedLanguage
+func buildDocument(
+	ctx context.Context,
+	lang string,
+	text string,
+) (*languagepb.Document, error) {
+	var sl *supportedLanguage
 	for _, l := range supportedLanguages {
-		if l.Code == languageCode {
-			lang = l
+		if l.Code == lang {
+			sl = l
 			break
 		}
 	}
 
-	if lang == nil {
-		return nil, hd.Error(
+	if sl == nil {
+		return nil, hd.Errorf(ctx,
 			http.StatusBadRequest,
-			fmt.Sprintf("%s is not supported", languageCode),
-			fmt.Sprintf("unsupported language code: %s", languageCode))
+			fmt.Sprintf("%s is not supported", lang),
+			"unsupported language code: %s", lang)
 	}
 
 	return &languagepb.Document{
 		Type:     languagepb.Document_PLAIN_TEXT,
-		Source:   &languagepb.Document_Content{Content: content},
-		Language: lang.languageCode,
+		Source:   &languagepb.Document_Content{Content: text},
+		Language: sl.languageCode,
 	}, nil
 }
 
 func base64ToWave(ctx context.Context, content string) ([]byte, error) {
-	logger := log.Ctx(ctx)
-
 	audio, err := base64.StdEncoding.DecodeString(content)
 	if err != nil {
-		logger.Error().Err(err).Msg("failed to decode base64")
-		return nil, hd.E(http.StatusBadRequest, "invalid audio",
+		return nil, hd.Errorf(ctx,
+			http.StatusBadRequest,
+			"invalid encoded audio",
 			"failed to decode base64: %w", err)
 	}
 
 	dir, err := ioutil.TempDir("", "contactcenteranalysis")
 	if err != nil {
-		logger.Error().Err(err).Msg("failed to create tempdir")
-		return nil, hd.E(http.StatusInternalServerError,
+		return nil, hd.Errorf(ctx,
+			http.StatusInternalServerError,
 			http.StatusText(http.StatusInternalServerError),
 			"failed to create tempdir: %w", err)
 	}
@@ -170,23 +176,23 @@ func base64ToWave(ctx context.Context, content string) ([]byte, error) {
 	dstFile := filepath.Join(dir, "dst.wav")
 
 	if err := ioutil.WriteFile(srcFile, audio, 0644); err != nil {
-		logger.Error().Err(err).Msgf("failed to write file: %s", srcFile)
-		return nil, hd.E(http.StatusInternalServerError,
+		return nil, hd.Errorf(ctx,
+			http.StatusInternalServerError,
 			http.StatusText(http.StatusInternalServerError),
 			"failed to write file: %s: %w", srcFile, err)
 	}
 
 	if err := exec.Command("ffmpeg", "-i", srcFile, dstFile).Run(); err != nil {
-		logger.Error().Err(err).Msg("failed to exec ffmpeg")
-		return nil, hd.E(http.StatusInternalServerError,
+		return nil, hd.Errorf(ctx,
+			http.StatusInternalServerError,
 			http.StatusText(http.StatusInternalServerError),
 			"failed to exec ffmpeg: %w", err)
 	}
 
 	wav, err := ioutil.ReadFile(dstFile)
 	if err != nil {
-		logger.Error().Err(err).Msgf("failed to read wave file: %s", dstFile)
-		return nil, hd.E(http.StatusInternalServerError,
+		return nil, hd.Errorf(ctx,
+			http.StatusInternalServerError,
 			http.StatusText(http.StatusInternalServerError),
 			"failed to read wav file: %s: %w", dstFile, err)
 	}

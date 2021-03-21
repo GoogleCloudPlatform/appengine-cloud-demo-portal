@@ -14,10 +14,10 @@ func RespondJSON(w http.ResponseWriter, r *http.Request, status int, body interf
 
 	bytes, err := json.Marshal(body)
 	if err != nil {
-		logger.Error().Err(err).Msg("failed to marshal response body as json")
-		RespondError(w, r,
-			E(http.StatusInternalServerError, "internal server error",
-				"failed to marshal response body as a JSON: %w", err))
+		RespondError(w, r, Errorf(r.Context(),
+			http.StatusInternalServerError, "internal server error",
+			"failed to marshal response body as a JSON: %w", err),
+		)
 		return
 	}
 
@@ -29,12 +29,9 @@ func RespondJSON(w http.ResponseWriter, r *http.Request, status int, body interf
 
 // DecodeJSONBody decodes request body as JSON.
 func DecodeJSONBody(r *http.Request, v interface{}) error {
-	ctx := r.Context()
-	logger := log.Ctx(ctx)
-
 	if err := json.NewDecoder(r.Body).Decode(v); err != nil {
-		logger.Error().Err(err).Msg("failed to decode request body as json")
-		return E(http.StatusBadRequest, "invalid request body",
+		return Errorf(r.Context(),
+			http.StatusBadRequest, "invalid json",
 			"failed to decode request body as json: %w", err)
 	}
 	defer r.Body.Close()

@@ -35,7 +35,7 @@ var (
 			ExtractDocumentSentiment: true,
 			ExtractEntitySentiment:   true,
 			ClassifyText:             false,
-			// ClassifyText:             true,
+			// ClassifyText:          true,
 		},
 		"fr": {
 			ExtractSyntax:            true,
