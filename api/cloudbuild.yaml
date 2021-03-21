@@ -1,5 +1,5 @@
 steps:
-  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     dir: api
     args:
       - gcloud
