@@ -26,3 +26,18 @@ func RespondJSON(w http.ResponseWriter, r *http.Request, status int, body interf
 		logger.Error().Err(err).Msg("failed to write json response")
 	}
 }
+
+// DecodeJSONBody decodes request body as JSON.
+func DecodeJSONBody(r *http.Request, v interface{}) error {
+	ctx := r.Context()
+	logger := log.Ctx(ctx)
+
+	if err := json.NewDecoder(r.Body).Decode(v); err != nil {
+		logger.Error().Err(err).Msg("failed to decode request body as json")
+		return E(http.StatusBadRequest, "invalid request body",
+			"failed to decode request body as json: %w", err)
+	}
+	defer r.Body.Close()
+
+	return nil
+}

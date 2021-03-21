@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"errors"
 	"fmt"
 	"net/http"
 
@@ -16,6 +17,15 @@ type httpError struct {
 // Error returns internal message of e.
 func (e *httpError) Error() string {
 	return fmt.Sprintf("%s (%d): %s", e.msg, e.status, e.err)
+}
+
+// Error returns a new error.
+func Error(status int, msg string, errmsg string) error {
+	return &httpError{
+		err:    errors.New(errmsg),
+		status: status,
+		msg:    msg,
+	}
 }
 
 // E constructs an error.
