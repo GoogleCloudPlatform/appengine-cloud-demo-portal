@@ -31,15 +31,25 @@ export type Language = {
   code: string;
 };
 
-export type OnStopCallback = (lang: string, blob: Blob) => Promise<void>;
+export type OnStopCallback = (
+  lang: string,
+  duration: number | null,
+  blob: Blob
+) => Promise<void>;
 
 type Props = {
   languages: Language[];
   defaultLanguage: string;
+  onStart: (lang: string) => void;
   onStop: OnStopCallback;
 };
 
-const Recorder: React.FC<Props> = ({ languages, defaultLanguage, onStop }) => {
+const Recorder: React.FC<Props> = ({
+  languages,
+  defaultLanguage,
+  onStart,
+  onStop,
+}) => {
   const classes = useStyles();
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -48,6 +58,7 @@ const Recorder: React.FC<Props> = ({ languages, defaultLanguage, onStop }) => {
   const [isRecording, setIsRecording] = useState(false);
   const [isStopping, setIsStopping] = useState(false);
   const [recorder, setRecorder] = useState<DisplayRecorder | null>(null);
+  const [startTime, setStartTime] = useState<number | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -74,6 +85,8 @@ const Recorder: React.FC<Props> = ({ languages, defaultLanguage, onStop }) => {
 
   const onClickStart = async () => {
     if (recorder === null) return;
+    setStartTime(Date.now());
+    onStart(lang);
     setIsRecording(true);
     await recorder.start();
   };
@@ -81,7 +94,11 @@ const Recorder: React.FC<Props> = ({ languages, defaultLanguage, onStop }) => {
   const onClickStop = () => {
     if (recorder === null) return;
     setIsStopping(true);
-    recorder.stop(async (blob: Blob) => await onStop(lang, blob));
+    let duration: number | null;
+    if (startTime) {
+      duration = Date.now() - startTime;
+    }
+    recorder.stop(async (blob: Blob) => await onStop(lang, duration, blob));
     setIsRecording(false);
     setIsStopping(false);
   };

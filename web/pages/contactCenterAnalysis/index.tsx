@@ -6,8 +6,8 @@ import {
   Typography,
 } from "@material-ui/core";
 import { useState, useEffect } from "react";
-
 import Head from "next/head";
+
 import ProductChips from "../../components/ProductChips";
 import { useTranslation } from "../../hooks/useTranslation";
 import { demos } from "../../src/demos";
@@ -19,6 +19,7 @@ import {
 } from "../../src/api/contactCenterAnalysis";
 import NaturalLanguageAnnotatedResult from "../../components/NaturalLanguageAnnotatedResult";
 import ErrorMessage from "../../components/ErrorMessage";
+import { event } from "../../src/gtag";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -84,7 +85,25 @@ const ContactCenterAnalysis: React.FC = () => {
     void f();
   }, []);
 
-  const onStop = async (lang: string, blob: Blob): Promise<void> => {
+  const onStart = (lang: string) => {
+    event({
+      category: "contactCenterAnalytics",
+      action: "start_recording",
+      label: lang,
+    });
+  };
+
+  const onStop = async (
+    lang: string,
+    duration: number | null,
+    blob: Blob
+  ): Promise<void> => {
+    event({
+      category: "contactCenterAnalytics",
+      action: "stop_recording",
+      label: lang,
+      value: duration,
+    });
     try {
       const res = await analyze(lang, blob);
       addResult(res);
@@ -117,6 +136,7 @@ const ContactCenterAnalysis: React.FC = () => {
         {t.contactCenterAnalysis.description}
       </Typography>
       <Recorder
+        onStart={onStart}
         onStop={onStop}
         languages={languages.languages}
         defaultLanguage={languages.default}
