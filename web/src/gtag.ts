@@ -10,17 +10,25 @@ const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "";
 const enabledGa = GA_MEASUREMENT_ID !== "";
 
 const pageview = (url: string): void => {
-  window.gtag("config", GA_MEASUREMENT_ID, {
-    page_path: url,
-  });
+  try {
+    window.gtag("config", GA_MEASUREMENT_ID, {
+      page_path: url,
+    });
+  } catch (e) {
+    console.error(e);
+  }
 };
 
-const event = ({ action, category, label, value }: Event): void => {
-  window.gtag("event", action, {
-    event_category: category,
-    event_label: label,
-    value: value,
-  });
+const event = ({ category, action, label, value }: Event): void => {
+  try {
+    window.gtag("event", action, {
+      event_category: category,
+      event_label: label,
+      value: value,
+    });
+  } catch (e) {
+    console.error(e);
+  }
 };
 
 export { GA_MEASUREMENT_ID, enabledGa, pageview, event };
