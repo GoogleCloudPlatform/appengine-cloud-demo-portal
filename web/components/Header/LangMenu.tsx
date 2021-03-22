@@ -46,8 +46,6 @@ const LangMenu: React.FC = () => {
           aria-haspopup="true"
           aria-label={t.changeLanguage}
           onClick={onClick}
-          data-ga-event-category="header"
-          data-ga-event-action="language"
         >
           <Translate />
           <span className={classes.language}>{languageLabels[locale]}</span>
