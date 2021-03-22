@@ -10,6 +10,8 @@ steps:
     dir: "web"
     entrypoint: "npm"
     args: ["run", "build"]
+    env:
+      - "NEXT_PUBLIC_GA_MEASUREMENT_ID=${_NEXT_PUBLIC_GA_MEASUREMENT_ID}"
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
     dir: "web"
     args:
@@ -19,4 +21,3 @@ steps:
       - --project
       - $PROJECT_ID
       - --quiet
-
