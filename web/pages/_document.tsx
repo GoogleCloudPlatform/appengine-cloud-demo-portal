@@ -9,6 +9,8 @@ import Document, {
 } from "next/document";
 import { Children } from "react";
 
+import { enabledGa, GA_MEASUREMENT_ID } from "../src/gtag";
+
 export default class MyDocument extends Document {
   render(): JSX.Element {
     return (
@@ -19,6 +21,27 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           />
           <link rel="icon" href="/favicon.ico" />
+
+          {enabledGa ? (
+            <>
+              <script
+                async
+                src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+              />
+              <script
+                dangerouslySetInnerHTML={{
+                  __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${GA_MEASUREMENT_ID}', {
+                    page_path: window.location.pathname,
+                  });
+                  `,
+                }}
+              />
+            </>
+          ) : null}
         </Head>
         <body>
           <Main />
