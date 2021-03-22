@@ -1,15 +1,21 @@
-type Event = {
-  action: string;
-  category: string;
+export type ContactCenterAnalyticsEvent = {
+  category: "contactCenterAnalytics";
+  action: "start_recording" | "stop_recording";
   label: string;
-  value?: string;
+  value?: number | null;
 };
+
+export type Event = ContactCenterAnalyticsEvent;
 
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "";
 
 const enabledGa = GA_MEASUREMENT_ID !== "";
 
 const pageview = (url: string): void => {
+  if (!enabledGa) {
+    return;
+  }
+
   try {
     window.gtag("config", GA_MEASUREMENT_ID, {
       page_path: url,
@@ -20,6 +26,10 @@ const pageview = (url: string): void => {
 };
 
 const event = ({ category, action, label, value }: Event): void => {
+  if (!enabledGa) {
+    return;
+  }
+
   try {
     window.gtag("event", action, {
       event_category: category,
