@@ -7,5 +7,45 @@ services:
     volumes:
       - ./dev/nginx-dispatcher.conf:/etc/nginx/conf.d/dispatcher.conf
 
+  api:
+    build:
+      context: ./api/dev
+    environment:
+      GOOGLE_APPLICATION_CREDENTIALS: /go/src/github.com/ShawnLabo/api/credentials.json
+      LOG_LEVEL: debug
+      LOG_PRETTY: "true"
+      PORT: "8000"
+    ports:
+      - 8000:8000
+    volumes:
+      - type: bind
+        source: .
+        target: /go/src/github.com/ShawnLabo
+    working_dir: /go/src/github.com/ShawnLabo/api
 
+  web:
+    image: node:14.16.0-buster
+    command:
+      - bash
+      - -c
+      - "npm install && npm run dev"
+    ports:
+      - 3000:3000
+    volumes:
+      - type: bind
+        source: ./web
+        target: /app
+      - type: volume
+        source: web-nodemodules
+        target: /app/node_modules
+      - type: volume
+        source: web-next
+        target: /app/.next
+    working_dir: /app
+
+volumes:
+  web-nodemodules:
+    driver: local
+  web-next:
+    driver: local
 
