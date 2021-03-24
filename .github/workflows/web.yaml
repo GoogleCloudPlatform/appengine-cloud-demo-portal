@@ -1,0 +1,16 @@
+name: web
+on:
+  pull_request:
+    paths:
+      - 'web/**'
+
+jobs:
+  eslint:
+    name: eslint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: reviewdog/action-eslint@v1
+        with:
+          workdir: web
+          fail_on_error: true
