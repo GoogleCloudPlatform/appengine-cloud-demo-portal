@@ -110,13 +110,7 @@ const Recorder: React.FC<Props> = ({
   };
 
   return (
-    <Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={2}
-    >
+    <Grid container direction="row" alignItems="center" spacing={2}>
       <Grid item>
         <Autocomplete
           options={languages}
