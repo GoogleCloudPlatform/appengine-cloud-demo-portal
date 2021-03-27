@@ -1,7 +1,7 @@
 import { Locale } from "./type";
 
 const ja: Locale = {
-  title: "Google Cloud デモポータル",
+  title: "Google Cloud デモポータル (preview)",
   changeLanguage: "言語を切り替える",
   home: {},
   contactCenterAnalysis: {
