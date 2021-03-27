@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     translations: {
       padding: theme.spacing(4),
-      height: "60vh",
+      height: "70vh",
     },
   })
 );
