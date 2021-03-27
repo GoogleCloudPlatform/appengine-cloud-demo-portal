@@ -52,9 +52,10 @@ func (h *handler) analyzeSpeechHandler(w http.ResponseWriter, r *http.Request) {
 
 	speechReq := &speechpb.RecognizeRequest{
 		Config: &speechpb.RecognitionConfig{
-			Encoding:        speechpb.RecognitionConfig_LINEAR16,
-			SampleRateHertz: 48000,
-			LanguageCode:    req.Config.LanguageCode,
+			Encoding:                   speechpb.RecognitionConfig_LINEAR16,
+			SampleRateHertz:            48000,
+			LanguageCode:               req.Config.LanguageCode,
+			EnableAutomaticPunctuation: true,
 		},
 		Audio: &speechpb.RecognitionAudio{
 			AudioSource: &speechpb.RecognitionAudio_Content{Content: wave},
