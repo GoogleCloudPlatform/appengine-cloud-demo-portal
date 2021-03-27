@@ -93,7 +93,12 @@ const Translations: React.FC<Props> = ({ translations }) => {
     <Box component="div" overflow="scroll" className={classes.root}>
       <Grid container direction="column">
         <Grid item className={classes.selectorButton}>
-          <Button onClick={handleOpen} variant="contained" color="primary">
+          <Button
+            onClick={handleOpen}
+            variant="contained"
+            color="primary"
+            disabled={languages.length === 0}
+          >
             {t.simultaneousInterpreter.selectLanguages}
           </Button>
           <Dialog onClose={handleClose} open={open}>
