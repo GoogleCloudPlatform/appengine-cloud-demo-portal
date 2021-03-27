@@ -9,7 +9,7 @@ const en = {
   contactCenterAnalysis: {
     title: "Contact Center Analysis",
     description:
-      "Identify entities, understand sentiments, and classify contents of customer voices at contact centers.",
+      "Identify entities and understand sentiments from customer voices at contact centers.",
   },
   simultaneousInterpreter: {
     title: "Simultaneous Interpreter",

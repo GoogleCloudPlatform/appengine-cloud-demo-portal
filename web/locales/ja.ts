@@ -11,7 +11,7 @@ const ja: Locale = {
   contactCenterAnalysis: {
     title: "コールセンター分析",
     description:
-      "コールセンターでの顧客の声について感情の分析、エンティティの特定、コンテンツの分類を実行します。",
+      "コールセンターでの顧客の声について感情の分析とエンティティの特定を実行します。",
   },
   simultaneousInterpreter: {
     title: "同時通訳",
