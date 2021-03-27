@@ -1,5 +1,8 @@
 {
+  "assigneesFromCodeOwners": true,
   "extends": [
     "config:base"
-  ]
+  ],
+  "patch": { "automerge": true },
+  "separateMinorPatch": true
 }
