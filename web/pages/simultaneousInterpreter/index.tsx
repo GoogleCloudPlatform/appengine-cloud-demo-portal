@@ -9,6 +9,7 @@ import {
 import Head from "next/head";
 
 import ErrorMessage from "../../components/ErrorMessage";
+import HelpButton from "../../components/HelpButton";
 import ProductChips from "../../components/ProductChips";
 import Recorder from "../../components/Recorder";
 import { useTranslation } from "../../hooks/useTranslation";
@@ -33,8 +34,11 @@ const useStyles = makeStyles((theme: Theme) =>
     panel: {
       padding: theme.spacing(4),
     },
-    title: {
+    titleContainer: {
       paddingBottom: theme.spacing(4),
+    },
+    helpButtonContainer: {
+      textAlign: "right",
     },
     description: {
       paddingBottom: theme.spacing(4),
@@ -71,9 +75,23 @@ const SimultaneousInterpreter: React.FC = () => {
       >
         <Grid item>
           <Paper className={classes.panel}>
-            <Typography variant="h3" component="h2" className={classes.title}>
-              {t.simultaneousInterpreter.title}
-            </Typography>
+            <Grid
+              container
+              direction="row"
+              alignItems="center"
+              className={classes.titleContainer}
+            >
+              <Grid item xs={11}>
+                <Typography variant="h3" component="h2">
+                  {t.simultaneousInterpreter.title}
+                </Typography>
+              </Grid>
+              <Grid item xs={1} className={classes.helpButtonContainer}>
+                <HelpButton
+                  instructions={t.simultaneousInterpreter.instructions}
+                />
+              </Grid>
+            </Grid>
             <Typography
               variant="subtitle1"
               component="p"

@@ -1,6 +1,7 @@
 const en = {
   title: "Google Cloud Demo Portal (preview)",
   changeLanguage: "Change language",
+  howToUse: "How to use",
   home: {},
   readme: {
     title: "README",
@@ -15,6 +16,13 @@ const en = {
     title: "Simultaneous Interpreter",
     description:
       "Translate your speech into multiple languages simultaneously.",
+    instructions: [
+      "Choose a language which you speak.",
+      "Click mic button and speak something in the language you choosed.",
+      "CLICK STOP BUTTON.",
+      "Wait a moment. Then translations are displayed.",
+      "If you want to filter languages to display, click [SELECT LANGUAGES] and choose langauges you want.",
+    ],
     selectLanguages: "Select languages",
     selectLanguagesTitle: "Select languages to display",
     unselectAll: "Unselect all",
