@@ -41,7 +41,7 @@ const Header: React.FC = () => {
             <IconButton
               aria-label="github"
               color="inherit"
-              href="https://github.com/ShawnLabo/cloud-demos"
+              href="https://github.com/nownabe/cloud-demos"
               target="_blank"
             >
               <GitHub />
