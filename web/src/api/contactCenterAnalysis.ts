@@ -1,4 +1,4 @@
-import { request } from "./api";
+import { blobToBase64, request } from "./api";
 
 export type EntityType =
   | "UNKNOWN"
@@ -57,20 +57,6 @@ export type Response = {
   documentSentiment: Sentiment;
   language: string;
   categories?: ClassificationCategory[];
-};
-
-const blobToBase64 = (blob: Blob): Promise<string> => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      if (typeof event.target?.result === "string") {
-        resolve(event.target.result.split(",")[1]);
-      } else {
-        reject("invalid result");
-      }
-    };
-    reader.readAsDataURL(blob);
-  });
 };
 
 const analyze = async (lang: string, blob: Blob): Promise<Response> => {

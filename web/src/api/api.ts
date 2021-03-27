@@ -26,4 +26,18 @@ const request = async <Res>(
   return res.data;
 };
 
-export { request };
+const blobToBase64 = (blob: Blob): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      if (typeof event.target?.result === "string") {
+        resolve(event.target.result.split(",")[1]);
+      } else {
+        reject("invalid result");
+      }
+    };
+    reader.readAsDataURL(blob);
+  });
+};
+
+export { request, blobToBase64 };
