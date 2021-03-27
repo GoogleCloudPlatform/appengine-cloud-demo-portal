@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: "center",
       alignItems: "center",
     },
+    demoCard: {
+      flexGrow: 1,
+    },
   })
 );
 
@@ -38,7 +41,14 @@ const Index: React.FC = () => {
         alignItems="flex-start"
       >
         {demoIds.map((demoId) => (
-          <Grid item key={demoId} md={6} sm={12} xs={12}>
+          <Grid
+            item
+            key={demoId}
+            md={6}
+            sm={12}
+            xs={12}
+            className={classes.demoCard}
+          >
             <DemoCard demoId={demoId} />
           </Grid>
         ))}

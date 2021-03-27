@@ -21,10 +21,14 @@ type Props = {
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    button: {
+      width: "100%",
+    },
     paper: {
       cursor: "pointer",
       padding: theme.spacing(2),
       textAlign: "left",
+      width: "100%",
     },
     demoTitle: {
       fontSize: "1.5rem",
@@ -53,7 +57,7 @@ const DemoCard: React.FC<Props> = ({ demoId }) => {
   const onMouseLeave = () => setHovered(false);
 
   return (
-    <ButtonBase focusRipple>
+    <ButtonBase focusRipple className={classes.button}>
       <Paper
         className={classes.paper}
         onClick={onClick}
