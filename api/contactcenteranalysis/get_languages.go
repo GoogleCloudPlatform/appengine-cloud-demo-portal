@@ -3,7 +3,7 @@ package contactcenteranalysis
 import (
 	"net/http"
 
-	hd "github.com/ShawnLabo/cloud-demos/api/pkg/handler"
+	hd "github.com/nownabe/cloud-demos/api/pkg/handler"
 )
 
 type getLanguagesHandlerResponse struct {

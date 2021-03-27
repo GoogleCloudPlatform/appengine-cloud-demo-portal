@@ -14,10 +14,10 @@ import (
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 
-	"github.com/ShawnLabo/cloud-demos/api/client"
-	"github.com/ShawnLabo/cloud-demos/api/contactcenteranalysis"
-	"github.com/ShawnLabo/cloud-demos/api/pkg/middleware"
-	"github.com/ShawnLabo/cloud-demos/api/simultaneousinterpreter"
+	"github.com/nownabe/cloud-demos/api/client"
+	"github.com/nownabe/cloud-demos/api/contactcenteranalysis"
+	"github.com/nownabe/cloud-demos/api/pkg/middleware"
+	"github.com/nownabe/cloud-demos/api/simultaneousinterpreter"
 )
 
 const (

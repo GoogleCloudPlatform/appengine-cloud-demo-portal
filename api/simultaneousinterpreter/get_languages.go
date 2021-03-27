@@ -7,8 +7,9 @@ import (
 	"strings"
 
 	"cloud.google.com/go/translate"
-	hd "github.com/ShawnLabo/cloud-demos/api/pkg/handler"
 	"golang.org/x/text/language"
+
+	hd "github.com/nownabe/cloud-demos/api/pkg/handler"
 )
 
 type supportedLanguage struct {
