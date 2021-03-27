@@ -28,6 +28,6 @@ const demos: { [key: string]: Demo } = {
   },
 };
 
-const demoIds = Object.keys(demos).sort();
+const demoIds = Object.keys(demos);
 
 export { demos, demoIds };
