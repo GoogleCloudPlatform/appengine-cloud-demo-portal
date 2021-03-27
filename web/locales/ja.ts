@@ -4,6 +4,10 @@ const ja: Locale = {
   title: "Google Cloud デモポータル (preview)",
   changeLanguage: "言語を切り替える",
   home: {},
+  readme: {
+    title: "README",
+    description: "利用前に読んでください。",
+  },
   contactCenterAnalysis: {
     title: "コールセンター分析",
     description:

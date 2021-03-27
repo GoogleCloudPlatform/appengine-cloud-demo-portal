@@ -51,7 +51,13 @@ const DemoCard: React.FC<Props> = ({ demoId }) => {
 
   const [hovered, setHovered] = useState(false);
 
-  const onClick = () => router.push(demo.path, demo.path);
+  const onClick = () => {
+    if (demo.link) {
+      window.open(demo.link, "_blank");
+    } else {
+      void router.push(demo.path, demo.path);
+    }
+  };
 
   const onMouseEnter = () => setHovered(true);
   const onMouseLeave = () => setHovered(false);

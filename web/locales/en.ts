@@ -2,6 +2,10 @@ const en = {
   title: "Google Cloud Demo Portal (preview)",
   changeLanguage: "Change language",
   home: {},
+  readme: {
+    title: "README",
+    description: "Read me before using this site.",
+  },
   contactCenterAnalysis: {
     title: "Contact Center Analysis",
     description:
