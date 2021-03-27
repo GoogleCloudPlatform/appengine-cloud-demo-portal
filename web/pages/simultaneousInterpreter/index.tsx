@@ -4,12 +4,10 @@ import {
   makeStyles,
   Paper,
   Theme,
-  Typography,
 } from "@material-ui/core";
 import Head from "next/head";
 
-import ErrorMessage from "../../components/ErrorMessage";
-import ProductChips from "../../components/ProductChips";
+import DemoContainer from "../../components/DemoContainer";
 import Recorder from "../../components/Recorder";
 import { useTranslation } from "../../hooks/useTranslation";
 import { demos } from "../../src/demos";
@@ -18,30 +16,12 @@ import Translations from "./_Translations";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      paddingTop: theme.spacing(4),
-      paddingLeft: theme.spacing(8),
-      paddingRight: theme.spacing(8),
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      alignItems: "center",
-    },
-    container: {
-      maxWidth: 1200,
-    },
     panel: {
       padding: theme.spacing(4),
     },
-    title: {
-      paddingBottom: theme.spacing(4),
-    },
-    description: {
-      paddingBottom: theme.spacing(4),
-    },
     translations: {
       padding: theme.spacing(4),
-      height: "60vh",
+      height: "70vh",
     },
   })
 );
@@ -57,55 +37,38 @@ const SimultaneousInterpreter: React.FC = () => {
   const { languages, defaultLanguage } = useLanguages(setError);
 
   return (
-    <main className={classes.root}>
+    <DemoContainer
+      title={t.simultaneousInterpreter.title}
+      description={t.simultaneousInterpreter.description}
+      instructions={t.simultaneousInterpreter.instructions}
+      productIds={demo.products}
+      errorMessageProps={{
+        open: error.open,
+        onClose: onCloseError,
+        message: error.message,
+      }}
+    >
       <Head>
         <title>
           {t.simultaneousInterpreter.title} | {t.title}
         </title>
       </Head>
-      <Grid
-        container
-        direction="column"
-        spacing={2}
-        className={classes.container}
-      >
-        <Grid item>
-          <Paper className={classes.panel}>
-            <Typography variant="h3" component="h2" className={classes.title}>
-              {t.simultaneousInterpreter.title}
-            </Typography>
-            <Typography
-              variant="subtitle1"
-              component="p"
-              className={classes.description}
-            >
-              {t.simultaneousInterpreter.description}
-            </Typography>
-            <ProductChips productIds={demo.products} />
-          </Paper>
-        </Grid>
-        <Grid item>
-          <Paper className={classes.panel}>
-            <Recorder
-              onStart={onStart}
-              onStop={onStop}
-              languages={languages}
-              defaultLanguage={defaultLanguage}
-            />
-          </Paper>
-        </Grid>
-        <Grid item>
-          <Paper className={classes.translations}>
-            <Translations translations={translations} />
-          </Paper>
-        </Grid>
+      <Grid item>
+        <Paper className={classes.panel}>
+          <Recorder
+            onStart={onStart}
+            onStop={onStop}
+            languages={languages}
+            defaultLanguage={defaultLanguage}
+          />
+        </Paper>
       </Grid>
-      <ErrorMessage
-        open={error.open}
-        onClose={onCloseError}
-        message={error.message}
-      />
-    </main>
+      <Grid item>
+        <Paper className={classes.translations}>
+          <Translations translations={translations} />
+        </Paper>
+      </Grid>
+    </DemoContainer>
   );
 };
 

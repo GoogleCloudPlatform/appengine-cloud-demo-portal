@@ -21,10 +21,14 @@ type Props = {
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    button: {
+      width: "100%",
+    },
     paper: {
       cursor: "pointer",
       padding: theme.spacing(2),
       textAlign: "left",
+      width: "100%",
     },
     demoTitle: {
       fontSize: "1.5rem",
@@ -47,13 +51,19 @@ const DemoCard: React.FC<Props> = ({ demoId }) => {
 
   const [hovered, setHovered] = useState(false);
 
-  const onClick = () => router.push(demo.path, demo.path);
+  const onClick = () => {
+    if (demo.link) {
+      window.open(demo.link, "_blank");
+    } else {
+      void router.push(demo.path, demo.path);
+    }
+  };
 
   const onMouseEnter = () => setHovered(true);
   const onMouseLeave = () => setHovered(false);
 
   return (
-    <ButtonBase focusRipple>
+    <ButtonBase focusRipple className={classes.button}>
       <Paper
         className={classes.paper}
         onClick={onClick}

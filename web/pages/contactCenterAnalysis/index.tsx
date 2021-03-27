@@ -3,12 +3,11 @@ import {
   Grid,
   makeStyles,
   Theme,
-  Typography,
+  Paper,
 } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import Head from "next/head";
 
-import ProductChips from "../../components/ProductChips";
 import { useTranslation } from "../../hooks/useTranslation";
 import { demos } from "../../src/demos";
 import Recorder, { Language } from "../../components/Recorder";
@@ -18,31 +17,13 @@ import {
   getLanguages,
 } from "../../src/api/contactCenterAnalysis";
 import NaturalLanguageAnnotatedResult from "../../components/NaturalLanguageAnnotatedResult";
-import ErrorMessage from "../../components/ErrorMessage";
 import { event } from "../../src/gtag";
+import DemoContainer from "../../components/DemoContainer";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      paddingTop: theme.spacing(5),
-      paddingBottom: theme.spacing(5),
-      paddingLeft: theme.spacing(5),
-      paddingRight: theme.spacing(5),
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      alignItems: "center",
-    },
-    title: {
-      marginBottom: theme.spacing(2),
-    },
-    description: {
-      marginTop: theme.spacing(2),
-      marginBottom: theme.spacing(4),
-    },
-    responses: {
-      marginTop: theme.spacing(4),
-      width: 800,
+    panel: {
+      padding: theme.spacing(4),
     },
   })
 );
@@ -118,48 +99,44 @@ const ContactCenterAnalysis: React.FC = () => {
   };
 
   return (
-    <main className={classes.root}>
+    <DemoContainer
+      title={t.contactCenterAnalysis.title}
+      description={t.contactCenterAnalysis.description}
+      instructions={[]}
+      productIds={demo.products}
+      errorMessageProps={{
+        open: error.open,
+        onClose: onCloseError,
+        message: error.msg,
+      }}
+    >
       <Head>
         <title>
           {t.contactCenterAnalysis.title} | {t.title}
         </title>
       </Head>
-      <Typography variant="h3" component="h2" className={classes.title}>
-        {t.contactCenterAnalysis.title}
-      </Typography>
-      <ProductChips productIds={demo.products} />
-      <Typography
-        variant="subtitle1"
-        component="p"
-        className={classes.description}
-      >
-        {t.contactCenterAnalysis.description}
-      </Typography>
-      <Recorder
-        onStart={onStart}
-        onStop={onStop}
-        languages={languages.languages}
-        defaultLanguage={languages.default}
-      />
-      <Grid
-        container
-        direction="column"
-        spacing={2}
-        className={classes.responses}
-      >
-        {responses.map((res, i) => (
-          <Grid item xs={12} key={i}>
-            <NaturalLanguageAnnotatedResult result={res} />
-          </Grid>
-        ))}
+      <Grid item>
+        <Paper className={classes.panel}>
+          <Recorder
+            onStart={onStart}
+            onStop={onStop}
+            languages={languages.languages}
+            defaultLanguage={languages.default}
+          />
+        </Paper>
       </Grid>
-      <div className={classes.responses}></div>
-      <ErrorMessage
-        open={error.open}
-        onClose={onCloseError}
-        message={error.msg}
-      />
-    </main>
+      <Grid item>
+        <Paper className={classes.panel}>
+          <Grid container direction="column" spacing={2}>
+            {responses.map((res, i) => (
+              <Grid item xs={12} key={i}>
+                <NaturalLanguageAnnotatedResult result={res} />
+              </Grid>
+            ))}
+          </Grid>
+        </Paper>
+      </Grid>
+    </DemoContainer>
   );
 };
 
