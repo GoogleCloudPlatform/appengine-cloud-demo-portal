@@ -32,7 +32,7 @@ func Base64ToWave(ctx context.Context, content string) ([]byte, error) {
 	srcFile := filepath.Join(dir, "src.ogg")
 	dstFile := filepath.Join(dir, "dst.wav")
 
-	if err := ioutil.WriteFile(srcFile, audio, 0644); err != nil {
+	if err := ioutil.WriteFile(srcFile, audio, 0600); err != nil {
 		return nil, Errorf(ctx,
 			http.StatusInternalServerError,
 			http.StatusText(http.StatusInternalServerError),
