@@ -78,6 +78,7 @@ func (h *handler) translate(ctx context.Context, sourceLang, text string) (map[s
 	for _, lang := range langs {
 		if sourceLangTag == lang.Tag {
 			translations[lang.Name] = text
+
 			continue
 		}
 
