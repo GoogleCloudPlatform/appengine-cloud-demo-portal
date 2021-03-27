@@ -24,6 +24,11 @@ const products: { [key: string]: Product } = {
     icon: "/images/cloud-natural-language-api-512-color.svg",
     url: "https://cloud.google.com/natural-language",
   },
+  "translation-api": {
+    name: "Cloud Translation API",
+    icon: "/images/cloud-translation-api-512-color.svg",
+    url: "https://cloud.google.com/translate",
+  },
 };
 
 type Props = {

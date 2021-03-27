@@ -14,9 +14,10 @@ import (
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 
-	"github.com/ShawnLabo/cloud-demos/api/client"
-	"github.com/ShawnLabo/cloud-demos/api/contactcenteranalysis"
-	"github.com/ShawnLabo/cloud-demos/api/pkg/middleware"
+	"github.com/nownabe/cloud-demos/api/client"
+	"github.com/nownabe/cloud-demos/api/contactcenteranalysis"
+	"github.com/nownabe/cloud-demos/api/pkg/middleware"
+	"github.com/nownabe/cloud-demos/api/simultaneousinterpreter"
 )
 
 const (
@@ -35,6 +36,7 @@ func router(clients *client.Clients) http.Handler {
 	r.Route("/api", func(r chi.Router) {
 		r.Route("/v1", func(r chi.Router) {
 			r.Route("/contactCenterAnalysis", contactcenteranalysis.Router(clients))
+			r.Route("/simultaneousInterpreter", simultaneousinterpreter.Router(clients))
 		})
 	})
 

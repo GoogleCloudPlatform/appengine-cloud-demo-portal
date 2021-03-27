@@ -1,8 +1,9 @@
 package contactcenteranalysis
 
 import (
-	"github.com/ShawnLabo/cloud-demos/api/client"
 	"github.com/go-chi/chi/v5"
+
+	"github.com/nownabe/cloud-demos/api/client"
 )
 
 type handler struct {

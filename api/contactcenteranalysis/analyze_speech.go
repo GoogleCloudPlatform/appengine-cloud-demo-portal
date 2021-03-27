@@ -2,19 +2,14 @@ package contactcenteranalysis
 
 import (
 	"context"
-	"encoding/base64"
 	"fmt"
-	"io/ioutil"
 	"net/http"
-	"os"
-	"os/exec"
-	"path/filepath"
 
 	"github.com/rs/zerolog/log"
 	languagepb "google.golang.org/genproto/googleapis/cloud/language/v1"
 	speechpb "google.golang.org/genproto/googleapis/cloud/speech/v1"
 
-	hd "github.com/ShawnLabo/cloud-demos/api/pkg/handler"
+	hd "github.com/nownabe/cloud-demos/api/pkg/handler"
 )
 
 type analyzeSpeechRequest struct {
@@ -49,7 +44,7 @@ func (h *handler) analyzeSpeechHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	wave, err := base64ToWave(ctx, req.Audio.Content)
+	wave, err := hd.Base64ToWave(ctx, req.Audio.Content)
 	if err != nil {
 		hd.RespondErrorJSON(w, r, err)
 		return
@@ -152,50 +147,4 @@ func buildDocument(
 		Source:   &languagepb.Document_Content{Content: text},
 		Language: sl.languageCode,
 	}, nil
-}
-
-func base64ToWave(ctx context.Context, content string) ([]byte, error) {
-	audio, err := base64.StdEncoding.DecodeString(content)
-	if err != nil {
-		return nil, hd.Errorf(ctx,
-			http.StatusBadRequest,
-			"invalid encoded audio",
-			"failed to decode base64: %w", err)
-	}
-
-	dir, err := ioutil.TempDir("", "contactcenteranalysis")
-	if err != nil {
-		return nil, hd.Errorf(ctx,
-			http.StatusInternalServerError,
-			http.StatusText(http.StatusInternalServerError),
-			"failed to create tempdir: %w", err)
-	}
-	defer os.RemoveAll(dir)
-
-	srcFile := filepath.Join(dir, "src.ogg")
-	dstFile := filepath.Join(dir, "dst.wav")
-
-	if err := ioutil.WriteFile(srcFile, audio, 0644); err != nil {
-		return nil, hd.Errorf(ctx,
-			http.StatusInternalServerError,
-			http.StatusText(http.StatusInternalServerError),
-			"failed to write file: %s: %w", srcFile, err)
-	}
-
-	if err := exec.Command("ffmpeg", "-i", srcFile, dstFile).Run(); err != nil {
-		return nil, hd.Errorf(ctx,
-			http.StatusInternalServerError,
-			http.StatusText(http.StatusInternalServerError),
-			"failed to exec ffmpeg: %w", err)
-	}
-
-	wav, err := ioutil.ReadFile(dstFile)
-	if err != nil {
-		return nil, hd.Errorf(ctx,
-			http.StatusInternalServerError,
-			http.StatusText(http.StatusInternalServerError),
-			"failed to read wav file: %s: %w", dstFile, err)
-	}
-
-	return wav, nil
 }
