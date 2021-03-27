@@ -1,12 +1,12 @@
 import { AppBar, IconButton, Toolbar, Typography } from "@material-ui/core";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { createStyles, makeStyles } from "@material-ui/core/styles";
 import { GitHub } from "@material-ui/icons";
 import { useRouter } from "next/router";
 
 import { useTranslation } from "../../hooks/useTranslation";
 import LangMenu from "./LangMenu";
 
-const useStyles = makeStyles((_theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       flexGrow: 1,
