@@ -1,16 +1,15 @@
 import {
-  MenuItem,
-  Select,
   createStyles,
-  FormControl,
-  InputLabel,
   makeStyles,
   Theme,
   IconButton,
   Grid,
+  TextField,
 } from "@material-ui/core";
 import { Mic, Stop } from "@material-ui/icons";
-import { useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { Autocomplete } from "@material-ui/lab";
+
 import { DisplayRecorder, Canvas } from "./Recorder";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -79,8 +78,15 @@ const Recorder: React.FC<Props> = ({
     }
   }, []);
 
-  const onChangeLang = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setLang(event.target.value as string);
+  const onChangeLang = (
+    _event: ChangeEvent<Record<string, never>>,
+    value: Language | null
+  ) => {
+    if (value === null) {
+      return;
+    }
+
+    setLang(value.code);
   };
 
   const onClickStart = async () => {
@@ -112,22 +118,19 @@ const Recorder: React.FC<Props> = ({
       spacing={2}
     >
       <Grid item>
-        <FormControl variant="outlined" className={classes.formControl}>
-          <InputLabel id="lang-selector-label">I speak</InputLabel>
-          <Select
-            labelId="lang-selector-label"
-            id="lang-delector"
-            value={lang}
-            onChange={onChangeLang}
-            label="I speak"
-          >
-            {languages.map((lang) => (
-              <MenuItem value={lang.code} key={lang.code}>
-                {lang.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <Autocomplete
+          options={languages}
+          getOptionLabel={(option) => option.name}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="I speak"
+              variant="outlined"
+              className={classes.formControl}
+            />
+          )}
+          onChange={onChangeLang}
+        />
       </Grid>
       <Grid item>
         {isRecording ? (
