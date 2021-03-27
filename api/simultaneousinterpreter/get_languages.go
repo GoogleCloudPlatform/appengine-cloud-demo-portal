@@ -16,6 +16,10 @@ type supportedLanguage struct {
 	Code string `json:"code"`
 }
 
+type getLanguagesResponse struct {
+	Languages []*supportedLanguage `json:"languages"`
+}
+
 var speechSupportedLanguages []*supportedLanguage
 
 func (h *handler) getLanguages(w http.ResponseWriter, r *http.Request) {
@@ -27,9 +31,9 @@ func (h *handler) getLanguages(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	slangs := filterLanguages(langs)
+	res := &getLanguagesResponse{Languages: filterLanguages(langs)}
 
-	hd.RespondJSON(w, r, http.StatusOK, slangs)
+	hd.RespondJSON(w, r, http.StatusOK, res)
 }
 
 func (h *handler) getTranslateSupportedLanguages(ctx context.Context) ([]translate.Language, error) {
