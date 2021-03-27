@@ -3,7 +3,7 @@ module github.com/nownabe/cloud-demos/api
 go 1.15
 
 require (
-	cloud.google.com/go v0.79.0
+	cloud.google.com/go v0.80.0
 	github.com/go-chi/chi/v5 v5.0.2
 	github.com/rs/zerolog v1.20.0
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
