@@ -15,8 +15,9 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       paddingTop: theme.spacing(4),
-      paddingLeft: theme.spacing(8),
-      paddingRight: theme.spacing(8),
+      paddingLeft: theme.spacing(4),
+      paddingRight: theme.spacing(4),
+      paddingBottom: theme.spacing(4),
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
@@ -29,13 +30,13 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(4),
     },
     titleContainer: {
-      paddingBottom: theme.spacing(4),
+      paddingBottom: theme.spacing(2),
     },
     helpButtonContainer: {
       textAlign: "right",
     },
     description: {
-      paddingBottom: theme.spacing(4),
+      paddingBottom: theme.spacing(2),
     },
   })
 );
