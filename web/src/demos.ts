@@ -10,6 +10,11 @@ const demos: { [key: string]: Demo } = {
     products: ["speech-to-text", "natural-language-api"],
     icon: "/images/contactCenterAnalysis.jpg",
   },
+  simultaneousInterpreter: {
+    path: "/simultaneousInterpreter",
+    products: ["speech-to-text", "translation-api"],
+    icon: "/images/simultaneousInterpreter.jpg",
+  },
 };
 
 const demoIds = Object.keys(demos).sort();

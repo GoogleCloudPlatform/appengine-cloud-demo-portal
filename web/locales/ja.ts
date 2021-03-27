@@ -9,6 +9,13 @@ const ja: Locale = {
     description:
       "コールセンターでの顧客の声について感情の分析、エンティティの特定、コンテンツの分類を実行します。",
   },
+  simultaneousInterpreter: {
+    title: "同時通訳",
+    description: "あなたの発言を多言語に同時通訳します。",
+    selectLanguages: "表示言語を選ぶ",
+    selectLanguagesTitle: "表示言語を選んでください",
+    unselectAll: "すべてのチェックを外す",
+  },
 };
 
 export default ja;

@@ -5,7 +5,14 @@ export type ContactCenterAnalyticsEvent = {
   value?: number | null;
 };
 
-export type Event = ContactCenterAnalyticsEvent;
+export type SimultaneousInterpreterEvent = {
+  category: "simultaneousInterpreter";
+  action: "start_recording" | "stop_recording";
+  label: string;
+  value?: number | null;
+};
+
+export type Event = ContactCenterAnalyticsEvent | SimultaneousInterpreterEvent;
 
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "";
 
