@@ -1,4 +1,4 @@
-import { blobToBase64, request } from "./api";
+import { blobToBase64, request, Response } from "./api";
 
 export type SupportedLanguage = {
   name: string;
@@ -9,7 +9,7 @@ type GetLanguagesResponse = {
   languages: SupportedLanguage[];
 };
 
-const getLanguages = async (): Promise<GetLanguagesResponse> =>
+const getLanguages = async (): Promise<Response<GetLanguagesResponse>> =>
   await request<GetLanguagesResponse>(
     "/simultaneousInterpreter/languages",
     "GET"
@@ -23,7 +23,7 @@ type TranslateSpeechResponse = {
 const translateSpeech = async (
   lang: string,
   blob: Blob
-): Promise<TranslateSpeechResponse> => {
+): Promise<Response<TranslateSpeechResponse>> => {
   const data = {
     audio: {
       content: await blobToBase64(blob),

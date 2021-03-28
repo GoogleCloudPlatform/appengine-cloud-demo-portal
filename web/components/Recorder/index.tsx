@@ -115,6 +115,7 @@ const Recorder: React.FC<Props> = ({
         <Autocomplete
           options={languages}
           getOptionLabel={(option) => option.name}
+          getOptionSelected={(option, value) => option.code === value.code}
           renderInput={(params) => (
             <TextField
               {...params}
@@ -135,7 +136,7 @@ const Recorder: React.FC<Props> = ({
           <IconButton
             aria-label="start-recording"
             onClick={onClickStart}
-            disabled={isStopping}
+            disabled={isStopping || lang === ""}
           >
             <Mic />
           </IconButton>

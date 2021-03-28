@@ -1,30 +1,12 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-import { event } from "../../src/gtag";
+import { event } from "../src/gtag";
 import {
   getLanguages,
   SupportedLanguage,
   translateSpeech,
-} from "../../src/api/simultaneousInterpreter";
-
-type ErrorMessage = {
-  open: boolean;
-  message: string;
-};
-
-const useError = (): {
-  error: ErrorMessage;
-  setError: Dispatch<SetStateAction<ErrorMessage>>;
-  onCloseError: () => void;
-} => {
-  const [error, setError] = useState<ErrorMessage>({
-    open: false,
-    message: "",
-  });
-  const onCloseError = () => setError({ open: false, message: "" });
-
-  return { error, setError, onCloseError };
-};
+} from "../src/api/simultaneousInterpreter";
+import { SetErrorMessage } from "./useError";
 
 type AddTranslationsFn = (translations: { [key: string]: string }) => void;
 
@@ -55,7 +37,7 @@ const useTranslations = (): {
 
 const useRecorder = (
   addTranslations: AddTranslationsFn,
-  setError: Dispatch<SetStateAction<ErrorMessage>>
+  setErrorMessage: SetErrorMessage
 ): {
   onStart: (lang: string) => void;
   onStop: (lang: string, duration: number | null, blob: Blob) => Promise<void>;
@@ -79,16 +61,11 @@ const useRecorder = (
       label: lang,
       value: duration,
     });
-    try {
-      const res = await translateSpeech(lang, blob);
-      addTranslations(res.translations);
-    } catch (e) {
-      console.error(e);
-      if (e instanceof Error) {
-        setError({ open: true, message: `failed to translate: ${e.message}` });
-      } else {
-        setError({ open: true, message: `failed to translate` });
-      }
+    const res = await translateSpeech(lang, blob);
+    if (res.success) {
+      addTranslations(res.data.translations);
+    } else {
+      setErrorMessage(`failed to translate: ${res.error.message}`);
     }
   };
 
@@ -96,7 +73,7 @@ const useRecorder = (
 };
 
 const useLanguages = (
-  setError: Dispatch<SetStateAction<ErrorMessage>>
+  setErrorMessage: SetErrorMessage
 ): {
   languages: SupportedLanguage[];
   defaultLanguage: string;
@@ -106,26 +83,18 @@ const useLanguages = (
 
   useEffect(() => {
     const f = async () => {
-      try {
-        const res = await getLanguages();
-        setLanguages(res.languages);
-        setDefaultLanguage(res.languages[0].code);
-      } catch (e) {
-        console.error(e);
-        if (e instanceof Error) {
-          setError({
-            open: true,
-            message: `failed to get languages: ${e.message}.`,
-          });
-        } else {
-          setError({ open: true, message: "something went wrong." });
-        }
+      const res = await getLanguages();
+      if (res.success) {
+        setLanguages(res.data.languages);
+        setDefaultLanguage(res.data.languages[0].code);
+      } else {
+        setErrorMessage(`failed to get languages: ${res.error.message}.`);
       }
     };
     void f();
-  }, [setError]);
+  }, [setErrorMessage]);
 
   return { languages, defaultLanguage };
 };
 
-export { useError, useTranslations, useRecorder, useLanguages };
+export { useTranslations, useRecorder, useLanguages };

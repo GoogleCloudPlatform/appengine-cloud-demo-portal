@@ -1,20 +1,16 @@
 import { Snackbar } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
+import { ErrorMessage as EM, OnCloseError } from "../../hooks/useError";
 
-export type ErrorMessageProps = {
-  open: boolean;
-  onClose: () => void;
-  message: string;
+type Props = {
+  message: EM;
+  onClose: OnCloseError;
 };
 
-const ErrorMessage: React.FC<ErrorMessageProps> = ({
-  open,
-  onClose,
-  message,
-}) => (
+const ErrorMessage: React.FC<Props> = ({ message, onClose }) => (
   <Snackbar
     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-    open={open}
+    open={!!message}
     onClose={onClose}
     autoHideDuration={10000}
   >

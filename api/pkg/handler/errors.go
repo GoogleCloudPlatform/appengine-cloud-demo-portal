@@ -82,7 +82,7 @@ type errjson struct {
 	Message string `json:"message"`
 }
 
-// RespondErrorJSON responds error as JSON and logs error.
+// RespondErrorJSON responds error as JSON.
 func RespondErrorJSON(w http.ResponseWriter, r *http.Request, err error) {
 	ej := &errjson{}
 
@@ -97,4 +97,15 @@ func RespondErrorJSON(w http.ResponseWriter, r *http.Request, err error) {
 	ej.Kind = http.StatusText(ej.Status)
 
 	RespondJSON(w, r, ej.Status, ej)
+}
+
+// RespondErrorMessage responds error messages as JSON.
+func RespondErrorMessage(w http.ResponseWriter, r *http.Request, status int, msg string) {
+	ej := &errjson{
+		Status:  status,
+		Kind:    http.StatusText(status),
+		Message: msg,
+	}
+
+	RespondJSON(w, r, status, ej)
 }

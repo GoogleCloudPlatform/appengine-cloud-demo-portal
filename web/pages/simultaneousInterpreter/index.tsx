@@ -11,8 +11,13 @@ import DemoContainer from "../../components/DemoContainer";
 import Recorder from "../../components/Recorder";
 import { useTranslation } from "../../hooks/useTranslation";
 import { demos } from "../../src/demos";
-import { useError, useLanguages, useRecorder, useTranslations } from "./_hooks";
-import Translations from "./_Translations";
+import {
+  useLanguages,
+  useRecorder,
+  useTranslations,
+} from "../../hooks/sinumlaneousInterpreter";
+import Translations from "../../components/Translations";
+import { useError } from "../../hooks/useError";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,10 +36,10 @@ const demo = demos["simultaneousInterpreter"];
 const SimultaneousInterpreter: React.FC = () => {
   const classes = useStyles();
   const { t } = useTranslation();
-  const { error, setError, onCloseError } = useError();
+  const { errorMessage, setErrorMessage, onCloseError } = useError();
   const { translations, addTranslations } = useTranslations();
-  const { onStart, onStop } = useRecorder(addTranslations, setError);
-  const { languages, defaultLanguage } = useLanguages(setError);
+  const { onStart, onStop } = useRecorder(addTranslations, setErrorMessage);
+  const { languages, defaultLanguage } = useLanguages(setErrorMessage);
 
   return (
     <DemoContainer
@@ -42,11 +47,8 @@ const SimultaneousInterpreter: React.FC = () => {
       description={t.simultaneousInterpreter.description}
       instructions={t.simultaneousInterpreter.instructions}
       productIds={demo.products}
-      errorMessageProps={{
-        open: error.open,
-        onClose: onCloseError,
-        message: error.message,
-      }}
+      errorMessage={errorMessage}
+      onCloseError={onCloseError}
     >
       <Head>
         <title>

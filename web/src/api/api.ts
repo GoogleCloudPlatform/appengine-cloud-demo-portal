@@ -1,29 +1,71 @@
 import applyCaseMiddleware from "axios-case-converter";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 type Method = "GET" | "POST";
 
+type ErrorResponse = {
+  kind: string;
+  message: string;
+  status: number;
+};
+
+const unexpectedError = {
+  kind: "unexpected",
+  message: "unexpected error",
+  status: -1,
+};
+
+export type Response<T> =
+  | {
+      success: true;
+      error: null;
+      data: T;
+    }
+  | {
+      success: false;
+      error: ErrorResponse;
+      data: null;
+    };
+
 const client = applyCaseMiddleware(axios.create());
 
-const request = async <Res>(
+const request = async <T>(
   path: string,
   method: Method,
   data?: Record<string, unknown>
-): Promise<Res> => {
+): Promise<Response<T>> => {
   const url = `/api/v1${path}`;
-  const res = await client.request<Res>({
-    url,
-    method,
-    responseType: "json",
-    data,
-  });
 
-  if (res.status >= 400) {
-    console.error(res);
-    throw new Error(`failed to request to ${url}: ${res.status}`);
+  try {
+    const res = await client.request<T>({
+      url,
+      method,
+      responseType: "json",
+      data,
+    });
+    return {
+      success: true,
+      error: null,
+      data: res.data,
+    };
+  } catch (e) {
+    const err = e as AxiosError<ErrorResponse>;
+    console.error(`failed to ${method} ${url}: ${err.message}`);
+    if (err.response) {
+      console.error(err.response.data);
+      return {
+        success: false,
+        error: err.response.data,
+        data: null,
+      };
+    } else {
+      return {
+        success: false,
+        error: unexpectedError,
+        data: null,
+      };
+    }
   }
-
-  return res.data;
 };
 
 const blobToBase64 = (blob: Blob): Promise<string> => {

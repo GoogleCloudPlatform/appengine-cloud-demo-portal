@@ -39,17 +39,17 @@ const useTranslationFn = (): { t: TFn; locale: locale } => {
   const t = (key: string): string => {
     const keys = key.split(".");
 
-    let nextT: string | Translations = translations;
-    let result = "";
+    let nextT: string | string[] | Translations = translations;
+    let result: string | string[] = "";
 
     keys.forEach((k, i) => {
-      if (typeof nextT === "string") {
+      if (typeof nextT === "string" || Array.isArray(nextT)) {
         throw "invalid translation key";
       }
 
       if (i === keys.length - 1) {
         const last = nextT[k];
-        if (typeof last === "string") {
+        if (typeof last === "string" || Array.isArray(last)) {
           result = last;
           return;
         } else {

@@ -37,6 +37,13 @@ func (h *handler) translateSpeech(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if req.Config.LanguageCode == "" {
+		hd.RespondErrorMessage(w, r,
+			http.StatusBadRequest,
+			"language_code must be specified")
+		return
+	}
+
 	text, err := h.speechToText(ctx, req.Config.LanguageCode, req.Audio.Content)
 	if err != nil {
 		hd.RespondErrorJSON(w, r, err)

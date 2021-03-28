@@ -13,12 +13,13 @@ import { demos } from "../../src/demos";
 import Recorder, { Language } from "../../components/Recorder";
 import {
   analyze,
-  Response,
+  AnalyzeResponse,
   getLanguages,
 } from "../../src/api/contactCenterAnalysis";
 import NaturalLanguageAnnotatedResult from "../../components/NaturalLanguageAnnotatedResult";
 import { event } from "../../src/gtag";
 import DemoContainer from "../../components/DemoContainer";
+import { useError } from "../../hooks/useError";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,38 +34,31 @@ const demo = demos["contactCenterAnalysis"];
 const ContactCenterAnalysis: React.FC = () => {
   const classes = useStyles();
   const { t } = useTranslation();
+  const { errorMessage, setErrorMessage, onCloseError } = useError();
 
-  const [responses, setResponses] = useState<Response[]>([]);
-  const [error, setError] = useState({ open: false, msg: "" });
+  const [responses, setResponses] = useState<AnalyzeResponse[]>([]);
   const [languages, setLanguages] = useState<{
     languages: Language[];
     default: string;
   }>({ languages: [], default: "" });
 
-  const onCloseError = () => setError({ open: false, msg: "" });
-
-  const addResult = (response: Response) =>
+  const addResult = (response: AnalyzeResponse) =>
     setResponses((responses) => [response, ...responses]);
 
   useEffect(() => {
     const f = async () => {
-      try {
-        const res = await getLanguages();
+      const res = await getLanguages();
+      if (res.success) {
         setLanguages({
-          languages: res.languages,
-          default: res.languages[0].code,
+          languages: res.data.languages,
+          default: res.data.languages[0].code,
         });
-      } catch (e) {
-        console.error(e);
-        if (e instanceof Error) {
-          setError({ open: true, msg: e.message });
-        } else {
-          setError({ open: true, msg: "something went wrong." });
-        }
+      } else {
+        setErrorMessage(`failed to get languages: ${res.error.message}`);
       }
     };
     void f();
-  }, []);
+  }, [setErrorMessage]);
 
   const onStart = (lang: string) => {
     event({
@@ -85,16 +79,11 @@ const ContactCenterAnalysis: React.FC = () => {
       label: lang,
       value: duration,
     });
-    try {
-      const res = await analyze(lang, blob);
-      addResult(res);
-    } catch (e) {
-      console.error(e);
-      if (e instanceof Error) {
-        setError({ open: true, msg: e.message });
-      } else {
-        setError({ open: true, msg: "something went wrong." });
-      }
+    const res = await analyze(lang, blob);
+    if (res.success) {
+      addResult(res.data);
+    } else {
+      setErrorMessage(`failed to analyze speech: ${res.error.message}`);
     }
   };
 
@@ -104,11 +93,8 @@ const ContactCenterAnalysis: React.FC = () => {
       description={t.contactCenterAnalysis.description}
       instructions={[]}
       productIds={demo.products}
-      errorMessageProps={{
-        open: error.open,
-        onClose: onCloseError,
-        message: error.msg,
-      }}
+      errorMessage={errorMessage}
+      onCloseError={onCloseError}
     >
       <Head>
         <title>
