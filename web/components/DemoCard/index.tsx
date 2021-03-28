@@ -23,12 +23,14 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     button: {
       width: "100%",
+      height: "100%",
     },
     paper: {
       cursor: "pointer",
       padding: theme.spacing(2),
       textAlign: "left",
       width: "100%",
+      height: "100%",
     },
     demoTitle: {
       fontSize: "1.5rem",
@@ -53,7 +55,7 @@ const DemoCard: React.FC<Props> = ({ demoId }) => {
 
   const onClick = () => {
     if (demo.link) {
-      window.open(demo.link, "_blank");
+      window.open(demo.link, "_blank", "noopener,noreferrer");
     } else {
       void router.push(demo.path, demo.path);
     }

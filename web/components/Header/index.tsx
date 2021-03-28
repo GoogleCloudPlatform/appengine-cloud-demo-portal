@@ -43,6 +43,7 @@ const Header: React.FC = () => {
               color="inherit"
               href="https://github.com/nownabe/cloud-demos"
               target="_blank"
+              rel="noopener noreferrer"
             >
               <GitHub />
             </IconButton>
