@@ -58,7 +58,7 @@ const ContactCenterAnalysis: React.FC = () => {
       }
     };
     void f();
-  }, []);
+  }, [setErrorMessage]);
 
   const onStart = (lang: string) => {
     event({
