@@ -2,7 +2,7 @@ name: web
 on:
   pull_request:
     paths:
-      - 'web/**'
+      - "web/**"
 
 jobs:
   eslint:
@@ -14,3 +14,14 @@ jobs:
         with:
           workdir: web
           fail_on_error: true
+
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "14.x"
+      - run: npm run build
+        working-directory: ./web
