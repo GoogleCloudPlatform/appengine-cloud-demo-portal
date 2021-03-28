@@ -23,7 +23,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: "14.x"
-      - run: npm run install
+      - run: npm install
         working-directory: ./web
       - run: npm run build
         working-directory: ./web
