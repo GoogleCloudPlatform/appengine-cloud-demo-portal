@@ -19,6 +19,7 @@ import {
 import NaturalLanguageAnnotatedResult from "../../components/NaturalLanguageAnnotatedResult";
 import { event } from "../../src/gtag";
 import DemoContainer from "../../components/DemoContainer";
+import { useError } from "../../hooks/useError";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,15 +34,13 @@ const demo = demos["contactCenterAnalysis"];
 const ContactCenterAnalysis: React.FC = () => {
   const classes = useStyles();
   const { t } = useTranslation();
+  const { errorMessage, setErrorMessage, onCloseError } = useError();
 
   const [responses, setResponses] = useState<Response[]>([]);
-  const [error, setError] = useState({ open: false, msg: "" });
   const [languages, setLanguages] = useState<{
     languages: Language[];
     default: string;
   }>({ languages: [], default: "" });
-
-  const onCloseError = () => setError({ open: false, msg: "" });
 
   const addResult = (response: Response) =>
     setResponses((responses) => [response, ...responses]);
@@ -57,9 +56,9 @@ const ContactCenterAnalysis: React.FC = () => {
       } catch (e) {
         console.error(e);
         if (e instanceof Error) {
-          setError({ open: true, msg: e.message });
+          setErrorMessage(e.message);
         } else {
-          setError({ open: true, msg: "something went wrong." });
+          setErrorMessage("something went wrong.");
         }
       }
     };
@@ -91,9 +90,9 @@ const ContactCenterAnalysis: React.FC = () => {
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
-        setError({ open: true, msg: e.message });
+        setErrorMessage(e.message);
       } else {
-        setError({ open: true, msg: "something went wrong." });
+        setErrorMessage("something went wrong.");
       }
     }
   };
@@ -104,11 +103,8 @@ const ContactCenterAnalysis: React.FC = () => {
       description={t.contactCenterAnalysis.description}
       instructions={[]}
       productIds={demo.products}
-      errorMessageProps={{
-        open: error.open,
-        onClose: onCloseError,
-        message: error.msg,
-      }}
+      errorMessage={errorMessage}
+      onCloseError={onCloseError}
     >
       <Head>
         <title>

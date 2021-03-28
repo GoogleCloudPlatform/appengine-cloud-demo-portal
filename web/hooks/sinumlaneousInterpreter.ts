@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { event } from "../src/gtag";
 import {
@@ -6,25 +6,7 @@ import {
   SupportedLanguage,
   translateSpeech,
 } from "../src/api/simultaneousInterpreter";
-
-type ErrorMessage = {
-  open: boolean;
-  message: string;
-};
-
-const useError = (): {
-  error: ErrorMessage;
-  setError: Dispatch<SetStateAction<ErrorMessage>>;
-  onCloseError: () => void;
-} => {
-  const [error, setError] = useState<ErrorMessage>({
-    open: false,
-    message: "",
-  });
-  const onCloseError = () => setError({ open: false, message: "" });
-
-  return { error, setError, onCloseError };
-};
+import { SetErrorMessage } from "./useError";
 
 type AddTranslationsFn = (translations: { [key: string]: string }) => void;
 
@@ -55,7 +37,7 @@ const useTranslations = (): {
 
 const useRecorder = (
   addTranslations: AddTranslationsFn,
-  setError: Dispatch<SetStateAction<ErrorMessage>>
+  setErrorMessage: SetErrorMessage
 ): {
   onStart: (lang: string) => void;
   onStop: (lang: string, duration: number | null, blob: Blob) => Promise<void>;
@@ -85,9 +67,9 @@ const useRecorder = (
     } catch (e) {
       console.error(e);
       if (e instanceof Error) {
-        setError({ open: true, message: `failed to translate: ${e.message}` });
+        setErrorMessage(`failed to translate: ${e.message}`);
       } else {
-        setError({ open: true, message: `failed to translate` });
+        setErrorMessage(`failed to translate`);
       }
     }
   };
@@ -96,7 +78,7 @@ const useRecorder = (
 };
 
 const useLanguages = (
-  setError: Dispatch<SetStateAction<ErrorMessage>>
+  setErrorMessage: SetErrorMessage
 ): {
   languages: SupportedLanguage[];
   defaultLanguage: string;
@@ -113,19 +95,16 @@ const useLanguages = (
       } catch (e) {
         console.error(e);
         if (e instanceof Error) {
-          setError({
-            open: true,
-            message: `failed to get languages: ${e.message}.`,
-          });
+          setErrorMessage(`failed to get languages: ${e.message}.`);
         } else {
-          setError({ open: true, message: "something went wrong." });
+          setErrorMessage("something went wrong.");
         }
       }
     };
     void f();
-  }, [setError]);
+  }, [setErrorMessage]);
 
   return { languages, defaultLanguage };
 };
 
-export { useError, useTranslations, useRecorder, useLanguages };
+export { useTranslations, useRecorder, useLanguages };

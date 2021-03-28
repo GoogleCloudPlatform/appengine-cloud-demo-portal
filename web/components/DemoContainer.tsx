@@ -6,8 +6,9 @@ import {
   Theme,
   Typography,
 } from "@material-ui/core";
+import { ErrorMessage as EM, OnCloseError } from "../hooks/useError";
 
-import ErrorMessage, { ErrorMessageProps } from "./ErrorMessage";
+import ErrorMessage from "./ErrorMessage";
 import HelpButton from "./HelpButton";
 import ProductChips from "./ProductChips";
 
@@ -46,7 +47,8 @@ type Props = {
   description: string;
   instructions: string[];
   productIds: string[];
-  errorMessageProps?: ErrorMessageProps;
+  errorMessage?: EM;
+  onCloseError?: OnCloseError;
 };
 
 const DemoContainer: React.FC<Props> = ({
@@ -55,7 +57,8 @@ const DemoContainer: React.FC<Props> = ({
   description,
   instructions,
   productIds,
-  errorMessageProps,
+  errorMessage,
+  onCloseError,
 }) => {
   const classes = useStyles();
 
@@ -96,12 +99,8 @@ const DemoContainer: React.FC<Props> = ({
         </Grid>
         {children}
       </Grid>
-      {errorMessageProps ? (
-        <ErrorMessage
-          open={errorMessageProps.open}
-          onClose={errorMessageProps.onClose}
-          message={errorMessageProps.message}
-        />
+      {errorMessage ? (
+        <ErrorMessage message={errorMessage} onClose={onCloseError} />
       ) : null}
     </main>
   );
