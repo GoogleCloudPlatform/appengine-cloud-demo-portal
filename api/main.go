@@ -14,8 +14,8 @@ import (
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 
-	"github.com/nownabe/cloud-demos/api/client"
 	"github.com/nownabe/cloud-demos/api/contactcenteranalysis"
+	"github.com/nownabe/cloud-demos/api/pkg/client"
 	"github.com/nownabe/cloud-demos/api/pkg/middleware"
 	"github.com/nownabe/cloud-demos/api/simultaneousinterpreter"
 )

@@ -6,7 +6,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 
-	"github.com/nownabe/cloud-demos/api/client"
+	"github.com/nownabe/cloud-demos/api/pkg/client"
 )
 
 type handler struct {
