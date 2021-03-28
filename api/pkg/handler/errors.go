@@ -99,7 +99,7 @@ func RespondErrorJSON(w http.ResponseWriter, r *http.Request, err error) {
 	RespondJSON(w, r, ej.Status, ej)
 }
 
-// RespondErrorMessage responds error messages as JSON
+// RespondErrorMessage responds error messages as JSON.
 func RespondErrorMessage(w http.ResponseWriter, r *http.Request, status int, msg string) {
 	ej := &errjson{
 		Status:  status,
