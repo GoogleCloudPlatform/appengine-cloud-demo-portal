@@ -1,4 +1,4 @@
-import { blobToBase64, request } from "./api";
+import { blobToBase64, request, Response } from "./api";
 
 export type EntityType =
   | "UNKNOWN"
@@ -51,7 +51,7 @@ export type Document = {
   content: string;
 };
 
-export type Response = {
+export type AnalyzeResponse = {
   document: Document;
   entities?: Entity[];
   documentSentiment: Sentiment;
@@ -59,7 +59,10 @@ export type Response = {
   categories?: ClassificationCategory[];
 };
 
-const analyze = async (lang: string, blob: Blob): Promise<Response> => {
+const analyze = async (
+  lang: string,
+  blob: Blob
+): Promise<Response<AnalyzeResponse>> => {
   const data = {
     audio: {
       content: await blobToBase64(blob),
@@ -69,7 +72,7 @@ const analyze = async (lang: string, blob: Blob): Promise<Response> => {
     },
   };
 
-  return await request<Response>(
+  return await request<AnalyzeResponse>(
     "/contactCenterAnalysis/speech:analyze",
     "POST",
     data
@@ -85,7 +88,7 @@ type GetLanguagesResponse = {
   languages: LanguageSupport[];
 };
 
-const getLanguages = async (): Promise<GetLanguagesResponse> =>
+const getLanguages = async (): Promise<Response<GetLanguagesResponse>> =>
   await request<GetLanguagesResponse>(
     "/contactCenterAnalysis/languages",
     "GET"

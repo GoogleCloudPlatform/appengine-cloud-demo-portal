@@ -61,16 +61,11 @@ const useRecorder = (
       label: lang,
       value: duration,
     });
-    try {
-      const res = await translateSpeech(lang, blob);
-      addTranslations(res.translations);
-    } catch (e) {
-      console.error(e);
-      if (e instanceof Error) {
-        setErrorMessage(`failed to translate: ${e.message}`);
-      } else {
-        setErrorMessage(`failed to translate`);
-      }
+    const res = await translateSpeech(lang, blob);
+    if (res.success) {
+      addTranslations(res.data.translations);
+    } else {
+      setErrorMessage(`failed to translate: ${res.error.message}`);
     }
   };
 
@@ -88,17 +83,12 @@ const useLanguages = (
 
   useEffect(() => {
     const f = async () => {
-      try {
-        const res = await getLanguages();
-        setLanguages(res.languages);
-        setDefaultLanguage(res.languages[0].code);
-      } catch (e) {
-        console.error(e);
-        if (e instanceof Error) {
-          setErrorMessage(`failed to get languages: ${e.message}.`);
-        } else {
-          setErrorMessage("something went wrong.");
-        }
+      const res = await getLanguages();
+      if (res.success) {
+        setLanguages(res.data.languages);
+        setDefaultLanguage(res.data.languages[0].code);
+      } else {
+        setErrorMessage(`failed to get languages: ${res.error.message}.`);
       }
     };
     void f();

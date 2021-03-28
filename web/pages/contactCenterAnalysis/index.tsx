@@ -13,7 +13,7 @@ import { demos } from "../../src/demos";
 import Recorder, { Language } from "../../components/Recorder";
 import {
   analyze,
-  Response,
+  AnalyzeResponse,
   getLanguages,
 } from "../../src/api/contactCenterAnalysis";
 import NaturalLanguageAnnotatedResult from "../../components/NaturalLanguageAnnotatedResult";
@@ -36,30 +36,25 @@ const ContactCenterAnalysis: React.FC = () => {
   const { t } = useTranslation();
   const { errorMessage, setErrorMessage, onCloseError } = useError();
 
-  const [responses, setResponses] = useState<Response[]>([]);
+  const [responses, setResponses] = useState<AnalyzeResponse[]>([]);
   const [languages, setLanguages] = useState<{
     languages: Language[];
     default: string;
   }>({ languages: [], default: "" });
 
-  const addResult = (response: Response) =>
+  const addResult = (response: AnalyzeResponse) =>
     setResponses((responses) => [response, ...responses]);
 
   useEffect(() => {
     const f = async () => {
-      try {
-        const res = await getLanguages();
+      const res = await getLanguages();
+      if (res.success) {
         setLanguages({
-          languages: res.languages,
-          default: res.languages[0].code,
+          languages: res.data.languages,
+          default: res.data.languages[0].code,
         });
-      } catch (e) {
-        console.error(e);
-        if (e instanceof Error) {
-          setErrorMessage(e.message);
-        } else {
-          setErrorMessage("something went wrong.");
-        }
+      } else {
+        setErrorMessage(`failed to get languages: ${res.error.message}`);
       }
     };
     void f();
@@ -84,16 +79,11 @@ const ContactCenterAnalysis: React.FC = () => {
       label: lang,
       value: duration,
     });
-    try {
-      const res = await analyze(lang, blob);
-      addResult(res);
-    } catch (e) {
-      console.error(e);
-      if (e instanceof Error) {
-        setErrorMessage(e.message);
-      } else {
-        setErrorMessage("something went wrong.");
-      }
+    const res = await analyze(lang, blob);
+    if (res.success) {
+      addResult(res.data);
+    } else {
+      setErrorMessage(`failed to analyze speech: ${res.error.message}`);
     }
   };
 
