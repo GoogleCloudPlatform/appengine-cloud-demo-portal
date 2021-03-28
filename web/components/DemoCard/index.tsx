@@ -55,7 +55,7 @@ const DemoCard: React.FC<Props> = ({ demoId }) => {
 
   const onClick = () => {
     if (demo.link) {
-      window.open(demo.link, "_blank");
+      window.open(demo.link, "_blank", "noopener,noreferrer");
     } else {
       void router.push(demo.path, demo.path);
     }

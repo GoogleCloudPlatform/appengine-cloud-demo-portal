@@ -50,7 +50,7 @@ const ProductChip: React.FC<Props> = ({ productId }) => {
 
   const onClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
-    window.open(`${product.url}?hl=${locale}`, "_blank");
+    window.open(`${product.url}?hl=${locale}`, "_blank", "noopener,noreferrer");
   };
 
   return (
