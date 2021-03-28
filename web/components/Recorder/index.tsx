@@ -136,7 +136,7 @@ const Recorder: React.FC<Props> = ({
           <IconButton
             aria-label="start-recording"
             onClick={onClickStart}
-            disabled={isStopping}
+            disabled={isStopping || lang === ""}
           >
             <Mic />
           </IconButton>
