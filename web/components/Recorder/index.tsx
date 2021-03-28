@@ -115,6 +115,7 @@ const Recorder: React.FC<Props> = ({
         <Autocomplete
           options={languages}
           getOptionLabel={(option) => option.name}
+          getOptionSelected={(option, value) => option.code === value.code}
           renderInput={(params) => (
             <TextField
               {...params}
