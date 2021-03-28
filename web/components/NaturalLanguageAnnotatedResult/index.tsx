@@ -9,10 +9,10 @@ import {
 } from "@material-ui/core";
 import { ThumbDown, ThumbsUpDown, ThumbUp } from "@material-ui/icons";
 
-import { Response } from "../../src/api/contactCenterAnalysis";
+import { AnalyzeResponse } from "../../src/api/contactCenterAnalysis";
 
 type Props = {
-  result: Response;
+  result: AnalyzeResponse;
   className?: string;
 };
 
