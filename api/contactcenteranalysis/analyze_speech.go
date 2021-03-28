@@ -44,6 +44,13 @@ func (h *handler) analyzeSpeechHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if req.Config.LanguageCode == "" {
+		hd.RespondErrorMessage(w, r,
+			http.StatusBadRequest,
+			"language_code must be specified")
+		return
+	}
+
 	wave, err := hd.Base64ToWave(ctx, req.Audio.Content)
 	if err != nil {
 		hd.RespondErrorJSON(w, r, err)
