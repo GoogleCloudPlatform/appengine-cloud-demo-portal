@@ -23,12 +23,14 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     button: {
       width: "100%",
+      height: "100%",
     },
     paper: {
       cursor: "pointer",
       padding: theme.spacing(2),
       textAlign: "left",
       width: "100%",
+      height: "100%",
     },
     demoTitle: {
       fontSize: "1.5rem",

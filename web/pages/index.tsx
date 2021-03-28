@@ -38,7 +38,8 @@ const Index: React.FC = () => {
         spacing={3}
         direction="row"
         justify="flex-start"
-        alignItems="flex-start"
+        alignItems="stretch"
+        alignContent="stretch"
       >
         {demoIds.map((demoId) => (
           <Grid
