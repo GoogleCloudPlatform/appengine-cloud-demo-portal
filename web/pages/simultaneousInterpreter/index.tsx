@@ -11,8 +11,13 @@ import DemoContainer from "../../components/DemoContainer";
 import Recorder from "../../components/Recorder";
 import { useTranslation } from "../../hooks/useTranslation";
 import { demos } from "../../src/demos";
-import { useError, useLanguages, useRecorder, useTranslations } from "./_hooks";
-import Translations from "./_Translations";
+import {
+  useError,
+  useLanguages,
+  useRecorder,
+  useTranslations,
+} from "../../hooks/sinumlaneousInterpreter";
+import Translations from "../../components/Translations";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

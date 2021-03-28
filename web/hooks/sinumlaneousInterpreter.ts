@@ -1,11 +1,11 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
-import { event } from "../../src/gtag";
+import { event } from "../src/gtag";
 import {
   getLanguages,
   SupportedLanguage,
   translateSpeech,
-} from "../../src/api/simultaneousInterpreter";
+} from "../src/api/simultaneousInterpreter";
 
 type ErrorMessage = {
   open: boolean;

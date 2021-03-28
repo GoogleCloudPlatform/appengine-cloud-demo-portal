@@ -13,7 +13,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { useEffect, useMemo, useState } from "react";
-import { useTranslation } from "../../hooks/useTranslation";
+import { useTranslation } from "../hooks/useTranslation";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
