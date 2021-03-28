@@ -47,8 +47,8 @@ type Props = {
   description: string;
   instructions: string[];
   productIds: string[];
-  errorMessage?: EM;
-  onCloseError?: OnCloseError;
+  errorMessage: EM;
+  onCloseError: OnCloseError;
 };
 
 const DemoContainer: React.FC<Props> = ({
