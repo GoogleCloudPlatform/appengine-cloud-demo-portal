@@ -52,6 +52,7 @@ const request = async <T>(
     const err = e as AxiosError<ErrorResponse>;
     console.error(`failed to ${method} ${url}: ${err.message}`);
     if (err.response) {
+      console.error(err.response.data);
       return {
         success: false,
         error: err.response.data,
