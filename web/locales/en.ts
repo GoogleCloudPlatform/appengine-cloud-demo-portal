@@ -11,6 +11,13 @@ const en = {
     title: "Contact Center Analysis",
     description:
       "Identify entities and understand sentiments from customer voices at contact centers.",
+    instructions: [
+      "Select a language which you speak.",
+      "Click mic button and speak something in the language you selected.",
+      "CLICK STOP BUTTON.",
+      "Wait a moment. Then results are displayed.",
+      "You can run it continuously and new results are displayed on the top.",
+    ],
   },
   simultaneousInterpreter: {
     title: "Simultaneous Interpreter",
