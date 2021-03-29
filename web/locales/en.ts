@@ -17,8 +17,8 @@ const en = {
     description:
       "Translate your speech into multiple languages simultaneously.",
     instructions: [
-      "Choose a language which you speak.",
-      "Click mic button and speak something in the language you choosed.",
+      "Select a language which you speak.",
+      "Click mic button and speak something in the language you selected.",
       "CLICK STOP BUTTON.",
       "Wait a moment. Then translations are displayed.",
       "You can run it continuously and the results follow previous ones.",
