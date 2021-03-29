@@ -12,6 +12,7 @@ steps:
     args: ["run", "build"]
     env:
       - "NEXT_PUBLIC_GA_MEASUREMENT_ID=${_NEXT_PUBLIC_GA_MEASUREMENT_ID}"
+      - "NEXT_PUBLIC_README_URL=${_NEXT_PUBLIC_README_URL}"
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
     dir: "web"
     args:
