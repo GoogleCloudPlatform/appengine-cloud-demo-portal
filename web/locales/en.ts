@@ -21,6 +21,7 @@ const en = {
       "Click mic button and speak something in the language you choosed.",
       "CLICK STOP BUTTON.",
       "Wait a moment. Then translations are displayed.",
+      "You can run it continuously and the results follow previous ones.",
       "If you want to filter languages to display, click [SELECT LANGUAGES] and choose langauges you want.",
     ],
     selectLanguages: "Select languages",
