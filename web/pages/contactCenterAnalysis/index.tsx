@@ -91,7 +91,7 @@ const ContactCenterAnalysis: React.FC = () => {
     <DemoContainer
       title={t.contactCenterAnalysis.title}
       description={t.contactCenterAnalysis.description}
-      instructions={[]}
+      instructions={t.contactCenterAnalysis.instructions}
       productIds={demo.products}
       errorMessage={errorMessage}
       onCloseError={onCloseError}

@@ -15,7 +15,7 @@ import {
   useLanguages,
   useRecorder,
   useTranslations,
-} from "../../hooks/sinumlaneousInterpreter";
+} from "../../hooks/simultaneousInterpreter";
 import Translations from "../../components/Translations";
 import { useError } from "../../hooks/useError";
 
