@@ -21,6 +21,12 @@ const ja: Locale = {
       "連続して実行すると、新しい結果が一番上に表示されます。",
     ],
   },
+  serverlessWebAppWithDevOps: {
+    title: "サーバーレス ウェブアプリとDevOps",
+    description:
+      "このデモサイトはサーバーレスCI/CDプラットフォームからデプロイされ、サーバーレスアプリケーションプラットフォームで稼働しています。",
+    instructions: ["アーキテクチャとソースコードを見てください。"],
+  },
   simultaneousInterpreter: {
     title: "同時通訳",
     description: "あなたの発言を多言語に同時通訳します。",

@@ -19,6 +19,15 @@ const en = {
       "You can run it continuously and new results are displayed on the top.",
     ],
   },
+  serverlessWebAppWithDevOps: {
+    title: "Serverless Web App with DevOps",
+    description:
+      "This demo site is deployed from serverless CI/CD platform and is running on a serverless application platform.",
+    instructions: [
+      "No interactions.",
+      "See the architecture and the source code.",
+    ],
+  },
   simultaneousInterpreter: {
     title: "Simultaneous Interpreter",
     description:
