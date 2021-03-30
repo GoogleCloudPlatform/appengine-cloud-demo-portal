@@ -25,7 +25,10 @@ const ja: Locale = {
     title: "サーバーレス ウェブアプリとDevOps",
     description:
       "このデモサイトはサーバーレスCI/CDプラットフォームからデプロイされ、サーバーレスアプリケーションプラットフォームで稼働しています。",
-    instructions: ["アーキテクチャとソースコードを見てください。"],
+    instructions: [
+      "操作はありません。",
+      "アーキテクチャとソースコードを見てください。",
+    ],
   },
   simultaneousInterpreter: {
     title: "同時通訳",
