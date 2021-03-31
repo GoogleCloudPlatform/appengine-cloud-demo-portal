@@ -11,6 +11,7 @@ import DemoContainer from "../components/DemoContainer";
 import { useError } from "../hooks/useError";
 import { useTranslation } from "../hooks/useTranslation";
 import { demos } from "../src/demos";
+import GettingStarted from "../src/serverlessWebAppWithDevOps/components/GettingStarted";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,6 +52,11 @@ const ServerlessWebAppWithDevOps: React.FC = () => {
             width={2017}
             height={781}
           />
+        </Paper>
+      </Grid>
+      <Grid item>
+        <Paper className={classes.panel}>
+          <GettingStarted />
         </Paper>
       </Grid>
     </DemoContainer>

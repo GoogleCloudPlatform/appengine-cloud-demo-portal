@@ -29,6 +29,21 @@ const ja: Locale = {
       "操作はありません。",
       "アーキテクチャとソースコードを見てください。",
     ],
+    gettingStarted: {
+      overview: "概要",
+      appConfiguration: "App Engine構成",
+      buildConfiguration: "Cloud Build構成",
+      web: {
+        overview:
+          "Web フロントエンドはTypeScriptとNext.jsで開発されています。" +
+          "開発者がGitHubのmainブランチにコードをプッシュすると、GitHubからのウェブフックによりCloud Buildが実行されます。" +
+          "Cloud Buildは本番用ビルドを行い、それをApp Engineのdefaultサービスとしてデプロイします。",
+        appConfiguration:
+          "次のYAMLファイルはWebフロントエンドのapp.yaml、つまりApp Engine用の構成ファイルです。" +
+          "もし、あなたのNext.jsやその他のNode.jsのアプリケーションをApp Engineでホストしたい場合、ただapp.yamlを用意すればアプリケーションをApp Engineにデプロイすることができます。",
+        buildConfiguration: "",
+      },
+    },
   },
   simultaneousInterpreter: {
     title: "同時通訳",

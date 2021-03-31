@@ -27,6 +27,21 @@ const en = {
       "No interactions.",
       "See the architecture and the source code.",
     ],
+    gettingStarted: {
+      overview: "Overview",
+      appConfiguration: "App Engine Configuration",
+      buildConfiguration: "Cloud Build Configuration",
+      web: {
+        overview:
+          "Web frontend is developed with Next.js and written in TypeScript. " +
+          "When a developer pushes the code to the main branch on GitHub, Cloud Build is triggered by a webhook from GitHub. " +
+          "Cloud Build builds a production deployment, and deploys it to App Engine as the default service.",
+        appConfiguration:
+          "Following YAML is the app.yaml of this web frontend app, configuration file for App Engine. " +
+          "If you want to host your Next.js or other Node.js app on App Engine, you can deploy it to App Engine just by preparing your app.yaml.",
+        buildConfiguration: "After ",
+      },
+    },
   },
   simultaneousInterpreter: {
     title: "Simultaneous Interpreter",
