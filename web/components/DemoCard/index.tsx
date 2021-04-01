@@ -7,6 +7,7 @@ import {
   Theme,
   Typography,
 } from "@material-ui/core";
+import { Launch } from "@material-ui/icons";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -34,6 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     demoTitle: {
       fontSize: "1.5rem",
+      verticalAlign: "middle",
     },
     demoIcon: {
       borderRadius: "10%",
@@ -98,13 +100,22 @@ const DemoCard: React.FC<Props> = ({ demoId }) => {
               spacing={1}
             >
               <Grid item>
-                <Typography
-                  className={classes.demoTitle}
-                  component="h2"
-                  variant="h2"
-                >
-                  {title}
-                </Typography>
+                <Grid container direction="row" alignItems="center" spacing={2}>
+                  <Grid item>
+                    <Typography
+                      className={classes.demoTitle}
+                      component="h2"
+                      variant="h2"
+                    >
+                      {title}
+                    </Typography>
+                  </Grid>
+                  {demo.link ? (
+                    <Grid item>
+                      <Launch color="action" fontSize="small" />
+                    </Grid>
+                  ) : null}
+                </Grid>
               </Grid>
               <Grid item>
                 <Typography variant="body1" component="p">
