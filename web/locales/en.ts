@@ -44,6 +44,19 @@ const en = {
           "There are three steps to build and deploy the web app. " +
           "You can also build and deploy your web app automatically with your configuration like this.",
       },
+      api: {
+        overview:
+          "API is written in Go and running on App Engine as api service. " +
+          "When a developer pushes the code to the main branch on GitHub, " +
+          "Cloud Build is triggerd by a webhook from GitHub, " +
+          "and then Cloud Build deploys it to App Engine as the api service.",
+        appConfiguration:
+          "The following YAML is the app.yaml, the configuration file for App Engine.",
+        buildConfiguration:
+          "The following YAML is cloudbuild.yaml, the configuration for Cloud Build." +
+          "There is just one step to deploy the Go app to App Engine.",
+      },
+      dispatch: {},
     },
   },
   simultaneousInterpreter: {

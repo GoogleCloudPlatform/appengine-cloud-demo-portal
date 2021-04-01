@@ -79,7 +79,7 @@ const Web: React.FC<Props> = ({ hidden }) => {
       <ul>
         <li>
           <ExternalLink href="https://github.com/nownabe/cloud-demos/tree/main/web">
-            web source code
+            web source code on GitHub
           </ExternalLink>
         </li>
       </ul>
@@ -93,7 +93,7 @@ const Web: React.FC<Props> = ({ hidden }) => {
       <ul>
         <li>
           <ExternalLink href="https://github.com/nownabe/cloud-demos/tree/main/web/app.yaml">
-            web/app.yaml
+            web/app.yaml on GitHub
           </ExternalLink>
         </li>
         <li>
@@ -113,7 +113,7 @@ const Web: React.FC<Props> = ({ hidden }) => {
       <ul>
         <li>
           <ExternalLink href="https://github.com/nownabe/cloud-demos/blob/main/web/cloudbuild.yaml">
-            web/cloudbuild.yaml
+            web/cloudbuild.yaml on GitHub
           </ExternalLink>
         </li>
         <li>

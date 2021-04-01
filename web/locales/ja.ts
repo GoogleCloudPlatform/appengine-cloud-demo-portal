@@ -46,6 +46,18 @@ const ja: Locale = {
           "3ステップからなり、Webアプリのビルドとデプロイを自動化しています。" +
           "このような構成ファイルを作ることでビルドとデプロイを自動化することができます。",
       },
+      api: {
+        overview:
+          "APIはGoで書かれていて、App Engineのapiサービスとして稼働しています。" +
+          "開発者がGitHubのmainブランチにコードをプッシュすると、GitHubからのウェブフックによりCloud Buildが実行されます。" +
+          "Cloud BuildはアプリケーションをapiサービスとしてApp Engineにデプロイします。 ",
+        appConfiguration:
+          "次のYAMLはapp.yamlです。App Engineの構成ファイルです。",
+        buildConfiguration:
+          "次のYAMLはcloudbuild.yamlです。Cloud Buildの構成ファイルです。" +
+          "たったひとつのステップでGoアプリをApp Engineにデプロイすることができます。",
+      },
+      dispatch: {},
     },
   },
   simultaneousInterpreter: {
