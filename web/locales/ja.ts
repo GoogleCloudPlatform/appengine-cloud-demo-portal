@@ -21,6 +21,50 @@ const ja: Locale = {
       "連続して実行すると、新しい結果が一番上に表示されます。",
     ],
   },
+  serverlessWebAppWithDevOps: {
+    title: "サーバーレス ウェブアプリとDevOps",
+    description:
+      "このデモサイトはサーバーレスCI/CDプラットフォームからデプロイされ、サーバーレスアプリケーションプラットフォームで稼働しています。",
+    instructions: [
+      "操作はありません。",
+      "アーキテクチャとソースコードを見てください。",
+    ],
+    gettingStarted: {
+      overview: "概要",
+      appConfiguration: "App Engine構成",
+      buildConfiguration: "Cloud Build構成",
+      web: {
+        overview:
+          "Web フロントエンドはTypeScriptとNext.jsで開発されています。" +
+          "開発者がGitHubのmainブランチにコードをプッシュすると、GitHubからのウェブフックによりCloud Buildが実行されます。" +
+          "Cloud Buildは本番用ビルドを行い、それをApp Engineのdefaultサービスとしてデプロイします。",
+        appConfiguration:
+          "次のYAMLファイルはWebフロントエンドのapp.yaml、つまりApp Engine用の構成ファイルです。" +
+          "もし、あなたのNext.jsやその他のNode.jsのアプリケーションをApp Engineでホストしたい場合、ただapp.yamlを用意すればアプリケーションをApp Engineにデプロイすることができます。",
+        buildConfiguration:
+          "次のYAMLファイルはWebフロントエンドのCloud Buildの構成ファイルです。" +
+          "3ステップからなり、Webアプリのビルドとデプロイを自動化しています。" +
+          "このような構成ファイルを作ることでビルドとデプロイを自動化することができます。",
+      },
+      api: {
+        overview:
+          "APIはGoで書かれていて、App Engineのapiサービスとして稼働しています。" +
+          "開発者がGitHubのmainブランチにコードをプッシュすると、GitHubからのウェブフックによりCloud Buildが実行されます。" +
+          "Cloud BuildはアプリケーションをapiサービスとしてApp Engineにデプロイします。 ",
+        appConfiguration:
+          "次のYAMLはapp.yamlです。App Engineの構成ファイルです。",
+        buildConfiguration:
+          "次のYAMLはcloudbuild.yamlです。Cloud Buildの構成ファイルです。" +
+          "たったひとつのステップでGoアプリをApp Engineにデプロイすることができます。",
+      },
+      dispatch: {
+        description:
+          "dispatch.yamlを使えばルーティングルールを上書きできます。" +
+          "このデモアプリではdispatch.yamlを使って、/apiへのリクエストはapiサービスへ、それ以外のリクエストはdefaultサービス (web) へルーティングしています。" +
+          "次のYAMLはこのデモアプリのdispatch.yamlです。",
+      },
+    },
+  },
   simultaneousInterpreter: {
     title: "同時通訳",
     description: "あなたの発言を多言語に同時通訳します。",

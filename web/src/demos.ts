@@ -21,6 +21,11 @@ const demos: { [key: string]: Demo } = {
     products: ["speech-to-text", "natural-language-api"],
     icon: "/images/contactCenterAnalysis.jpg",
   },
+  serverlessWebAppWithDevOps: {
+    path: "/serverlessWebAppWithDevOps",
+    products: ["app-engine", "build"],
+    icon: "/images/serverlessWebAppWithDevOps.jpg",
+  },
   simultaneousInterpreter: {
     path: "/simultaneousInterpreter",
     products: ["speech-to-text", "translation-api"],
