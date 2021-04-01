@@ -5,6 +5,13 @@ export type ContactCenterAnalyticsEvent = {
   value?: number | null;
 };
 
+export type ServerlessWebAppWithDevOpsEvent = {
+  category: "serverlessWebAppWithDevOps";
+  action: "switch_tab";
+  label: string;
+  value?: null;
+};
+
 export type SimultaneousInterpreterEvent = {
   category: "simultaneousInterpreter";
   action: "start_recording" | "stop_recording";
@@ -12,7 +19,10 @@ export type SimultaneousInterpreterEvent = {
   value?: number | null;
 };
 
-export type Event = ContactCenterAnalyticsEvent | SimultaneousInterpreterEvent;
+export type Event =
+  | ContactCenterAnalyticsEvent
+  | SimultaneousInterpreterEvent
+  | ServerlessWebAppWithDevOpsEvent;
 
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "";
 
