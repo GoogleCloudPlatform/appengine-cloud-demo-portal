@@ -57,7 +57,12 @@ const ja: Locale = {
           "次のYAMLはcloudbuild.yamlです。Cloud Buildの構成ファイルです。" +
           "たったひとつのステップでGoアプリをApp Engineにデプロイすることができます。",
       },
-      dispatch: {},
+      dispatch: {
+        description:
+          "dispatch.yamlを使えばルーティングルールを上書きできます。" +
+          "このデモアプリではdispatch.yamlを使って、/apiへのリクエストはapiサービスへ、それ以外のリクエストはdefaultサービス (web) へルーティングしています。" +
+          "次のYAMLはこのデモアプリのdispatch.yamlです。",
+      },
     },
   },
   simultaneousInterpreter: {

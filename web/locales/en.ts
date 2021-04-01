@@ -56,7 +56,12 @@ const en = {
           "The following YAML is cloudbuild.yaml, the configuration for Cloud Build." +
           "There is just one step to deploy the Go app to App Engine.",
       },
-      dispatch: {},
+      dispatch: {
+        description:
+          "dispatch.yaml allows developers to overrice routing rules. " +
+          "This demo app uses dispatch.yaml to route requests to /api to the api service and other requests to default (web) service." +
+          "The following YAML is the dispatch.yaml for this demo app.",
+      },
     },
   },
   simultaneousInterpreter: {
