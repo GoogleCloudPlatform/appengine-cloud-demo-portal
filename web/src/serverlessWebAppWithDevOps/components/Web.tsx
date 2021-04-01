@@ -37,6 +37,31 @@ handlers:
 automatic_scaling:
   min_instances: 1`;
 
+const cloudbuildYaml = `substitutions:
+  _NODE_VERSION: "14.16.0"
+
+steps:
+  - name: "node:\${_NODE_VERSION}-buster-slim"
+    dir: "web"
+    entrypoint: "npm"
+    args: ["install"]
+  - name: "node:\${_NODE_VERSION}-buster-slim"
+    dir: "web"
+    entrypoint: "npm"
+    args: ["run", "build"]
+    env:
+      - "NEXT_PUBLIC_GA_MEASUREMENT_ID=\${_NEXT_PUBLIC_GA_MEASUREMENT_ID}"
+      - "NEXT_PUBLIC_README_URL=\${_NEXT_PUBLIC_README_URL}"
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
+    dir: "web"
+    args:
+      - gcloud
+      - app
+      - deploy
+      - --project
+      - $PROJECT_ID
+      - --quiet`;
+
 const Web: React.FC<Props> = ({ hidden }) => {
   const classes = useStyles();
   const { t } = useTranslation();
@@ -85,6 +110,19 @@ const Web: React.FC<Props> = ({ hidden }) => {
       <Typography variant="body1" component="p">
         {tt.buildConfiguration}
       </Typography>
+      <ul>
+        <li>
+          <ExternalLink href="https://github.com/nownabe/cloud-demos/blob/main/web/cloudbuild.yaml">
+            web/cloudbuild.yaml
+          </ExternalLink>
+        </li>
+        <li>
+          <ExternalLink href="https://cloud.google.com/build/docs/build-config">
+            cloudbuild.yaml reference
+          </ExternalLink>
+        </li>
+      </ul>
+      <Code language="yaml">{cloudbuildYaml}</Code>
     </Box>
   );
 };

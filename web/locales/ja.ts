@@ -41,7 +41,10 @@ const ja: Locale = {
         appConfiguration:
           "次のYAMLファイルはWebフロントエンドのapp.yaml、つまりApp Engine用の構成ファイルです。" +
           "もし、あなたのNext.jsやその他のNode.jsのアプリケーションをApp Engineでホストしたい場合、ただapp.yamlを用意すればアプリケーションをApp Engineにデプロイすることができます。",
-        buildConfiguration: "",
+        buildConfiguration:
+          "次のYAMLファイルはWebフロントエンドのCloud Buildの構成ファイルです。" +
+          "3ステップからなり、Webアプリのビルドとデプロイを自動化しています。" +
+          "このような構成ファイルを作ることでビルドとデプロイを自動化することができます。",
       },
     },
   },

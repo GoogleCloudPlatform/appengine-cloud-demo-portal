@@ -37,9 +37,12 @@ const en = {
           "When a developer pushes the code to the main branch on GitHub, Cloud Build is triggered by a webhook from GitHub. " +
           "Cloud Build builds a production deployment, and deploys it to App Engine as the default service.",
         appConfiguration:
-          "Following YAML is the app.yaml of this web frontend app, configuration file for App Engine. " +
+          "The following YAML is the app.yaml of this web frontend app, configuration file for App Engine. " +
           "If you want to host your Next.js or other Node.js app on App Engine, you can deploy it to App Engine just by preparing your app.yaml.",
-        buildConfiguration: "After ",
+        buildConfiguration:
+          "The following YAML is the cloudbuild.yaml of this web frontend app, configuration file for Cloud Build. " +
+          "There are three steps to build and deploy the web app. " +
+          "You can also build and deploy your web app automatically with your configuration like this.",
       },
     },
   },
