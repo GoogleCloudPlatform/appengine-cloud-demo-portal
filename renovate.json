@@ -3,6 +3,12 @@
   "extends": [
     "config:base"
   ],
+  "packageRules": [
+    {
+      "matchDepTypes": ["devDependencies"],
+      "automerge": true
+    }
+  ],
   "patch": { "automerge": true },
   "separateMinorPatch": true
 }
