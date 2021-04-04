@@ -18,7 +18,6 @@ const useStyles = makeStyles((theme: Theme) =>
     panel: {
       padding: theme.spacing(4),
     },
-    architecture: {},
   })
 );
 
@@ -48,7 +47,6 @@ const ServerlessWebAppWithDevOps: React.FC = () => {
           <Image
             src="/images/serverlessWebAppWithDevOps/architecture.png"
             alt="Architecture of serverless web app with DevOps"
-            className={classes.architecture}
             width={2017}
             height={781}
           />
