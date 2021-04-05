@@ -22,6 +22,7 @@ type postQueriesRequest struct {
 }
 
 type postQueriesResponse struct {
+	JobID string `json:"job_id"`
 }
 
 func (h *handler) postQueries(w http.ResponseWriter, r *http.Request) {
@@ -51,7 +52,7 @@ func (h *handler) postQueries(w http.ResponseWriter, r *http.Request) {
 			"failed to run query: %w", err))
 	}
 
-	hd.RespondJSON(w, r, http.StatusOK, job.ID())
+	hd.RespondJSON(w, r, http.StatusOK, &postQueriesResponse{JobID: job.ID()})
 }
 
 func (h *handler) buildQuery(req *postQueriesRequest) *bigquery.Query {
