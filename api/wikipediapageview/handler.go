@@ -20,5 +20,6 @@ func Router(clients *client.Clients) func(r chi.Router) {
 
 	return func(r chi.Router) {
 		r.Post("/queries", h.postQueries)
+		r.Get("/jobs/{jobID}", h.getJob)
 	}
 }
