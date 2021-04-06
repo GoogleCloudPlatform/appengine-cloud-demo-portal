@@ -7,7 +7,7 @@ import {
 } from "@material-ui/core";
 
 import { useTranslation } from "../../../hooks/useTranslation";
-import Code from "./Code";
+import Code from "../../../components/Code";
 import ExternalLink from "./ExternalLink";
 
 const useStyles = makeStyles((theme: Theme) =>
