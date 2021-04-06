@@ -6,6 +6,7 @@ import (
 
 	"cloud.google.com/go/bigquery"
 	"github.com/go-chi/chi/v5"
+	"github.com/rs/zerolog/log"
 	"google.golang.org/api/iterator"
 
 	hd "github.com/nownabe/cloud-demos/api/pkg/handler"
@@ -35,6 +36,7 @@ type config struct {
 
 func (h *handler) getJob(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
+	logger := log.Ctx(ctx)
 
 	jobID := chi.URLParam(r, "jobID")
 
@@ -47,6 +49,8 @@ func (h *handler) getJob(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	logger.Debug().Msgf("job: %+v", job)
+
 	js, err := job.Status(ctx)
 	if err != nil {
 		hd.RespondErrorJSON(w, r, hd.Errorf(ctx,
@@ -55,6 +59,8 @@ func (h *handler) getJob(w http.ResponseWriter, r *http.Request) {
 			"failed to get job status: %w", err))
 		return
 	}
+
+	logger.Debug().Msgf("js: %+v", job)
 
 	jc, err := job.Config()
 	if err != nil {
@@ -65,6 +71,8 @@ func (h *handler) getJob(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	logger.Debug().Msgf("jc: %+v", job)
+
 	qc, ok := jc.(*bigquery.QueryConfig)
 	if !ok {
 		hd.RespondErrorMessage(w, r,
@@ -72,6 +80,8 @@ func (h *handler) getJob(w http.ResponseWriter, r *http.Request) {
 			"job id must be id of query job")
 		return
 	}
+
+	logger.Debug().Msgf("qc: %+v", job)
 
 	res := &getJobResponse{
 		Completed: js.Done(),
@@ -101,6 +111,8 @@ func (h *handler) getJob(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	logger.Debug().Msgf("qc: %+v", job)
+
 	res.Statistics = &statistics{
 		StartTime:           js.Statistics.StartTime,
 		EndTime:             js.Statistics.EndTime,
@@ -108,6 +120,8 @@ func (h *handler) getJob(w http.ResponseWriter, r *http.Request) {
 		CacheHit:            qs.CacheHit,
 		InputRows:           qs.QueryPlan[0].RecordsRead,
 	}
+
+	logger.Debug().Msgf("qs.QueryPlan: %+v", qs.QueryPlan)
 
 	it, err := job.Read(ctx)
 	if err != nil {
