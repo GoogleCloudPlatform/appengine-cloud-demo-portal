@@ -118,10 +118,15 @@ func (h *handler) getJob(w http.ResponseWriter, r *http.Request) {
 		EndTime:             js.Statistics.EndTime,
 		TotalBytesProcessed: js.Statistics.TotalBytesProcessed,
 		CacheHit:            qs.CacheHit,
-		InputRows:           qs.QueryPlan[0].RecordsRead,
 	}
 
 	logger.Debug().Msgf("qs.QueryPlan: %+v", qs.QueryPlan)
+
+	if qs.QueryPlan != nil && len(qs.QueryPlan) > 0 {
+		res.Statistics.InputRows = qs.QueryPlan[0].RecordsRead
+	} else {
+		res.Statistics.InputRows = 0
+	}
 
 	it, err := job.Read(ctx)
 	if err != nil {
