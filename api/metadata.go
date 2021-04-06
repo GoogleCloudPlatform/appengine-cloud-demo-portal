@@ -47,20 +47,20 @@ func getMetadata(ctx context.Context) (*instanceMetadata, error) {
 func getMetadataValue(ctx context.Context, c *http.Client, path string) (string, error) {
 	req, err := http.NewRequest("GET", "http://"+metadataServerHost+path, nil)
 	if err != nil {
-		return "", fmt.Errorf("http.NewRequest: %v", err)
+		return "", fmt.Errorf("http.NewRequest: %w", err)
 	}
 
 	req.Header.Add("Metadata-Flavor", "Google")
 
 	resp, err := c.Do(req.WithContext(ctx))
 	if err != nil {
-		return "", fmt.Errorf("failed to get metadata %s: %v", path, err)
+		return "", fmt.Errorf("failed to get metadata %s: %w", path, err)
 	}
 	defer resp.Body.Close()
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return "", fmt.Errorf("failed to read response body of %s: %v", path, err)
+		return "", fmt.Errorf("failed to read response body of %s: %w", path, err)
 	}
 
 	return string(body), nil
