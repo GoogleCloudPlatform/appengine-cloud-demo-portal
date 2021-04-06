@@ -59,9 +59,11 @@ func (h *handler) buildQuery(req *postQueriesRequest) *bigquery.Query {
 	var q *bigquery.Query
 
 	cond := []string{"datehour >= @startDate", "datehour < @endDate"}
+
 	if req.Wiki != "" {
 		cond = append(cond, "wiki = @wiki")
 	}
+
 	if req.TitleLike != "" {
 		cond = append(cond, "title LIKE @titleLike")
 	}

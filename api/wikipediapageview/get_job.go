@@ -37,6 +37,7 @@ func (h *handler) getJob(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
 	jobID := chi.URLParam(r, "jobID")
+
 	job, err := h.Bigquery.JobFromID(ctx, jobID)
 	if err != nil {
 		hd.RespondErrorJSON(w, r, hd.Errorf(ctx,
@@ -63,6 +64,7 @@ func (h *handler) getJob(w http.ResponseWriter, r *http.Request) {
 			"failed to get job config: %w", err))
 		return
 	}
+
 	qc, ok := jc.(*bigquery.QueryConfig)
 	if !ok {
 		hd.RespondErrorMessage(w, r,
@@ -120,17 +122,18 @@ func (h *handler) getJob(w http.ResponseWriter, r *http.Request) {
 
 	for {
 		var row []bigquery.Value
+
 		err := it.Next(&row)
 		if err == iterator.Done {
 			break
-		}
-		if err != nil {
+		} else if err != nil {
 			hd.RespondErrorJSON(w, r, hd.Errorf(ctx,
 				http.StatusInternalServerError,
 				http.StatusText(http.StatusInternalServerError),
 				"failed to get : %w", err))
 			return
 		}
+
 		results = append(results, row)
 	}
 
