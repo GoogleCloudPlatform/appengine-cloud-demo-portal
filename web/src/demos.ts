@@ -31,6 +31,11 @@ const demos: { [key: string]: Demo } = {
     products: ["speech-to-text", "translation-api"],
     icon: "/images/simultaneousInterpreter.jpg",
   },
+  wikipediaPageview: {
+    path: "/wikipediaPageview",
+    products: ["bigquery"],
+    icon: "/wikipediaPageview/icon.jpg",
+  },
 };
 
 const demoIds = Object.keys(demos);
