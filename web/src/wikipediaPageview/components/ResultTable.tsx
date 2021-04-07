@@ -25,7 +25,7 @@ const rowGroupByTitle = (
   id: i,
   wiki: row[0],
   title: row[1],
-  views: row[2],
+  views: (row[2] as number).toLocaleString(),
 });
 
 const rowGroupByDate = (
@@ -34,7 +34,7 @@ const rowGroupByDate = (
 ): Record<string, unknown> => ({
   id: i,
   date: row[0],
-  views: row[1],
+  views: (row[1] as number).toLocaleString(),
 });
 
 const ResultTable: React.FC<Props> = ({ results, groupBy }) => {
@@ -45,8 +45,8 @@ const ResultTable: React.FC<Props> = ({ results, groupBy }) => {
   const rows: Record<string, unknown>[] = results.map(mapFn);
 
   return (
-    <div style={{ height: 420, width: "100%" }}>
-      <DataGrid rows={rows} columns={columns} pageSize={10} rowHeight={30} />
+    <div style={{ height: 460, width: "100%" }}>
+      <DataGrid rows={rows} columns={columns} pageSize={10} rowHeight={35} />
     </div>
   );
 };
