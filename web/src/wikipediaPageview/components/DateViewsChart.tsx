@@ -5,7 +5,7 @@ type Props = {
 };
 
 const DateViewsChart: React.FC<Props> = ({ results }) => {
-  const sorted = results.sort((a, b) => {
+  const sorted = [...results].sort((a, b) => {
     const aDate = new Date(a[0] as string);
     const bDate = new Date(b[0] as string);
     return aDate.getTime() - bDate.getTime();
