@@ -90,6 +90,19 @@ const ja: Locale = {
       "wikipedia.pageviewsテーブルは各国のWikipediaの各記事の毎日のページビュー数を格納しています。" +
       "このデモでは、pageviews_2020テーブルを使用します。" +
       "2020年のページビューを記録したテーブルで、550億行以上の2.25TBのデータから成ります。",
+    controller: {
+      titleIncludes: "タイトルに含む",
+      startDate: "開始日",
+      endDate: "終了日",
+      orderBy: "並び替え",
+      descending: "降順",
+      ascending: "昇順",
+      groupBy: "グルーピング",
+      title: "タイトル",
+      date: "日付",
+      queryCache: "クエリキャッシュ",
+      runQuery: "クエリ実行",
+    },
   },
 };
 
