@@ -84,7 +84,16 @@ const ja: Locale = {
     title: "Wikipedia 閲覧回数",
     description:
       "BigQueryとBigQueryの一般公開データセットを使ってWikipediaのページ閲覧回数を分析・可視化します。",
-    instructions: [],
+    instructions: [
+      "まずはそのまま [クエリ実行] をクリックしてください。",
+      "そして、グラフ、結果、SQL、ジョブ情報を見てください。",
+      "次に「グルーピング」を変更してクエリを実行してください。",
+      "時系列のグラフを確認してください。",
+      "その後は、好きなようにクエリを実行してください。例えば、",
+      "「Wiki」フィールドを使って自分の言語について調べてみる。",
+      "「タイトルを含む」フィールドを使ってある特定のトピックを調べる。",
+      "日付の範囲を変更する。",
+    ],
     tableInformation: "テーブル情報",
     tableInformationContent:
       "wikipedia.pageviewsテーブルは各国のWikipediaの各記事の毎日のページビュー数を格納しています。" +

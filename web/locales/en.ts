@@ -84,7 +84,16 @@ const en = {
     title: "Wikipedia Pageview",
     description:
       "Analyze and visualize pageviews of Wikipedia using BigQuery and BigQuery public datasets.",
-    instructions: [],
+    instructions: [
+      "First of all, click 'RUN QUERY' with default settings.",
+      "See the results: visualization, results table, SQL and job information.",
+      "Next, change 'Group by' to 'Date' and run query.",
+      "See the time series chart.",
+      "After that, run query again as you like. For example,",
+      "Look up in your own language with 'Wiki' field.",
+      "Analyze a specific topic using 'Title includes' field.",
+      "Change the range of dates.",
+    ],
     tableInformation: "Table information",
     tableInformationContent:
       "The wikipedia.pageviews table contains daily pageviews of articles for each language. " +
