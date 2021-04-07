@@ -17,7 +17,6 @@ import {
   CircularProgress,
 } from "@material-ui/core";
 import { PlayCircleFilled } from "@material-ui/icons";
-import { Autocomplete } from "@material-ui/lab";
 import { KeyboardDatePicker } from "@material-ui/pickers";
 
 import { SetErrorMessage } from "../../../hooks/useError";
@@ -72,13 +71,8 @@ const Controller: React.FC<Props> = ({ setErrorMessage, addJob }) => {
   const [queryCache, setQueryCache] = useState(false);
 
   const onChangeLanguage = (
-    event: React.ChangeEvent<unknown>,
-    value: string | null
-  ) => {
-    if (value) {
-      setLanguage(value);
-    }
-  };
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => setLanguage(event.target.value);
   const onChangeTitleLike = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => setTitleLike(event.target.value);
@@ -136,21 +130,14 @@ const Controller: React.FC<Props> = ({ setErrorMessage, addJob }) => {
       <Grid item>
         <Grid container direction="column" spacing={2}>
           <Grid item>
-            <Autocomplete
-              disabled={running}
-              options={["ja", "en"]}
-              getOptionLabel={(option) => option}
-              getOptionSelected={(option, value) => option == value}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Language"
-                  variant="outlined"
-                  className={classes.wiki}
-                />
-              )}
-              onChange={onChangeLanguage}
-            />
+            <FormControl variant="outlined" disabled={running}>
+              <InputLabel htmlFor="language">Language</InputLabel>
+              <OutlinedInput
+                value={language}
+                onChange={onChangeLanguage}
+                labelWidth={100}
+              />
+            </FormControl>
           </Grid>
           <Grid item>
             <FormControl variant="outlined" disabled={running}>
