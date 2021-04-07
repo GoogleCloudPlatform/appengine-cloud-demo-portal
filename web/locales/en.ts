@@ -80,6 +80,17 @@ const en = {
     selectLanguagesTitle: "Select languages to display",
     unselectAll: "Unselect all",
   },
+  wikipediaPageview: {
+    title: "Wikipedia Pageview",
+    description:
+      "Analyze and visualize pageviews of Wikipedia using BigQuery and BigQuery public datasets.",
+    instructions: [],
+    tableInformation: "Table information",
+    tableInformationContent:
+      "The wikipedia.pageviews table contains daily pageviews of articles for each language. " +
+      "In this demo, we use the pageviews_2020 table that records pageviews in 2020. " +
+      "It has 55 billions+ lines which size is 2.25TB.",
+  },
 };
 
 export default en;

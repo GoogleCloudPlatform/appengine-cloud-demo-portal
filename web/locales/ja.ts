@@ -80,6 +80,17 @@ const ja: Locale = {
     selectLanguagesTitle: "表示言語を選んでください",
     unselectAll: "すべてのチェックを外す",
   },
+  wikipediaPageview: {
+    title: "Wikipedia 閲覧回数",
+    description:
+      "BigQueryとBigQueryの一般公開データセットを使ってWikipediaのページ閲覧回数を分析・可視化します。",
+    instructions: [],
+    tableInformation: "テーブル情報",
+    tableInformationContent:
+      "wikipedia.pageviewsテーブルは各国のWikipediaの各記事の毎日のページビュー数を格納しています。" +
+      "このデモでは、pageviews_2020テーブルを使用します。" +
+      "2020年のページビューを記録したテーブルで、550億行以上の2.25TBのデータから成ります。",
+  },
 };
 
 export default ja;

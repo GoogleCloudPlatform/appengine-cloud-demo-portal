@@ -18,6 +18,7 @@ import (
 	"github.com/nownabe/cloud-demos/api/pkg/client"
 	"github.com/nownabe/cloud-demos/api/pkg/middleware"
 	"github.com/nownabe/cloud-demos/api/simultaneousinterpreter"
+	"github.com/nownabe/cloud-demos/api/wikipediapageview"
 )
 
 const (
@@ -37,6 +38,7 @@ func router(clients *client.Clients) http.Handler {
 		r.Route("/v1", func(r chi.Router) {
 			r.Route("/contactCenterAnalysis", contactcenteranalysis.Router(clients))
 			r.Route("/simultaneousInterpreter", simultaneousinterpreter.Router(clients))
+			r.Route("/wikipediaPageview", wikipediapageview.Router(clients))
 		})
 	})
 
@@ -74,17 +76,27 @@ func main() {
 
 	ctx := context.Background()
 
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8000"
+	md, err := getMetadata(ctx)
+	if err != nil {
+		log.Error().Err(err).Msg("failed to get metadata from metadata server")
+
+		// local environment must raise this error.
+		md = &instanceMetadata{
+			projectID: os.Getenv("PROJECT_ID"),
+		}
 	}
 
-	clients, err := client.NewClients(ctx)
+	clients, err := client.NewClients(ctx, md.projectID)
 	if err != nil {
 		panic(err)
 	}
 
 	r := router(clients)
+
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8000"
+	}
 
 	srv := &http.Server{
 		Addr:              ":" + port,

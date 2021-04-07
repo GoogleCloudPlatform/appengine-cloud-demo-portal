@@ -19,6 +19,11 @@ const products: { [key: string]: Product } = {
     icon: "/images/AppEngine-512-color.svg",
     url: "https://cloud.google.com/appengine",
   },
+  bigquery: {
+    name: "BigQuery",
+    icon: "/cloud-icons/bigquery-512-color.svg",
+    url: "https://cloud.google.com/bigquery",
+  },
   build: {
     name: "Cloud Build",
     icon: "/images/cloud-build-512-color.svg",

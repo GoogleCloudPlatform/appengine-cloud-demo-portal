@@ -1,4 +1,6 @@
+import DateFnsUtils from "@date-io/date-fns";
 import { CssBaseline, Toolbar } from "@material-ui/core";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { AppProps } from "next/app";
 import { useEffect } from "react";
 
@@ -20,7 +22,9 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
       <CssBaseline />
       <Header />
       <Toolbar />
-      <Component {...pageProps} />
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <Component {...pageProps} />
+      </MuiPickersUtilsProvider>
     </>
   );
 };

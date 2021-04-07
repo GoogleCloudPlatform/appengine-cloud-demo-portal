@@ -15,6 +15,7 @@ services:
       LOG_LEVEL: debug
       LOG_PRETTY: "true"
       PORT: "8000"
+      PROJECT_ID: $PROJECT_ID
     ports:
       - 8000:8000
     volumes:
