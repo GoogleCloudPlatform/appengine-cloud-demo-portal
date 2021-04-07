@@ -23,7 +23,9 @@ import Code from "../../../components/Code";
 import { SetErrorMessage } from "../../../hooks/useError";
 import { Job } from "../../../pages/wikipediaPageview";
 import { getJob, GetJobResponse } from "../api";
+import DateViewsChart from "./DateViewsChart";
 import ResultTable from "./ResultTable";
+import TitleViewsChart from "./TitleViewsChart";
 
 const getJobInterval = 1000;
 
@@ -179,13 +181,23 @@ const Result: React.FC<Props> = ({ jobId, groupBy, setErrorMessage }) => {
         <Tab label="job information" />
       </Tabs>
 
-      <Box hidden={tab !== 1}>
+      <Box hidden={tab !== 0} style={{ height: 484 }}>
+        {jobResult.results ? (
+          groupBy === "title" ? (
+            <TitleViewsChart results={jobResult.results} />
+          ) : (
+            <DateViewsChart results={jobResult.results} />
+          )
+        ) : null}
+      </Box>
+
+      <Box hidden={tab !== 1} style={{ height: 484 }}>
         {jobResult.results ? (
           <ResultTable results={jobResult.results} groupBy={groupBy} />
         ) : null}
       </Box>
 
-      <Box hidden={tab !== 2}>
+      <Box hidden={tab !== 2} style={{ height: 484 }}>
         <Grid container direction="row" spacing={2} alignItems="flex-start">
           <Grid item>
             <Typography variant="subtitle1">Parameters</Typography>
@@ -214,7 +226,7 @@ const Result: React.FC<Props> = ({ jobId, groupBy, setErrorMessage }) => {
         </Grid>
       </Box>
 
-      <Box hidden={tab !== 3}>
+      <Box hidden={tab !== 3} style={{ height: 484 }}>
         <TableContainer component={Paper}>
           <Table>
             <TableBody>
