@@ -90,7 +90,7 @@ const en = {
       "Next, change 'Group by' to 'Date' and run query.",
       "See the time series chart.",
       "After that, run query again as you like. For example,",
-      "Look up in your own language with 'Wiki' field.",
+      "Look up in your own language with 'Wiki' field filled with 'en' or 'ja'.",
       "Analyze a specific topic using 'Title includes' field.",
       "Change the range of dates.",
     ],
