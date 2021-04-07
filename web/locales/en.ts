@@ -103,6 +103,18 @@ const en = {
       queryCache: "Query cache",
       runQuery: "Run query",
     },
+    result: {
+      visualization: "Visualization",
+      results: "Results",
+      jobInformation: "Job information",
+      parameters: "Parameters",
+      startTime: "Start time",
+      endTime: "End time",
+      duration: "Duration",
+      bytesProcessed: "Bytes processed",
+      inputRows: "Input rows",
+      cacheHit: "Cache hit",
+    },
   },
 };
 

@@ -103,6 +103,18 @@ const ja: Locale = {
       queryCache: "クエリキャッシュ",
       runQuery: "クエリ実行",
     },
+    result: {
+      visualization: "グラフ",
+      results: "結果",
+      jobInformation: "ジョブ情報",
+      parameters: "パラメーター",
+      startTime: "開始時間",
+      endTime: "終了時間",
+      duration: "実行時間",
+      bytesProcessed: "処理バイト数",
+      inputRows: "入力行数",
+      cacheHit: "キャッシュヒット",
+    },
   },
 };
 

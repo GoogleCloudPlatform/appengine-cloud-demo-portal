@@ -21,6 +21,7 @@ import { useEffect, useState } from "react";
 
 import Code from "../../../components/Code";
 import { SetErrorMessage } from "../../../hooks/useError";
+import { useTranslation } from "../../../hooks/useTranslation";
 import { Job } from "../../../pages/wikipediaPageview";
 import { getJob, GetJobResponse } from "../api";
 import DateViewsChart from "./DateViewsChart";
@@ -75,6 +76,8 @@ const calcDuration = (data: GetJobResponse): string | null => {
 
 const Result: React.FC<Props> = ({ jobId, groupBy, setErrorMessage }) => {
   const classes = useStyles();
+  const { t } = useTranslation();
+  const tt = t.wikipediaPageview.result;
 
   const [completed, setCompleted] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -175,10 +178,10 @@ const Result: React.FC<Props> = ({ jobId, groupBy, setErrorMessage }) => {
         onChange={onChangeTab}
         className={classes.tabs}
       >
-        <Tab label="visualization" />
-        <Tab label="results" />
+        <Tab label={tt.visualization} />
+        <Tab label={tt.results} />
         <Tab label="sql" />
-        <Tab label="job information" />
+        <Tab label={tt.jobInformation} />
       </Tabs>
 
       <Box hidden={tab !== 0} style={{ height: 484 }}>
@@ -200,7 +203,7 @@ const Result: React.FC<Props> = ({ jobId, groupBy, setErrorMessage }) => {
       <Box hidden={tab !== 2} style={{ height: 484 }}>
         <Grid container direction="row" spacing={2} alignItems="flex-start">
           <Grid item>
-            <Typography variant="subtitle1">Parameters</Typography>
+            <Typography variant="subtitle1">{tt.parameters}</Typography>
             <TableContainer component={Paper}>
               <Table size="small">
                 <TableHead>
@@ -231,29 +234,29 @@ const Result: React.FC<Props> = ({ jobId, groupBy, setErrorMessage }) => {
           <Table>
             <TableBody>
               <TableRow>
-                <TableCell>Start time</TableCell>
+                <TableCell>{tt.startTime}</TableCell>
                 <TableCell>{jobInfo.startTime}</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell>End time</TableCell>
+                <TableCell>{tt.endTime}</TableCell>
                 <TableCell>{jobInfo.endTime}</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell>Duration</TableCell>
+                <TableCell>{tt.duration}</TableCell>
                 <TableCell>{jobInfo.duration}</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell>Bytes processed</TableCell>
+                <TableCell>{tt.bytesProcessed}</TableCell>
                 <TableCell>
                   {jobInfo.bytesProcessed?.toLocaleString()}
                 </TableCell>
               </TableRow>
               <TableRow>
-                <TableCell>Input rows</TableCell>
+                <TableCell>{tt.inputRows}</TableCell>
                 <TableCell>{jobInfo.inputRows?.toLocaleString()}</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell>Cache hit</TableCell>
+                <TableCell>{tt.cacheHit}</TableCell>
                 <TableCell>
                   {typeof jobInfo.cacheHit === "undefined"
                     ? ""
