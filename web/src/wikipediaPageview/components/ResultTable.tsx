@@ -7,7 +7,6 @@ type Props = {
 
 const columnsGroupByTitle: GridColDef[] = [
   { field: "id", headerName: "Row", width: 80 },
-  { field: "wiki", headerName: "Wiki", width: 150 },
   { field: "title", headerName: "Title", width: 200 },
   { field: "views", headerName: "Views", width: 200 },
 ];
@@ -23,9 +22,8 @@ const rowGroupByTitle = (
   i: number
 ): Record<string, unknown> => ({
   id: i,
-  wiki: row[0],
-  title: row[1],
-  views: (row[2] as number).toLocaleString(),
+  title: row[0],
+  views: (row[1] as number).toLocaleString(),
 });
 
 const rowGroupByDate = (

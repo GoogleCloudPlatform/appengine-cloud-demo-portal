@@ -70,12 +70,11 @@ func (h *handler) buildQuery(req *postQueriesRequest) *bigquery.Query {
 
 	if req.GroupBy == "title" {
 		q = h.Bigquery.Query(fmt.Sprintf(`SELECT
-    wiki,
     title,
     SUM(views) AS views
 FROM bigquery-public-data.wikipedia.pageviews_2020
 WHERE %s
-GROUP BY wiki, title
+GROUP BY title
 ORDER BY views %s
 LIMIT 100`, strings.Join(cond, "\n    AND "), req.OrderBy))
 	} else {
