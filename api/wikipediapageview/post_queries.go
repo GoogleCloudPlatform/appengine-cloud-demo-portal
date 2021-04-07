@@ -61,7 +61,7 @@ func (h *handler) buildQuery(req *postQueriesRequest) *bigquery.Query {
 	cond := []string{"datehour >= @startDate", "datehour < @endDate"}
 
 	if req.Wiki != "" {
-		cond = append(cond, "wiki = @wiki")
+		cond = append(cond, "wiki LIKE @wiki")
 	}
 
 	if req.TitleLike != "" {
@@ -90,7 +90,7 @@ LIMIT 366`, strings.Join(cond, "\n    AND "), req.OrderBy))
 	}
 
 	q.Parameters = []bigquery.QueryParameter{
-		{Name: "wiki", Value: req.Wiki},
+		{Name: "wiki", Value: "%" + req.Wiki + "%"},
 		{Name: "titleLike", Value: "%" + req.TitleLike + "%"},
 		{Name: "startDate", Value: req.StartDate},
 		{Name: "endDate", Value: req.EndDate.AddDate(0, 0, 1)},
