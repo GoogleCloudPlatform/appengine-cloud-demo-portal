@@ -23,10 +23,12 @@ import Code from "../../../components/Code";
 import { SetErrorMessage } from "../../../hooks/useError";
 import { Job } from "../../../pages/wikipediaPageview";
 import { getJob, GetJobResponse } from "../api";
+import ResultTable from "./ResultTable";
 
 const getJobInterval = 1000;
 
 type JobResult = {
+  results: unknown[][] | undefined;
   sql: {
     sql: string;
     parameters: { name: string; value: string }[];
@@ -102,6 +104,7 @@ const Result: React.FC<Props> = ({ jobId, groupBy, setErrorMessage }) => {
               completeWithError(`Job error: ${res.data.error}`);
             } else {
               setJobResult({
+                results: res.data.results,
                 sql: {
                   sql: res.data.config.query,
                   parameters: res.data.config.parameters,
@@ -175,6 +178,12 @@ const Result: React.FC<Props> = ({ jobId, groupBy, setErrorMessage }) => {
         <Tab label="sql" />
         <Tab label="job information" />
       </Tabs>
+
+      <Box hidden={tab !== 1}>
+        {jobResult.results ? (
+          <ResultTable results={jobResult.results} groupBy={groupBy} />
+        ) : null}
+      </Box>
 
       <Box hidden={tab !== 2}>
         <Grid container direction="row" spacing={2} alignItems="flex-start">
