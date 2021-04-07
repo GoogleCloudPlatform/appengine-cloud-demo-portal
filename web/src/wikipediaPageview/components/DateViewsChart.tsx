@@ -26,7 +26,7 @@ const DateViewsChart: React.FC<Props> = ({ results }) => {
     ],
   };
 
-  return <Line data={data} />;
+  return <Line data={data} height={130} />;
 };
 
 export default DateViewsChart;
