@@ -220,7 +220,7 @@ const Result: React.FC<Props> = ({ jobId, groupBy, setErrorMessage }) => {
               </Table>
             </TableContainer>
           </Grid>
-          <Grid item>
+          <Grid item style={{ flexGrow: 1, height: "100%" }}>
             <Code language="sql">{jobResult.sql.sql}</Code>
           </Grid>
         </Grid>
