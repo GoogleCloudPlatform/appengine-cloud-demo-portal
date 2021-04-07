@@ -5,7 +5,7 @@ type PostQueriesResponse = {
 };
 
 type RunQueryArgs = {
-  language: string;
+  wiki: string;
   titleLike: string;
   startDate: Date;
   endDate: Date;
@@ -15,7 +15,7 @@ type RunQueryArgs = {
 };
 
 const runQuery = async ({
-  language,
+  wiki,
   titleLike,
   startDate,
   endDate,
@@ -24,9 +24,9 @@ const runQuery = async ({
   queryCache,
 }: RunQueryArgs): Promise<Response<PostQueriesResponse>> => {
   const data = {
-    wiki: language,
     startDate: startDate.toISOString(),
     endDate: endDate.toISOString(),
+    wiki,
     titleLike,
     orderBy,
     groupBy,

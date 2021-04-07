@@ -62,7 +62,7 @@ const Controller: React.FC<Props> = ({ setErrorMessage, addJob }) => {
   const classes = useStyles();
 
   const [running, setRunning] = useState(false);
-  const [language, setLanguage] = useState("");
+  const [wiki, setWiki] = useState("");
   const [titleLike, setTitleLike] = useState("");
   const [startDate, setStartDate] = useState<Date | null>(defaultStartDate);
   const [endDate, setEndDate] = useState<Date | null>(defaultEndDate);
@@ -70,9 +70,9 @@ const Controller: React.FC<Props> = ({ setErrorMessage, addJob }) => {
   const [groupBy, setGroupBy] = useState<"title" | "date">("title");
   const [queryCache, setQueryCache] = useState(false);
 
-  const onChangeLanguage = (
+  const onChangeWiki = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => setLanguage(event.target.value);
+  ) => setWiki(event.target.value);
   const onChangeTitleLike = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => setTitleLike(event.target.value);
@@ -107,7 +107,7 @@ const Controller: React.FC<Props> = ({ setErrorMessage, addJob }) => {
     setRunning(true);
 
     const res = await runQuery({
-      language,
+      wiki,
       titleLike,
       startDate,
       endDate,
@@ -131,10 +131,10 @@ const Controller: React.FC<Props> = ({ setErrorMessage, addJob }) => {
         <Grid container direction="column" spacing={2}>
           <Grid item>
             <FormControl variant="outlined" disabled={running}>
-              <InputLabel htmlFor="language">Language</InputLabel>
+              <InputLabel htmlFor="wiki">Wiki</InputLabel>
               <OutlinedInput
-                value={language}
-                onChange={onChangeLanguage}
+                value={wiki}
+                onChange={onChangeWiki}
                 labelWidth={100}
               />
             </FormControl>
