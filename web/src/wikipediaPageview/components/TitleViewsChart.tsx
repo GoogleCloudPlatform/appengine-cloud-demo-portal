@@ -22,7 +22,7 @@ const TitleViewsChart: React.FC<Props> = ({ results }) => {
     ],
   };
 
-  return <HorizontalBar data={data} />;
+  return <HorizontalBar data={data} height={130} />;
 };
 
 export default TitleViewsChart;
