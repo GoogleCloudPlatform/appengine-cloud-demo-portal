@@ -70,23 +70,23 @@ func (h *handler) buildQuery(req *postQueriesRequest) *bigquery.Query {
 
 	if req.GroupBy == "title" {
 		q = h.Bigquery.Query(fmt.Sprintf(`SELECT
-	wiki,
-	title,
-	SUM(views) AS views
+    wiki,
+    title,
+    SUM(views) AS views
 FROM bigquery-public-data.wikipedia.pageviews_2020
 WHERE %s
 GROUP BY wiki, title
 ORDER BY views %s
-LIMIT 100`, strings.Join(cond, " AND "), req.OrderBy))
+LIMIT 100`, strings.Join(cond, "\n    AND "), req.OrderBy))
 	} else {
 		q = h.Bigquery.Query(fmt.Sprintf(`SELECT
-	DATE(datehour) AS date,
-	SUM(views) AS views
+    DATE(datehour) AS date,
+    SUM(views) AS views
 FROM bigquery-public-data.wikipedia.pageviews_2020
 WHERE %s
 GROUP BY date
 ORDER BY views %s
-LIMIT 366`, strings.Join(cond, " AND "), req.OrderBy))
+LIMIT 366`, strings.Join(cond, "\n    AND "), req.OrderBy))
 	}
 
 	q.Parameters = []bigquery.QueryParameter{
