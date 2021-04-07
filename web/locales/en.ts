@@ -84,12 +84,46 @@ const en = {
     title: "Wikipedia Pageview",
     description:
       "Analyze and visualize pageviews of Wikipedia using BigQuery and BigQuery public datasets.",
-    instructions: [],
+    instructions: [
+      "First of all, click 'RUN QUERY' with default settings.",
+      "See the results: visualization, results table, SQL and job information.",
+      "Next, change 'Group by' to 'Date' and run query.",
+      "See the time series chart.",
+      "After that, run query again as you like. For example,",
+      "Look up in your own language with 'Wiki' field.",
+      "Analyze a specific topic using 'Title includes' field.",
+      "Change the range of dates.",
+    ],
     tableInformation: "Table information",
     tableInformationContent:
       "The wikipedia.pageviews table contains daily pageviews of articles for each language. " +
       "In this demo, we use the pageviews_2020 table that records pageviews in 2020. " +
       "It has 55 billions+ lines which size is 2.25TB.",
+    controller: {
+      titleIncludes: "Title includes",
+      startDate: "Start date",
+      endDate: "End date",
+      orderBy: "Order by",
+      descending: "Descending",
+      ascending: "Ascending",
+      groupBy: "Group by",
+      title: "Title",
+      date: "Date",
+      queryCache: "Query cache",
+      runQuery: "Run query",
+    },
+    result: {
+      visualization: "Visualization",
+      results: "Results",
+      jobInformation: "Job information",
+      parameters: "Parameters",
+      startTime: "Start time",
+      endTime: "End time",
+      duration: "Duration",
+      bytesProcessed: "Bytes processed",
+      inputRows: "Input rows",
+      cacheHit: "Cache hit",
+    },
   },
 };
 

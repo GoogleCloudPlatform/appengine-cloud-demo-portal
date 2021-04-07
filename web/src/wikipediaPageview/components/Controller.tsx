@@ -21,6 +21,7 @@ import { KeyboardDatePicker } from "@material-ui/pickers";
 import { SetErrorMessage } from "../../../hooks/useError";
 import { Job } from "../../../pages/wikipediaPageview";
 import { runQuery } from "../api";
+import { useTranslation } from "../../../hooks/useTranslation";
 
 const minDate = new Date("2020-01-01");
 const maxDate = new Date("2020-12-31");
@@ -59,6 +60,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Controller: React.FC<Props> = ({ setErrorMessage, addJob }) => {
   const classes = useStyles();
+  const { t } = useTranslation();
+  const tt = t.wikipediaPageview.controller;
 
   const [running, setRunning] = useState(false);
   const [wiki, setWiki] = useState("");
@@ -134,17 +137,17 @@ const Controller: React.FC<Props> = ({ setErrorMessage, addJob }) => {
               <OutlinedInput
                 value={wiki}
                 onChange={onChangeWiki}
-                labelWidth={100}
+                labelWidth={30}
               />
             </FormControl>
           </Grid>
           <Grid item>
             <FormControl variant="outlined" disabled={running}>
-              <InputLabel htmlFor="title-like">Title includes</InputLabel>
+              <InputLabel htmlFor="title-like">{tt.titleIncludes}</InputLabel>
               <OutlinedInput
                 value={titleLike}
                 onChange={onChangeTitleLike}
-                labelWidth={100}
+                labelWidth={110}
               />
             </FormControl>
           </Grid>
@@ -161,7 +164,7 @@ const Controller: React.FC<Props> = ({ setErrorMessage, addJob }) => {
               format="yyyy-MM-dd"
               margin="normal"
               id="start-date"
-              label="Start date"
+              label={tt.startDate}
               value={startDate}
               onChange={onChangeStartDate}
               minDate={minDate}
@@ -177,7 +180,7 @@ const Controller: React.FC<Props> = ({ setErrorMessage, addJob }) => {
               format="yyyy-MM-dd"
               margin="normal"
               id="end-date"
-              label="End date"
+              label={tt.endDate}
               value={endDate}
               onChange={onChangeEndDate}
               minDate={startDate}
@@ -188,7 +191,7 @@ const Controller: React.FC<Props> = ({ setErrorMessage, addJob }) => {
       </Grid>
       <Grid item>
         <FormControl component="fieldset" disabled={running}>
-          <FormLabel component="legend">Order by</FormLabel>
+          <FormLabel component="legend">{tt.orderBy}</FormLabel>
           <RadioGroup
             aria-label="order by"
             name="order-by"
@@ -198,27 +201,35 @@ const Controller: React.FC<Props> = ({ setErrorMessage, addJob }) => {
             <FormControlLabel
               value="desc"
               control={<Radio />}
-              label="Descending"
+              label={tt.descending}
             />
             <FormControlLabel
               value="asc"
               control={<Radio />}
-              label="Ascending"
+              label={tt.ascending}
             />
           </RadioGroup>
         </FormControl>
       </Grid>
       <Grid item>
         <FormControl component="fieldset" disabled={running}>
-          <FormLabel component="legend">Group by</FormLabel>
+          <FormLabel component="legend">{tt.groupBy}</FormLabel>
           <RadioGroup
             aria-label="group by"
             name="group-by"
             value={groupBy}
             onChange={onChangeGroupBy}
           >
-            <FormControlLabel value="title" control={<Radio />} label="Title" />
-            <FormControlLabel value="date" control={<Radio />} label="Date" />
+            <FormControlLabel
+              value="title"
+              control={<Radio />}
+              label={tt.title}
+            />
+            <FormControlLabel
+              value="date"
+              control={<Radio />}
+              label={tt.date}
+            />
           </RadioGroup>
         </FormControl>
       </Grid>
@@ -234,7 +245,7 @@ const Controller: React.FC<Props> = ({ setErrorMessage, addJob }) => {
                   color="primary"
                 />
               }
-              label="Query cache"
+              label={tt.queryCache}
             />
           </Grid>
           <Grid item>
@@ -246,7 +257,7 @@ const Controller: React.FC<Props> = ({ setErrorMessage, addJob }) => {
                 onClick={requestRunQuery}
                 startIcon={<PlayCircleFilled />}
               >
-                Run query
+                {tt.runQuery}
               </Button>
               {running && (
                 <CircularProgress size={24} className={classes.progress} />
