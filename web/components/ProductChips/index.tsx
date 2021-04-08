@@ -1,5 +1,6 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
-import ProductChip from "../ProductChip";
+
+import ProductChip from "./ProductChip";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

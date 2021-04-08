@@ -1,4 +1,4 @@
-import { request, Response } from "../api/api";
+import { request, Response } from "../api";
 
 type PostQueriesResponse = {
   jobId: string;

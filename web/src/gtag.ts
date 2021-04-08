@@ -1,28 +1,9 @@
-export type ContactCenterAnalyticsEvent = {
-  category: "contactCenterAnalytics";
-  action: "start_recording" | "stop_recording";
+export interface Event {
+  category: string;
+  action: string;
   label: string;
   value?: number | null;
-};
-
-export type ServerlessWebAppWithDevOpsEvent = {
-  category: "serverlessWebAppWithDevOps";
-  action: "switch_tab";
-  label: string;
-  value?: null;
-};
-
-export type SimultaneousInterpreterEvent = {
-  category: "simultaneousInterpreter";
-  action: "start_recording" | "stop_recording";
-  label: string;
-  value?: number | null;
-};
-
-export type Event =
-  | ContactCenterAnalyticsEvent
-  | SimultaneousInterpreterEvent
-  | ServerlessWebAppWithDevOpsEvent;
+}
 
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "";
 
@@ -42,7 +23,12 @@ const pageview = (url: string): void => {
   }
 };
 
-const event = ({ category, action, label, value }: Event): void => {
+const event = <T extends Event>({
+  category,
+  action,
+  label,
+  value,
+}: T): void => {
   if (!enabledGa) {
     return;
   }

@@ -1,1 +1,4 @@
 export PROJECT_ID="your development project id"
+
+# keep empty if you don't have id
+export NEXT_PUBLIC_GA_MEASUREMENT_ID=""

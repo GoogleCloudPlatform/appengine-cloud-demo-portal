@@ -1,12 +1,8 @@
 import { useEffect, useState } from "react";
 
-import { event } from "../src/gtag";
-import {
-  getLanguages,
-  SupportedLanguage,
-  translateSpeech,
-} from "../src/api/simultaneousInterpreter";
-import { SetErrorMessage } from "./useError";
+import { SetErrorMessage } from "../../hooks/useError";
+import { getLanguages, SupportedLanguage, translateSpeech } from "./api";
+import { onStartEvent, onStopEvent } from "./gtag";
 
 type AddTranslationsFn = (translations: { [key: string]: string }) => void;
 
@@ -42,25 +38,15 @@ const useRecorder = (
   onStart: (lang: string) => void;
   onStop: (lang: string, duration: number | null, blob: Blob) => Promise<void>;
 } => {
-  const onStart = (lang: string): void => {
-    event({
-      category: "simultaneousInterpreter",
-      action: "start_recording",
-      label: lang,
-    });
-  };
+  const onStart = (lang: string): void => onStartEvent(lang);
 
   const onStop = async (
     lang: string,
     duration: number | null,
     blob: Blob
   ): Promise<void> => {
-    event({
-      category: "simultaneousInterpreter",
-      action: "stop_recording",
-      label: lang,
-      value: duration,
-    });
+    onStopEvent(lang, duration);
+
     const res = await translateSpeech(lang, blob);
     if (res.success) {
       addTranslations(res.data.translations);

@@ -1,6 +1,6 @@
 import { Snackbar } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
-import { ErrorMessage as EM, OnCloseError } from "../../hooks/useError";
+import { ErrorMessage as EM, OnCloseError } from "../hooks/useError";
 
 type Props = {
   message: EM;

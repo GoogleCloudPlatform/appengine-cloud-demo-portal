@@ -7,17 +7,17 @@ import {
 } from "@material-ui/core";
 import Head from "next/head";
 
-import DemoContainer from "../../components/DemoContainer";
-import Recorder from "../../components/Recorder";
-import { useTranslation } from "../../hooks/useTranslation";
-import { demos } from "../../src/demos";
+import DemoContainer from "../components/DemoContainer";
+import Recorder from "../components/Recorder";
+import { useTranslation } from "../hooks/useTranslation";
+import { demos } from "../src/demos";
 import {
   useLanguages,
   useRecorder,
   useTranslations,
-} from "../../hooks/simultaneousInterpreter";
-import Translations from "../../components/Translations";
-import { useError } from "../../hooks/useError";
+} from "../src/simultaneousInterpreter/hooks";
+import Translations from "../src/simultaneousInterpreter/components/Translations";
+import { useError } from "../hooks/useError";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

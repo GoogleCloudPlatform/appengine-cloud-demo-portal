@@ -1,4 +1,4 @@
-import { blobToBase64, request, Response } from "./api";
+import { blobToBase64, request, Response } from "../api";
 
 export type EntityType =
   | "UNKNOWN"
