@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 
-import {
-  getLanguages,
-  SupportedLanguage,
-  translateSpeech,
-} from "../../src/api/simultaneousInterpreter";
 import { SetErrorMessage } from "../../hooks/useError";
+import { getLanguages, SupportedLanguage, translateSpeech } from "./api";
 import { onStartEvent, onStopEvent } from "./gtag";
 
 type AddTranslationsFn = (translations: { [key: string]: string }) => void;

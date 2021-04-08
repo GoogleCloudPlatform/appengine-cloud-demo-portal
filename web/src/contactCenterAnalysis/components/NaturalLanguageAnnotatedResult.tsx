@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import { ThumbDown, ThumbsUpDown, ThumbUp } from "@material-ui/icons";
 
-import { AnalyzeResponse } from "../../api/contactCenterAnalysis";
+import { AnalyzeResponse } from "../api";
 
 type Props = {
   result: AnalyzeResponse;
