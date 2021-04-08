@@ -22,6 +22,7 @@ import { SetErrorMessage } from "../../../hooks/useError";
 import { Job } from "../../../pages/wikipediaPageview";
 import { runQuery } from "../api";
 import { useTranslation } from "../../../hooks/useTranslation";
+import { runQueryEvent } from "../gtag";
 
 const minDate = new Date("2020-01-01");
 const maxDate = new Date("2020-12-31");
@@ -105,6 +106,8 @@ const Controller: React.FC<Props> = ({ setErrorMessage, addJob }) => {
     if (!startDate || !endDate) {
       return;
     }
+
+    runQueryEvent();
 
     setRunning(true);
 
