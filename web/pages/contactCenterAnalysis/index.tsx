@@ -16,7 +16,7 @@ import {
   AnalyzeResponse,
   getLanguages,
 } from "../../src/api/contactCenterAnalysis";
-import NaturalLanguageAnnotatedResult from "../../components/NaturalLanguageAnnotatedResult";
+import NaturalLanguageAnnotatedResult from "../../src/contactCenterAnalysis/components/NaturalLanguageAnnotatedResult";
 import DemoContainer from "../../components/DemoContainer";
 import { useError } from "../../hooks/useError";
 import {

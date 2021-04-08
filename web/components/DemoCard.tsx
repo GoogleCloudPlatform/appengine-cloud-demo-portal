@@ -12,9 +12,9 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-import { useTranslationFn } from "../../hooks/useTranslation";
-import { demos } from "../../src/demos";
-import ProductChips from "../ProductChips";
+import { useTranslationFn } from "../hooks/useTranslation";
+import { demos } from "../src/demos";
+import ProductChips from "./ProductChips";
 
 type Props = {
   demoId: string;

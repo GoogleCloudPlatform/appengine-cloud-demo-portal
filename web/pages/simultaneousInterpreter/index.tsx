@@ -16,7 +16,7 @@ import {
   useRecorder,
   useTranslations,
 } from "../../hooks/simultaneousInterpreter";
-import Translations from "../../components/Translations";
+import Translations from "../../src/simultaneousInterpreter/components/Translations";
 import { useError } from "../../hooks/useError";
 
 const useStyles = makeStyles((theme: Theme) =>
