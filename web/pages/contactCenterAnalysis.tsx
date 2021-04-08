@@ -8,21 +8,18 @@ import {
 import { useState, useEffect } from "react";
 import Head from "next/head";
 
-import { useTranslation } from "../../hooks/useTranslation";
-import { demos } from "../../src/demos";
-import Recorder, { Language } from "../../components/Recorder";
+import { useTranslation } from "../hooks/useTranslation";
+import { demos } from "../src/demos";
+import Recorder, { Language } from "../components/Recorder";
 import {
   analyze,
   AnalyzeResponse,
   getLanguages,
-} from "../../src/api/contactCenterAnalysis";
-import NaturalLanguageAnnotatedResult from "../../src/contactCenterAnalysis/components/NaturalLanguageAnnotatedResult";
-import DemoContainer from "../../components/DemoContainer";
-import { useError } from "../../hooks/useError";
-import {
-  onStartEvent,
-  onStopEvent,
-} from "../../src/contactCenterAnalysis/gtag";
+} from "../src/api/contactCenterAnalysis";
+import NaturalLanguageAnnotatedResult from "../src/contactCenterAnalysis/components/NaturalLanguageAnnotatedResult";
+import DemoContainer from "../components/DemoContainer";
+import { useError } from "../hooks/useError";
+import { onStartEvent, onStopEvent } from "../src/contactCenterAnalysis/gtag";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
