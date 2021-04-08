@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { event } from "../../gtag";
+
+import { onChangeTabEvent } from "../gtag";
 
 const useTab = (): {
   value: number;
@@ -8,12 +9,8 @@ const useTab = (): {
   const [value, setValue] = useState(0);
 
   const onChange = (_event: React.ChangeEvent<unknown>, newValue: number) => {
+    onChangeTabEvent(newValue);
     setValue(newValue);
-    event({
-      category: "serverlessWebAppWithDevOps",
-      action: "switch_tab",
-      label: newValue.toString(),
-    });
   };
 
   return { value, onChange };

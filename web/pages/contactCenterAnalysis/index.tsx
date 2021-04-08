@@ -17,9 +17,12 @@ import {
   getLanguages,
 } from "../../src/api/contactCenterAnalysis";
 import NaturalLanguageAnnotatedResult from "../../components/NaturalLanguageAnnotatedResult";
-import { event } from "../../src/gtag";
 import DemoContainer from "../../components/DemoContainer";
 import { useError } from "../../hooks/useError";
+import {
+  onStartEvent,
+  onStopEvent,
+} from "../../src/contactCenterAnalysis/gtag";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -60,25 +63,15 @@ const ContactCenterAnalysis: React.FC = () => {
     void f();
   }, [setErrorMessage]);
 
-  const onStart = (lang: string) => {
-    event({
-      category: "contactCenterAnalytics",
-      action: "start_recording",
-      label: lang,
-    });
-  };
+  const onStart = (lang: string) => onStartEvent(lang);
 
   const onStop = async (
     lang: string,
     duration: number | null,
     blob: Blob
   ): Promise<void> => {
-    event({
-      category: "contactCenterAnalytics",
-      action: "stop_recording",
-      label: lang,
-      value: duration,
-    });
+    onStopEvent(lang, duration);
+
     const res = await analyze(lang, blob);
     if (res.success) {
       addResult(res.data);
