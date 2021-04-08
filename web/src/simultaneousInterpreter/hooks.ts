@@ -4,9 +4,9 @@ import {
   getLanguages,
   SupportedLanguage,
   translateSpeech,
-} from "../src/api/simultaneousInterpreter";
-import { onStartEvent, onStopEvent } from "../src/simultaneousInterpreter/gtag";
-import { SetErrorMessage } from "./useError";
+} from "../../src/api/simultaneousInterpreter";
+import { SetErrorMessage } from "../../hooks/useError";
+import { onStartEvent, onStopEvent } from "./gtag";
 
 type AddTranslationsFn = (translations: { [key: string]: string }) => void;
 
