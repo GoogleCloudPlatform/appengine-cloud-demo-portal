@@ -30,6 +30,8 @@ services:
       - bash
       - -c
       - "npm install && npm run dev"
+    environment:
+      NEXT_PUBLIC_GA_MEASUREMENT_ID: $NEXT_PUBLIC_GA_MEASUREMENT_ID
     ports:
       - 3000:3000
     volumes:
