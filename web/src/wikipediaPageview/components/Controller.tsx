@@ -61,11 +61,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Controller: React.FC<Props> = ({ setErrorMessage, addJob }) => {
   const classes = useStyles();
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const tt = t.wikipediaPageview.controller;
 
   const [running, setRunning] = useState(false);
-  const [wiki, setWiki] = useState("");
+  const [wiki, setWiki] = useState(locale as string);
   const [titleLike, setTitleLike] = useState("");
   const [startDate, setStartDate] = useState<Date | null>(defaultStartDate);
   const [endDate, setEndDate] = useState<Date | null>(defaultEndDate);
