@@ -1,5 +1,5 @@
 runtime: nodejs14
-instance_class: F1
+instance_class: F4
 
 handlers:
   - url: /.*
