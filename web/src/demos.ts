@@ -13,28 +13,28 @@ const demos: { [key: string]: Demo } = {
   readme: {
     path: "",
     products: [],
-    icon: "/images/readme.jpg",
+    icon: "/static/readme.jpg",
     link: README_URL,
   },
   contactCenterAnalysis: {
     path: "/contactCenterAnalysis",
     products: ["speech-to-text", "natural-language-api"],
-    icon: "/images/contactCenterAnalysis.jpg",
+    icon: "/static/contactCenterAnalysis/icon.jpg",
   },
   serverlessWebAppWithDevOps: {
     path: "/serverlessWebAppWithDevOps",
     products: ["app-engine", "build"],
-    icon: "/images/serverlessWebAppWithDevOps.jpg",
+    icon: "/static/serverlessWebAppWithDevOps/icon.jpg",
   },
   simultaneousInterpreter: {
     path: "/simultaneousInterpreter",
     products: ["speech-to-text", "translation-api"],
-    icon: "/images/simultaneousInterpreter.jpg",
+    icon: "/static/simultaneousInterpreter/icon.jpg",
   },
   wikipediaPageview: {
     path: "/wikipediaPageview",
     products: ["bigquery"],
-    icon: "/wikipediaPageview/icon.jpg",
+    icon: "/static/wikipediaPageview/icon.jpg",
   },
 };
 

@@ -6,7 +6,8 @@ import {
   Theme,
 } from "@material-ui/core";
 import Head from "next/head";
-import Image from "next/image";
+
+import Image from "../components/Image";
 import DemoContainer from "../components/DemoContainer";
 import { useError } from "../hooks/useError";
 import { useTranslation } from "../hooks/useTranslation";
@@ -45,7 +46,7 @@ const ServerlessWebAppWithDevOps: React.FC = () => {
       <Grid item>
         <Paper className={classes.panel}>
           <Image
-            src="/images/serverlessWebAppWithDevOps/architecture.png"
+            src="/static/serverlessWebAppWithDevOps/architecture.png"
             alt="Architecture of serverless web app with DevOps"
             width={2017}
             height={781}
