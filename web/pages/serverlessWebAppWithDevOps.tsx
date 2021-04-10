@@ -6,7 +6,8 @@ import {
   Theme,
 } from "@material-ui/core";
 import Head from "next/head";
-import Image from "next/image";
+
+import Image from "../components/Image";
 import DemoContainer from "../components/DemoContainer";
 import { useError } from "../hooks/useError";
 import { useTranslation } from "../hooks/useTranslation";

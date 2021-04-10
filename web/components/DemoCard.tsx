@@ -8,13 +8,13 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Launch } from "@material-ui/icons";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
 import { useTranslationFn } from "../hooks/useTranslation";
 import { demos } from "../src/demos";
 import ProductChips from "./ProductChips";
+import Image from "./Image";
 
 type Props = {
   demoId: string;
