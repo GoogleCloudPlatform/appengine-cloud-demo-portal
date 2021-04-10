@@ -1,0 +1,26 @@
+steps:
+  - name: debian:buster-slim
+    dir: terraform
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        cat <<EOF > ci.tf
+        terraform {
+          backend "gcs" {
+            bucket = $_STATE_BUCKET
+          }
+        }
+        EOF
+
+  - name: hashicorp/terraform:0.14.10
+    dir: terraform
+    args: ["init"]
+
+  - name: hashicorp/terraform:0.14.10
+    dir: terraform
+    args: ["apply", "-auto-approve"]
+    env:
+      - "TF_VAR_billing_account=$_BILLING_ACCOUNT"
+      - "TF_VAR_project_id=$PROJECT_ID"
+      - "TF_VAR_state_bucket=$_STATE_BUCKET"
