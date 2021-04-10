@@ -45,7 +45,7 @@ const ServerlessWebAppWithDevOps: React.FC = () => {
       <Grid item>
         <Paper className={classes.panel}>
           <Image
-            src="/images/serverlessWebAppWithDevOps/architecture.png"
+            src="/static/serverlessWebAppWithDevOps/architecture.png"
             alt="Architecture of serverless web app with DevOps"
             width={2017}
             height={781}
