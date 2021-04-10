@@ -2,6 +2,16 @@ runtime: nodejs14
 instance_class: F4
 
 handlers:
+  - url: /favicon\.ico
+    secure: always
+    static_files: public/favicon.ico
+    upload: public/favicon\.ico
+
+  - url: /static
+    secure: always
+    static_dir: public/static
+    expiration: 1d
+
   - url: /.*
     secure: always
     script: auto
