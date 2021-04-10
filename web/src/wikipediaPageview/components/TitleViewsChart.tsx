@@ -14,7 +14,7 @@ const TitleViewsChart: React.FC<Props> = ({ results }) => {
     labels,
     datasets: [
       {
-        label: "Views (Top 30)",
+        label: "Views",
         data: values,
         borderColor: "#2196f3",
         backgroundColor: "#64b5f6",
