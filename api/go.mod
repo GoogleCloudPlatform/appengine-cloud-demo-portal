@@ -10,5 +10,5 @@ require (
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
 	golang.org/x/text v0.3.6
 	google.golang.org/api v0.45.0
-	google.golang.org/genproto v0.0.0-20210415145412-64678f1ae2d5
+	google.golang.org/genproto v0.0.0-20210421164718-3947dc264843
 )
