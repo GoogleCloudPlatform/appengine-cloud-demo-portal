@@ -1,10 +1,36 @@
+resource "google_sourcerepo_repository" "repo" {
+  name    = "cloud-demos"
+  project = data.google_project.project.project_id
+
+  depends_on = [
+    google_project_service.sourcerepo
+  ]
+}
+
 resource "google_app_engine_application" "app" {
-  project     = google_project.project.project_id
+  project     = data.google_project.project.project_id
   location_id = "us-central"
 }
 
+resource "google_iap_brand" "brand" {
+  project           = data.google_project.project.project_id
+  application_title = "Google Cloud Demo Portal"
+  support_email     = var.support_email
+}
+
+resource "google_iap_web_type_app_engine_iam_member" "iap" {
+  project = data.google_project.project.project_id
+  app_id  = google_app_engine_application.app.app_id
+  role    = "roles/iap.httpsResourceAccessor"
+  member  = "domain:${var.domain}"
+
+  depends_on = [
+    google_project_service.iap
+  ]
+}
+
 resource "google_cloudbuild_trigger" "api" {
-  project  = google_project.project.project_id
+  project  = data.google_project.project.project_id
   name     = "API"
   filename = "api/cloudbuild.yaml"
 
@@ -12,16 +38,12 @@ resource "google_cloudbuild_trigger" "api" {
     "api/**"
   ]
 
-  github {
-    owner = "nownabe"
-    name  = "cloud-demos"
-    push {
-      branch = "main"
-    }
+  trigger_template {
+    repo_name   = google_sourcerepo_repository.repo.name
+    branch_name = "main"
   }
 
-  substitutions = {
-  }
+  substitutions = {}
 
   depends_on = [
     google_project_service.cloudbuild
@@ -33,7 +55,7 @@ resource "google_cloudbuild_trigger" "api" {
 }
 
 resource "google_cloudbuild_trigger" "web" {
-  project  = google_project.project.project_id
+  project  = data.google_project.project.project_id
   name     = "Web"
   filename = "web/cloudbuild.yaml"
 
@@ -41,12 +63,9 @@ resource "google_cloudbuild_trigger" "web" {
     "web/**"
   ]
 
-  github {
-    owner = "nownabe"
-    name  = "cloud-demos"
-    push {
-      branch = "main"
-    }
+  trigger_template {
+    repo_name   = google_sourcerepo_repository.repo.name
+    branch_name = "main"
   }
 
   substitutions = {
@@ -64,7 +83,7 @@ resource "google_cloudbuild_trigger" "web" {
 }
 
 resource "google_cloudbuild_trigger" "dispatch" {
-  project  = google_project.project.project_id
+  project  = data.google_project.project.project_id
   name     = "Dispatch"
   filename = "cloudbuild-dispatch.yaml"
 
@@ -72,12 +91,9 @@ resource "google_cloudbuild_trigger" "dispatch" {
     "dispatch.yaml"
   ]
 
-  github {
-    owner = "nownabe"
-    name  = "cloud-demos"
-    push {
-      branch = "main"
-    }
+  trigger_template {
+    repo_name   = google_sourcerepo_repository.repo.name
+    branch_name = "main"
   }
 
   depends_on = [
@@ -86,19 +102,31 @@ resource "google_cloudbuild_trigger" "dispatch" {
 }
 
 resource "google_project_iam_member" "cloudbuild_appengine_addAdmin" {
-  project = google_project.project.project_id
+  project = data.google_project.project.project_id
   role    = "roles/appengine.appAdmin"
-  member  = "serviceAccount:${google_project.project.number}@cloudbuild.gserviceaccount.com"
+  member  = "serviceAccount:${data.google_project.project.number}@cloudbuild.gserviceaccount.com"
+
+  depends_on = [
+    google_cloudbuild_trigger.dispatch
+  ]
 }
 
 resource "google_project_iam_member" "cloudbuild_cloudbuild_builds_builder" {
-  project = google_project.project.project_id
+  project = data.google_project.project.project_id
   role    = "roles/cloudbuild.builds.builder"
-  member  = "serviceAccount:${google_project.project.number}@cloudbuild.gserviceaccount.com"
+  member  = "serviceAccount:${data.google_project.project.number}@cloudbuild.gserviceaccount.com"
+
+  depends_on = [
+    google_cloudbuild_trigger.dispatch
+  ]
 }
 
 resource "google_project_iam_member" "cloudbuild_iam_serviceAccountUser" {
-  project = google_project.project.project_id
+  project = data.google_project.project.project_id
   role    = "roles/iam.serviceAccountUser"
-  member  = "serviceAccount:${google_project.project.number}@cloudbuild.gserviceaccount.com"
+  member  = "serviceAccount:${data.google_project.project.number}@cloudbuild.gserviceaccount.com"
+
+  depends_on = [
+    google_cloudbuild_trigger.dispatch
+  ]
 }
