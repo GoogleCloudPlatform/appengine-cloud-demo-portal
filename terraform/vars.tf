@@ -1,4 +1,3 @@
-variable "billing_account" {}
-
 variable "project_id" {}
-variable "state_bucket" {}
+variable "domain" {}
+variable "support_email" {}

@@ -9,6 +9,6 @@ terraform {
   }
 }
 
-data "google_billing_account" "billing_account" {
-  billing_account = var.billing_account
+data "google_project" "project" {
+  project_id = var.project_id
 }

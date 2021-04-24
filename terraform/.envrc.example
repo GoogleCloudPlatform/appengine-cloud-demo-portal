@@ -1,3 +1,17 @@
-export TF_VAR_billing_account=""
+# Your google cloud project id
+#
+# example) export TF_VAR_project_id="my-demo-prj"
+
 export TF_VAR_project_id=""
-export TF_VAR_state_bucket=""
+
+# Your domain for Cloud Identity. It's used to authenticate users.
+#
+# example) TF_VAR_domain="example.com"
+
+export TF_VAR_domain=""
+
+# Support email. It's displayed on login screens.
+#
+# example) TF_VAR_support_email="support@example.com"
+
+export TF_VAR_support_email=""
