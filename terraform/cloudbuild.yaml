@@ -13,11 +13,11 @@ steps:
         }
         EOF
 
-  - name: hashicorp/terraform:0.14.10
+  - name: hashicorp/terraform:0.14.11
     dir: terraform
     args: ["init"]
 
-  - name: hashicorp/terraform:0.14.10
+  - name: hashicorp/terraform:0.14.11
     dir: terraform
     args: ["apply", "-auto-approve"]
     env:
