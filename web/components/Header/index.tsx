@@ -38,6 +38,7 @@ const Header: React.FC = () => {
           </Typography>
           <nav>
             <LangMenu />
+            {/*
             <IconButton
               aria-label="github"
               color="inherit"
@@ -47,6 +48,7 @@ const Header: React.FC = () => {
             >
               <GitHub />
             </IconButton>
+            */}
           </nav>
         </Toolbar>
       </AppBar>
