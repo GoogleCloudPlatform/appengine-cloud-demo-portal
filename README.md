@@ -1,13 +1,9 @@
-# cloud-demos
+# Cloud Simple Demo Collection
 
-Demos for Google Cloud.
+A collection of simple [Google Cloud](https://cloud.google.com/) demos.
 This demo is a personal project, not an official Google Cloud project.
 
-## Getting Started
-
-### Note
-
-Be careful with security and billing.
+## Deploy
 
 ### Prerequisites
 
@@ -18,8 +14,8 @@ Be careful with security and billing.
 ### Clone this repository
 
 ```bash
-git clone https://github.com/nownabe/cloud-demos
-cd cloud-demos
+git clone TBD
+cd TBD
 ```
 
 ### Apply Terraform
