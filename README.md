@@ -67,9 +67,9 @@ If authentication doesn't work, you can enable IAP on [Console](https://console.
 
 Prerequisites
 
-- Direnv
-- Docker
-- docker-compose
+- [direnv](https://direnv.net/)
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/)
 
 Setup git hooks.
 
