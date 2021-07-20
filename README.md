@@ -17,8 +17,8 @@ Cloud Demo Portal is an App Engine web application which has small demos.
 ### Clone this repository
 
 ```bash
-git clone TBD
-cd TBD
+git clone https://github.com/GoogleCloudPlatform/appengine-cloud-demo-portal.git
+cd appengine-cloud-demo-portal
 ```
 
 ### Apply Terraform
