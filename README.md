@@ -17,8 +17,8 @@ Cloud Demo Portal is an App Engine web application which has small demos.
 ### Clone this repository
 
 ```bash
-git clone TBD
-cd TBD
+git clone https://github.com/GoogleCloudPlatform/appengine-cloud-demo-portal.git
+cd appengine-cloud-demo-portal
 ```
 
 ### Apply Terraform
@@ -67,9 +67,9 @@ If authentication doesn't work, you can enable IAP on [Console](https://console.
 
 Prerequisites
 
-- Direnv
-- Docker
-- docker-compose
+- [direnv](https://direnv.net/)
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/)
 
 Setup git hooks.
 
