@@ -2,7 +2,7 @@
 
 Cloud Demo Portal is an App Engine web application which has small demos.
 
-**This demo is not an official Google Cloud project.**
+**Cloud Demo Portal is not an official Google Cloud project.**
 
 ![Home](./doc/clouddemo-home.png)
 
