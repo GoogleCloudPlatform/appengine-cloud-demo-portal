@@ -31,5 +31,5 @@ handlers:
     script: auto
 
 automatic_scaling:
-  min_instances: 1
-  min_idle_instances: 1
+  min_instances: 2
+  min_idle_instances: 2
