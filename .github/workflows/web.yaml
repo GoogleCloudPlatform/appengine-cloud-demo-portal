@@ -1,0 +1,30 @@
+name: web
+on:
+  pull_request:
+    paths:
+      - 'web/**'
+
+jobs:
+  eslint:
+    name: eslint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: reviewdog/action-eslint@v1
+        with:
+          workdir: web
+          fail_on_error: true
+
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+      - run: npm install
+        working-directory: ./web
+      - run: npm run build
+        working-directory: ./web
+
