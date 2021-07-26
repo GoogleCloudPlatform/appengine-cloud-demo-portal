@@ -1,0 +1,19 @@
+name: api
+on:
+  pull_request:
+    paths:
+      - 'api/**'
+
+jobs:
+  golangci-lint:
+    name: golangci-lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: reviewdog/action-golangci-lint@v1
+        with:
+          golangci_lint_flags: "--enable-all --exclude-use-default=false"
+          level: warning
+          reporter: github-pr-review
+          workdir: api
+
