@@ -23,7 +23,7 @@ import (
 	"github.com/rs/zerolog/log"
 	"google.golang.org/api/iterator"
 
-	hd "github.com/nownabe/cloud-demos/api/pkg/handler"
+	hd "github.com/GoogleCloudPlatform/appengine-cloud-demo-portal/api/pkg/handler"
 )
 
 type getJobResponse struct {

@@ -41,6 +41,7 @@ module.exports = {
     "plugin:import/warnings",
     "plugin:prettier/recommended",
     "prettier",
+    "plugin:@next/next/recommended",
   ],
   settings: {
     "import/resolver": {
@@ -49,6 +50,9 @@ module.exports = {
         alwaysTryTypes: true,
       },
     },
+    "react": {
+      "version": "detect",
+    }
   },
   rules: {
     "@typescript-eslint/no-floating-promises": ["error", { ignoreVoid: true }],

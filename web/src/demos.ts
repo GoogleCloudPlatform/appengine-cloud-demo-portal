@@ -16,7 +16,7 @@
 
 const README_URL =
   process.env.NEXT_PUBLIC_README_URL ||
-  "https://github.com/nownabe/cloud-demos";
+  "https://github.com/GoogleCloudPlatform/appengine-cloud-demo-portal";
 
 type Demo = {
   path: string;

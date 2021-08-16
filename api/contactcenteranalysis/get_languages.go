@@ -17,7 +17,7 @@ package contactcenteranalysis
 import (
 	"net/http"
 
-	hd "github.com/nownabe/cloud-demos/api/pkg/handler"
+	hd "github.com/GoogleCloudPlatform/appengine-cloud-demo-portal/api/pkg/handler"
 )
 
 type getLanguagesHandlerResponse struct {

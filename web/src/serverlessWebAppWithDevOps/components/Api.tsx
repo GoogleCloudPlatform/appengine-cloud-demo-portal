@@ -81,7 +81,7 @@ const Api: React.FC<Props> = ({ hidden }) => {
       </Typography>
       <ul>
         <li>
-          <ExternalLink href="https://github.com/nownabe/cloud-demos/tree/main/api">
+          <ExternalLink href="https://github.com/GoogleCloudPlatform/appengine-cloud-demo-portal/tree/main/api">
             api source code on GitHub
           </ExternalLink>
         </li>
@@ -95,7 +95,7 @@ const Api: React.FC<Props> = ({ hidden }) => {
       </Typography>
       <ul>
         <li>
-          <ExternalLink href="https://github.com/nownabe/cloud-demos/tree/main/api/app.yaml">
+          <ExternalLink href="https://github.com/GoogleCloudPlatform/appengine-cloud-demo-portal/tree/main/api/app.yaml">
             api/app.yaml on GitHub
           </ExternalLink>
         </li>
@@ -115,7 +115,7 @@ const Api: React.FC<Props> = ({ hidden }) => {
       </Typography>
       <ul>
         <li>
-          <ExternalLink href="https://github.com/nownabe/cloud-demos/blob/main/api/cloudbuild.yaml">
+          <ExternalLink href="https://github.com/GoogleCloudPlatform/appengine-cloud-demo-portal/blob/main/api/cloudbuild.yaml">
             api/cloudbuild.yaml on GitHub
           </ExternalLink>
         </li>

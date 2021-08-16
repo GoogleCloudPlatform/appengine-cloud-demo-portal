@@ -28,11 +28,11 @@ import (
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 
-	"github.com/nownabe/cloud-demos/api/contactcenteranalysis"
-	"github.com/nownabe/cloud-demos/api/pkg/client"
-	"github.com/nownabe/cloud-demos/api/pkg/middleware"
-	"github.com/nownabe/cloud-demos/api/simultaneousinterpreter"
-	"github.com/nownabe/cloud-demos/api/wikipediapageview"
+	"github.com/GoogleCloudPlatform/appengine-cloud-demo-portal/api/contactcenteranalysis"
+	"github.com/GoogleCloudPlatform/appengine-cloud-demo-portal/api/pkg/client"
+	"github.com/GoogleCloudPlatform/appengine-cloud-demo-portal/api/pkg/middleware"
+	"github.com/GoogleCloudPlatform/appengine-cloud-demo-portal/api/simultaneousinterpreter"
+	"github.com/GoogleCloudPlatform/appengine-cloud-demo-portal/api/wikipediapageview"
 )
 
 const (

@@ -63,7 +63,7 @@ const Dispatch: React.FC<Props> = ({ hidden }) => {
       </Typography>
       <ul>
         <li>
-          <ExternalLink href="https://github.com/nownabe/cloud-demos/tree/main/dispatch.yaml">
+          <ExternalLink href="https://github.com/GoogleCloudPlatform/appengine-cloud-demo-portal/tree/main/dispatch.yaml">
             dispatch.yaml on GitHub
           </ExternalLink>
         </li>
