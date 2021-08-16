@@ -114,7 +114,7 @@ const en = {
     tableInformationContent:
       "The wikipedia.pageviews table contains daily pageviews of articles for each language. " +
       "In this demo, we use the pageviews_2020 table that records pageviews in 2020. " +
-      "It has 55 billions+ lines which size is 2.25TB.",
+      "It has 55 billions lines which size is 2.25TB.",
     controller: {
       titleIncludes: "Title includes",
       startDate: "Start date",
@@ -139,6 +139,7 @@ const en = {
       bytesProcessed: "Bytes processed",
       inputRows: "Input rows",
       cacheHit: "Cache hit",
+      lineUnit: " lines",
     },
   },
 };

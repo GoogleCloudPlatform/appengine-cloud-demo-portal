@@ -25,7 +25,7 @@ import (
 	"golang.org/x/text/language"
 	speechpb "google.golang.org/genproto/googleapis/cloud/speech/v1"
 
-	hd "github.com/nownabe/cloud-demos/api/pkg/handler"
+	hd "github.com/GoogleCloudPlatform/appengine-cloud-demo-portal/api/pkg/handler"
 )
 
 type translateSpeechRequest struct {

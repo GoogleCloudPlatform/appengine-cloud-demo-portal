@@ -1,4 +1,4 @@
-module github.com/nownabe/cloud-demos/api
+module github.com/GoogleCloudPlatform/appengine-cloud-demo-portal/api
 
 go 1.15
 

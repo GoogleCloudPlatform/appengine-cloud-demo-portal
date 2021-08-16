@@ -94,7 +94,7 @@ const Web: React.FC<Props> = ({ hidden }) => {
       </Typography>
       <ul>
         <li>
-          <ExternalLink href="https://github.com/nownabe/cloud-demos/tree/main/web">
+          <ExternalLink href="https://github.com/GoogleCloudPlatform/appengine-cloud-demo-portal/tree/main/web">
             web source code on GitHub
           </ExternalLink>
         </li>
@@ -108,7 +108,7 @@ const Web: React.FC<Props> = ({ hidden }) => {
       </Typography>
       <ul>
         <li>
-          <ExternalLink href="https://github.com/nownabe/cloud-demos/tree/main/web/app.yaml">
+          <ExternalLink href="https://github.com/GoogleCloudPlatform/appengine-cloud-demo-portal/tree/main/web/app.yaml">
             web/app.yaml on GitHub
           </ExternalLink>
         </li>
@@ -128,7 +128,7 @@ const Web: React.FC<Props> = ({ hidden }) => {
       </Typography>
       <ul>
         <li>
-          <ExternalLink href="https://github.com/nownabe/cloud-demos/blob/main/web/cloudbuild.yaml">
+          <ExternalLink href="https://github.com/GoogleCloudPlatform/appengine-cloud-demo-portal/blob/main/web/cloudbuild.yaml">
             web/cloudbuild.yaml on GitHub
           </ExternalLink>
         </li>

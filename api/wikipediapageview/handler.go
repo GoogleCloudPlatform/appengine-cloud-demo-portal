@@ -17,7 +17,7 @@ package wikipediapageview
 import (
 	"github.com/go-chi/chi/v5"
 
-	"github.com/nownabe/cloud-demos/api/pkg/client"
+	"github.com/GoogleCloudPlatform/appengine-cloud-demo-portal/api/pkg/client"
 )
 
 type handler struct {

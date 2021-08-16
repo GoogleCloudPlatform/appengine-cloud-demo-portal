@@ -17,9 +17,10 @@ version: "3.8"
 services:
   dispatcher:
     image: nginx
-    network_mode: "host"
+    ports:
+      - 8080:8080
     volumes:
-      - ./dev/nginx-dispatcher.conf:/etc/nginx/conf.d/dispatcher.conf
+      - ./dev/nginx-dispatcher.macos.conf:/etc/nginx/conf.d/dispatcher.conf
 
   api:
     build:
