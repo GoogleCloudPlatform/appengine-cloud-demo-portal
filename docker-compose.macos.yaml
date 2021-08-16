@@ -1,0 +1,72 @@
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+version: "3.8"
+
+services:
+  dispatcher:
+    image: nginx
+    ports:
+      - 8080:8080
+    volumes:
+      - ./dev/nginx-dispatcher.macos.conf:/etc/nginx/conf.d/dispatcher.conf
+
+  api:
+    build:
+      context: ./api/dev
+    environment:
+      GOOGLE_APPLICATION_CREDENTIALS: /go/src/$APP_PATH/api/credentials.json
+      LOG_LEVEL: debug
+      LOG_PRETTY: "true"
+      PORT: "8000"
+      PROJECT_ID: $PROJECT_ID
+    ports:
+      - 8000:8000
+    volumes:
+      - type: bind
+        source: .
+        target: /go/src/$APP_PATH
+      - type: bind
+        source: $APPLICATION_DEFAULT_CREDENTIALS
+        target: /go/src/$APP_PATH/api/credentials.json
+    working_dir: /go/src/$APP_PATH/api
+
+  web:
+    image: node:14.16.1-buster
+    command:
+      - bash
+      - -c
+      - "npm install && npm run dev"
+    environment:
+      NEXT_PUBLIC_GA_MEASUREMENT_ID: $NEXT_PUBLIC_GA_MEASUREMENT_ID
+    ports:
+      - 3000:3000
+    volumes:
+      - type: bind
+        source: ./web
+        target: /app
+      - type: volume
+        source: web-nodemodules
+        target: /app/node_modules
+      - type: volume
+        source: web-next
+        target: /app/.next
+    working_dir: /app
+
+volumes:
+  web-nodemodules:
+    driver: local
+  web-next:
+    driver: local
+

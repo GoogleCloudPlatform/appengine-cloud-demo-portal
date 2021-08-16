@@ -94,6 +94,9 @@ Run development servers.
 
 ```bash
 docker-compose up
+
+# on macOS
+docker-compose -f docker-compose.macos.yaml up
 ```
 
 Go to [http://localhost:8080](http://localhost:8080).
