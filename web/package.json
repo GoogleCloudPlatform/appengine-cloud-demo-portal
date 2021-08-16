@@ -34,6 +34,7 @@
     "react-syntax-highlighter": "15.4.3"
   },
   "devDependencies": {
+    "@next/eslint-plugin-next": "^11.1.0",
     "@types/chart.js": "2.9.32",
     "@types/dom-mediacapture-record": "1.0.7",
     "@types/gtag.js": "0.0.4",
@@ -42,10 +43,10 @@
     "@types/react-syntax-highlighter": "13.5.0",
     "@typescript-eslint/eslint-plugin": "4.23.0",
     "@typescript-eslint/parser": "4.23.0",
-    "eslint": "7.26.0",
+    "eslint": "7.32.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-import-resolver-typescript": "2.4.0",
-    "eslint-plugin-import": "2.23.2",
+    "eslint-plugin-import": "2.24.0",
     "eslint-plugin-jsx-a11y": "6.4.1",
     "eslint-plugin-prettier": "3.4.0",
     "eslint-plugin-react": "7.23.2",
