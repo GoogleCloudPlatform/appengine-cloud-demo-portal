@@ -54,6 +54,6 @@
     "lint-staged": "10.5.4",
     "prettier": "2.3.0",
     "stylelint-config-prettier": "8.0.2",
-    "typescript": "4.2.4"
+    "typescript": "4.3.5"
   }
 }
