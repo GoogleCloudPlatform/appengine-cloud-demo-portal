@@ -22,7 +22,7 @@ import (
 	"cloud.google.com/go/translate"
 	"golang.org/x/text/language"
 
-	hd "github.com/nownabe/cloud-demos/api/pkg/handler"
+	hd "github.com/GoogleCloudPlatform/appengine-cloud-demo-portal/api/pkg/handler"
 )
 
 type supportedLanguage struct {

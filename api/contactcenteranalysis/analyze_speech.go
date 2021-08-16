@@ -23,7 +23,7 @@ import (
 	languagepb "google.golang.org/genproto/googleapis/cloud/language/v1"
 	speechpb "google.golang.org/genproto/googleapis/cloud/speech/v1"
 
-	hd "github.com/nownabe/cloud-demos/api/pkg/handler"
+	hd "github.com/GoogleCloudPlatform/appengine-cloud-demo-portal/api/pkg/handler"
 )
 
 type analyzeSpeechRequest struct {
