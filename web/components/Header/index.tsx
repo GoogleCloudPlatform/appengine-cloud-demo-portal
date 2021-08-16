@@ -54,17 +54,15 @@ const Header: React.FC = () => {
           </Typography>
           <nav>
             <LangMenu />
-            {/*
             <IconButton
               aria-label="github"
               color="inherit"
-              href="https://github.com/nownabe/cloud-demos"
+              href="https://github.com/GoogleCloudPlatform/appengine-cloud-demo-portal"
               target="_blank"
               rel="noopener noreferrer"
             >
               <GitHub />
             </IconButton>
-            */}
           </nav>
         </Toolbar>
       </AppBar>
