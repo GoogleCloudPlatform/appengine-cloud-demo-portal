@@ -25,7 +25,7 @@ services:
     build:
       context: ./api/dev
     environment:
-      GOOGLE_APPLICATION_CREDENTIALS: /go/src/github.com/nownabe/cloud-demos/api/credentials.json
+      GOOGLE_APPLICATION_CREDENTIALS: /go/src/$APP_PATH/api/credentials.json
       LOG_LEVEL: debug
       LOG_PRETTY: "true"
       PORT: "8000"
@@ -35,8 +35,11 @@ services:
     volumes:
       - type: bind
         source: .
-        target: /go/src/github.com/nownabe/cloud-demos
-    working_dir: /go/src/github.com/nownabe/cloud-demos/api
+        target: /go/src/$APP_PATH
+      - type: bind
+        source: $APPLICATION_DEFAULT_CREDENTIALS
+        target: /go/src/$APP_PATH/api/credentials.json
+    working_dir: /go/src/$APP_PATH/api
 
   web:
     image: node:14.16.1-buster
