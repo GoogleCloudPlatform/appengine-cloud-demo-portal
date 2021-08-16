@@ -77,7 +77,13 @@ Setup git hooks.
 scripts/init-git-hooks
 ```
 
-Create your `.envrc`.
+Create application-default credentials.
+
+```bash
+gcloud auth application-default login
+```
+
+Create your `.envrc` and change `PROJECT_ID` to yours.
 
 ```bash
 cp .envrc.example .envrc
@@ -88,4 +94,9 @@ Run development servers.
 
 ```bash
 docker-compose up
+
+# on macOS
+docker-compose -f docker-compose.macos.yaml up
 ```
+
+Go to [http://localhost:8080](http://localhost:8080).

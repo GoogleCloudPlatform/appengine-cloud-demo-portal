@@ -1,4 +1,7 @@
 export PROJECT_ID="your development project id"
 
+export APP_PATH="github.com/GoogleCloudPlatform/appengine-cloud-demo-portal"
+export APPLICATION_DEFAULT_CREDENTIALS="$HOME/.config/gcloud/application_default_credentials.json"
+
 # keep empty if you don't have id
 export NEXT_PUBLIC_GA_MEASUREMENT_ID=""
