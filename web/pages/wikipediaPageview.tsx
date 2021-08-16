@@ -18,6 +18,7 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Grid,
   Typography,
 } from "@material-ui/core";
 import { ExpandMore } from "@material-ui/icons";
@@ -26,6 +27,7 @@ import { useState } from "react";
 
 import DemoContainer from "../components/DemoContainer";
 import DemoContent from "../components/DemoContent";
+import Image from "../components/Image";
 import { useError } from "../hooks/useError";
 import { useTranslation } from "../hooks/useTranslation";
 import { demos } from "../src/demos";
@@ -72,9 +74,21 @@ const WikipediaPageview: React.FC = () => {
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Typography variant="body1">
-              {t.wikipediaPageview.tableInformationContent}
-            </Typography>
+            <Grid container direction="row" spacing={2}>
+              <Grid item sm={12} md={6}>
+                <Image
+                  src="/static/wikipediaPageview/preview.png"
+                  alt="preview of wikipedia pageview table"
+                  width={895}
+                  height={508}
+                />
+              </Grid>
+              <Grid item sm={12} md={6}>
+                <Typography variant="body1">
+                  {t.wikipediaPageview.tableInformationContent}
+                </Typography>
+              </Grid>
+            </Grid>
           </AccordionDetails>
         </Accordion>
       </DemoContent>
