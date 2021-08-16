@@ -33,7 +33,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import Code from "../../../components/Code";
 import { SetErrorMessage } from "../../../hooks/useError";
@@ -90,15 +90,40 @@ const calcDuration = (data: GetJobResponse): string | null => {
   }
 };
 
+const SIPrefixes: Record<number, string> = {
+  0: "",
+  3: "k",
+  6: "M",
+  9: "G",
+  12: "T",
+  15: "P",
+};
+
+const formatSI = (num: number): string => {
+  let exponent = 0;
+
+  while (num >= 1000 && exponent < 15) {
+    num /= 1000;
+    exponent += 3;
+  }
+
+  return num.toPrecision(3) + SIPrefixes[exponent];
+};
+
 const Result: React.FC<Props> = ({ jobId, groupBy, setErrorMessage }) => {
   const classes = useStyles();
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const tt = t.wikipediaPageview.result;
 
   const [completed, setCompleted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [jobResult, setJobResult] = useState<JobResult | null>(null);
   const [tab, setTab] = useState(0);
+
+  const fmt = useMemo(
+    () => Intl.NumberFormat(locale as string, { notation: "compact" }),
+    [locale]
+  );
 
   const completeWithError = (error: string) => {
     setCompleted(true);
@@ -264,12 +289,17 @@ const Result: React.FC<Props> = ({ jobId, groupBy, setErrorMessage }) => {
               <TableRow>
                 <TableCell>{tt.bytesProcessed}</TableCell>
                 <TableCell>
-                  {jobInfo.bytesProcessed?.toLocaleString()}
+                  {formatSI(jobInfo.bytesProcessed || -1)}B (
+                  {jobInfo.bytesProcessed?.toLocaleString()} bytes)
                 </TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>{tt.inputRows}</TableCell>
-                <TableCell>{jobInfo.inputRows?.toLocaleString()}</TableCell>
+                <TableCell>
+                  {fmt.format(jobInfo.inputRows || -1)}
+                  {tt.lineUnit} ({jobInfo.inputRows?.toLocaleString()}
+                  {tt.lineUnit})
+                </TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>{tt.cacheHit}</TableCell>

@@ -139,6 +139,7 @@ const ja: Locale = {
       bytesProcessed: "処理バイト数",
       inputRows: "入力行数",
       cacheHit: "キャッシュヒット",
+      lineUnit: "行",
     },
   },
 };
