@@ -32,6 +32,10 @@ resource "google_iap_brand" "brand" {
   project           = data.google_project.project.project_id
   application_title = "Google Cloud Demo Portal"
   support_email     = var.support_email
+
+  depends_on = [
+    google_project_service.iap
+  ]
 }
 
 resource "google_iap_web_type_app_engine_iam_member" "iap" {
