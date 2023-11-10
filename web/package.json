@@ -23,7 +23,7 @@
     "@material-ui/icons": "4.11.2",
     "@material-ui/lab": "4.0.0-alpha.58",
     "@material-ui/pickers": "3.3.10",
-    "axios": "0.21.2",
+    "axios": "1.6.0",
     "axios-case-converter": "0.7.0",
     "chart.js": "2.9.4",
     "date-fns": "2.21.3",
